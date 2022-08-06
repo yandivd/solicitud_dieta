@@ -193,23 +193,20 @@ JAZZMIN_SETTINGS = {
 
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
     "order_with_respect_to": ["auth",
-                              "app.division_territorial",
-                              "app.municipio",
-                              "app.responsable",
-                              "app.organismo",
-                              "app.cliente",
-                              "app.trabjadores",
-                              "app.enlace"],
+                              "app.Trabajador",
+                              "app.Unidad_Organizativa",
+                              "app.Municipio",
+                              "app.Solicitud"],
 
     # Custom links to append to app groups, keyed on app name
-    "custom_links": {
+    '''"custom_links": {
         "books": [{
             "name": "Make Messages",
             "url": "make_messages",
             "icon": "fas fa-comments",
             "permissions": ["books.view_book"]
         }]
-    },
+    },'''
 
     # Custom icons for side menu apps/models See https://fontawesome.com/icons?d=gallery&m=free
     # for a list of icon classes
@@ -233,7 +230,7 @@ JAZZMIN_SETTINGS = {
     #############
     # Relative paths to custom CSS/JS scripts (must be present in static files)
     #"custom_css": None,
-    "custom_js": '/scripts.js',
+    #"custom_js": '/scripts.js',
     # Whether to show the UI customizer on the sidebar
     "show_ui_builder": True,
 
