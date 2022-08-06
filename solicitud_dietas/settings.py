@@ -193,20 +193,23 @@ JAZZMIN_SETTINGS = {
 
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
     "order_with_respect_to": ["auth",
-                              "app.Trabajador",
-                              "app.Unidad_Organizativa",
-                              "app.Municipio",
-                              "app.Solicitud"],
+                              "app.division_territorial",
+                              "app.municipio",
+                              "app.responsable",
+                              "app.organismo",
+                              "app.cliente",
+                              "app.trabjadores",
+                              "app.enlace"],
 
     # Custom links to append to app groups, keyed on app name
-    '''"custom_links": {
+    "custom_links": {
         "books": [{
             "name": "Make Messages",
             "url": "make_messages",
             "icon": "fas fa-comments",
             "permissions": ["books.view_book"]
         }]
-    },'''
+    },
 
     # Custom icons for side menu apps/models See https://fontawesome.com/icons?d=gallery&m=free
     # for a list of icon classes

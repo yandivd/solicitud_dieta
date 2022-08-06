@@ -12,6 +12,7 @@ class Unidad_OrganizativaAdmin(admin.ModelAdmin):
 
 class SolicitudAdmin(admin.ModelAdmin):
     list_display=(
+        'numero',
         'solicitante',
         'unidad_organizativa',
         'c_contable',

@@ -26,6 +26,7 @@ class Municipio(models.Model):
 #    municipios=models.OneToOneField(Municipio, on_delete=models.CASCADE)
 
 class Solicitud(models.Model):
+    numero=models.IntegerField()
     solicitante=models.ForeignKey(Trabajador, on_delete=models.CASCADE)
     unidad_organizativa=models.ForeignKey(Unidad_Organizativa, on_delete=models.CASCADE)
     c_contable=models.CharField(max_length=4)
@@ -35,5 +36,8 @@ class Solicitud(models.Model):
     regreso=models.ForeignKey(Municipio, on_delete=models.CASCADE, related_name='municipio_regreso')
     fecha_inicio=models.DateField()
     fecha_final=models.DateField()
+
+    def __str__(self):
+        return str(self.solicitante)
     
 
