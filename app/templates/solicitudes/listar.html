@@ -2,11 +2,12 @@
 {% load static %}
 {% block content %}
     <div class=" card card-default">
-        <div class=" card-header px-3 mb-3 mt-3 container">
-            <h3 class=" card-title">
-                Titulo
+        <div class="card-header px-3 mb-3 mt-3 container">
+            <h3 class="card-title">
+            <i class="fas fa-exclamation-triangle bi bi-search"></i>
+                {{title}}
             </h3>
-        </div>
+            </div>
         <div class="card card-body content-header mx-5 px-5">
             <table id="myTable" class="display" style="width: 100%;">
                 <thead>
@@ -24,15 +25,17 @@
                 </thead>
                 <tbody>
                     {% for i in object_list %}
-                        <td>{{i.trabajador}}</td>
+                    <tr>
+                        <td style="width: 200px;">{{i.trabajador}}</td>
                         <td>{{i.trabajador.ci}}</td>
                         <td>{{i.unidad_organizativa}}</td>
-                        <td>{{i.c_contable}}</td>
+                        <td style="width: 80px;">{{i.c_contable}}</td>
                         <td>{{i.origen}}</td>
                         <td>{{i.destino}}</td>
                         <td>{{i.regreso}}</td>
                         <td>{{i.fecha_inicio}}</td>
                         <td>{{i.fecha_final}}</td>
+                    </tr>
                     {% endfor %}
                 </tbody>
             </table>

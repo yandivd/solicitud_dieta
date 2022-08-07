@@ -8,9 +8,8 @@ class SolicitudListView(ListView):
     template_name = 'solicitudes/listar.html'
 
     def get_context(self, **kwargs):
-        context=self.super().get_context_data(**kwargs)
-        context['title']='Listado de Solicitudes'
-
+        context = super().get_context_data(**kwargs)
+        context['title']="Listado de Solicitudes"
         return context
 
 def index(request):
