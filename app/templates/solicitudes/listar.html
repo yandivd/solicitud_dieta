@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class=" card card-default">
+        <div class=" card-header px-3 mb-3 mt-3 container">
+            <h3 class=" card-title">
+                Titulo
+            </h3>
+        </div>
+        <div class="card card-body content-header mx-5 px-5">
+            <table id="my_table" class="display" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Nombre y Apellidos</th>
+                        <th>Carnet de Identidad</th>
+                        <th>Unidad Organizativa</th>
+                        <th>C. Contable que entrega el anticipio</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
+                        <th>Regreso</th>
+                        <th>Desde</th>
+                        <th>Hasta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in object_list %}
+                        <td>{{i.trabajador}}</td>
+                        <td>{{i.unidad_organizativa}}</td>
+                        <td>{{i.c_contable}}</td>
+                        <td>{{i.origen}}</td>
+                        <td>{{i.destino}}</td>
+                        <td>{{i.regreso}}</td>
+                        <td>{{i.fecha_inicio}}</td>
+                        <td>{{i.fecha_final}}</td>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class=" card-footer mt-3">
+            <a href="#" type="button" class="btn btn-primary btn-success">
+                Agregar Solicitud
+            </a>
+        </div>
+    </div>
+{% endblock %}
