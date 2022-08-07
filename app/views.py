@@ -25,7 +25,7 @@ class SolicitudCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context['title'] = "Agregar Solicitud"
         context['action']='add'
-        context['list_url']=reverse_lazy('listarPro')
+        context['list_url']=reverse_lazy('solicitudes')
         
         #context['object_list'] = Producto.objects.all()
         return context
