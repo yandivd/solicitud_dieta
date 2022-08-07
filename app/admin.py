@@ -5,9 +5,12 @@ class TrabajadorAdmin(admin.ModelAdmin):
     list_display=('user',)
 
 class MunicipioAdmin(admin.ModelAdmin):
-    list_display=('nombre',)
+    list_display=('nombre','provincia')
 
 class Unidad_OrganizativaAdmin(admin.ModelAdmin):
+    list_display=('nombre',)
+
+class ProvinciaAdmin(admin.ModelAdmin):
     list_display=('nombre',)
 
 class SolicitudAdmin(admin.ModelAdmin):
@@ -28,3 +31,4 @@ admin.site.register(Trabajador, TrabajadorAdmin)
 admin.site.register(Municipio, MunicipioAdmin)
 admin.site.register(Solicitud, SolicitudAdmin)
 admin.site.register(Unidad_Organizativa, Unidad_OrganizativaAdmin)
+admin.site.register(Provincia, ProvinciaAdmin)

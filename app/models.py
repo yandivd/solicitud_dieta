@@ -24,8 +24,15 @@ class Unidad_Organizativa(models.Model):
         verbose_name="Unidad Organizativa"
         verbose_name_plural="Unidades Organizativas"
 
+class Provincia(models.Model):
+    nombre=models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.nombre
+
 class Municipio(models.Model):
     nombre=models.CharField(max_length=30)
+    provincia=models.ForeignKey(Provincia, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nombre
@@ -34,8 +41,6 @@ class Municipio(models.Model):
         verbose_name="Municipio"
         verbose_name_plural="Municipios"
 
-#class Provincia(models.Model):
-#    municipios=models.OneToOneField(Municipio, on_delete=models.CASCADE)
 
 class Solicitud(models.Model):
     numero=models.IntegerField()
