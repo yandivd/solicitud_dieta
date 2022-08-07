@@ -10,17 +10,29 @@ class Trabajador(models.Model):
     def __str__(self):
         return self.user.username
 
+    class Meta:
+        verbose_name = "Trabajador"
+        verbose_name_plural = "Trabajadores"
+
 class Unidad_Organizativa(models.Model):
     nombre=models.CharField(max_length=100)
 
     def __str__(self):
         return self.nombre
 
+    class Meta:
+        verbose_name="Unidad Organizativa"
+        verbose_name_plural="Unidades Organizativas"
+
 class Municipio(models.Model):
     nombre=models.CharField(max_length=30)
 
     def __str__(self):
         return self.nombre
+
+    class Meta:
+        verbose_name="Municipio"
+        verbose_name_plural="Municipios"
 
 #class Provincia(models.Model):
 #    municipios=models.OneToOneField(Municipio, on_delete=models.CASCADE)
@@ -39,5 +51,9 @@ class Solicitud(models.Model):
 
     def __str__(self):
         return str(self.solicitante)
+
+    class Meta:
+        verbose_name="Solicitud"
+        verbose_name_plural="Solicitudes"
     
 
