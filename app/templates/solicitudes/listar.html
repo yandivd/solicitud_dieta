@@ -8,7 +8,7 @@
             </h3>
         </div>
         <div class="card card-body content-header mx-5 px-5">
-            <table id="my_table" class="display" style="width: 100%;">
+            <table id="myTable" class="display" style="width: 100%;">
                 <thead>
                     <tr>
                         <th>Nombre y Apellidos</th>
@@ -25,6 +25,7 @@
                 <tbody>
                     {% for i in object_list %}
                         <td>{{i.trabajador}}</td>
+                        <td>{{i.trabajador.ci}}</td>
                         <td>{{i.unidad_organizativa}}</td>
                         <td>{{i.c_contable}}</td>
                         <td>{{i.origen}}</td>
