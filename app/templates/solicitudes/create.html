@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<form action="." method="post" id="" enctype="multipart/form-data">
+    <div class="card card-default">
+        <div class="card-header">
+            <h3 class="card-title">
+                {% if action == 'add' %}
+                <i class="bi bi-plus-circle "></i>
+                {% else %}
+                <i class="bi bi-pencil-square "></i>
+                {% endif %}
+                {{title}}
+            </h3>
+        </div>
+        <div class="card-body ">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="{{action}}">
+            {% if form.errors %}
+            <div class=" alert alert-danger alert-dismissible">
+                <button type="button" class=" close" data-dismiss="alert" aria-hidden="true">x</button>
+                <h5><i class="icon bi bi-x-octagon"></i>Ha ocurrido un error al agregar el registro</h5>
+                <ul>
+                    {% for field in form %}
+                    {% for error in field.errors %}
+                    <li>{{error}}</li>
+                    {% endfor %}
+                    {% endfor %}
+
+                </ul>
+            </div>
+            {% endif %}
+            <div class=" form-group form-card text-center">
+                <br>
+                <div class="container">
+                {{form | crispy}}
+                </div>
+              
+            </div> 
+        </div>
+
+    </div>
+    <div class="  card-footer mt-3 px-5 mb-3">
+        <button type="submit" class="  btn btn-primary btn-flat btnTest">
+            <i class="bi bi-cassette"></i> Guardar Producto
+        </button>
+        <a href="{% url 'solicitudes' %}">
+            <button type="button" class=" btn btn-danger">
+                <i class="bi bi-x"></i> Cancelar
+            </button>
+        </a>
+    </div>
+    </div>
+</form>
+
+
+{% endblock %}
