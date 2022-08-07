@@ -2,13 +2,18 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+class PersonalCualificado(models.Model):
+    usuario=models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.usuario.username
 
 class Trabajador(models.Model):
-    user=models.ForeignKey(User, on_delete=models.CASCADE)
+    nombre_y_apellidos = models.CharField(max_length=80)
     ci=models.CharField(max_length=11, unique=True)
 
     def __str__(self):
-        return self.user.username
+            return self.nombre_y_apellidos
 
     class Meta:
         verbose_name = "Trabajador"
@@ -44,10 +49,11 @@ class Municipio(models.Model):
 
 class Solicitud(models.Model):
     numero=models.IntegerField()
-    solicitante=models.ForeignKey(Trabajador, on_delete=models.CASCADE)
+    solicitante=models.ForeignKey(PersonalCualificado, on_delete=models.CASCADE)
+    trabajador=models.ForeignKey(Trabajador, on_delete=models.CASCADE)
     unidad_organizativa=models.ForeignKey(Unidad_Organizativa, on_delete=models.CASCADE)
     c_contable=models.CharField(max_length=4)
-    #provincia=models.ForeignKey(Provincia, on_delete=models.CASCADE)
+    provincia=models.ForeignKey(Provincia, on_delete=models.CASCADE)
     origen=models.ForeignKey(Municipio, on_delete=models.CASCADE, related_name='municipio_origen')
     destino=models.ForeignKey(Municipio, on_delete=models.CASCADE, related_name='municipio_destino')
     regreso=models.ForeignKey(Municipio, on_delete=models.CASCADE, related_name='municipio_regreso')
