@@ -5,7 +5,7 @@
         <div class="card-header px-3 mb-3 mt-3 container">
             <h3 class="card-title">
             <i class="fas fa-exclamation-triangle bi bi-search"></i>
-                {{title}}
+                Listado de las Solicitudes de Dietas
             </h3>
             </div>
         <div class="card card-body content-header mx-5 px-5">
@@ -21,12 +21,13 @@
                         <th>Regreso</th>
                         <th>Desde</th>
                         <th>Hasta</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for i in object_list %}
                     <tr>
-                        <td style="width: 200px;">{{i.trabajador}}</td>
+                        <td style="width: 150px;">{{i.trabajador}}</td>
                         <td>{{i.trabajador.ci}}</td>
                         <td>{{i.unidad_organizativa}}</td>
                         <td style="width: 80px;">{{i.c_contable}}</td>
@@ -35,6 +36,14 @@
                         <td>{{i.regreso}}</td>
                         <td>{{i.fecha_inicio}}</td>
                         <td>{{i.fecha_final}}</td>
+                        <td>               
+                            <a href="#" type="button" class="btn btn-warning bi bi-pencil-square">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="#" type="button" class="btn btn-danger bi bi-trash">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
