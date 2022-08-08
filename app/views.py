@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView
 from .models import Solicitud
 from .forms import SolicitudForm
@@ -20,6 +20,12 @@ class SolicitudCreateView(CreateView):
     form_class=SolicitudForm
     template_name='solicitudes/create.html'
     success_url=reverse_lazy('solicitudes')
+
+    def post(self, request, *args, **kwargs):
+        data={}
+        formulario=SolicitudForm(data=request.POST)
+        return redirect('solicitudes')
+
 
     def get_context_data(self,  **kwargs):
         context = super().get_context_data(**kwargs)
