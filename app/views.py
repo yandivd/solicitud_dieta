@@ -55,3 +55,12 @@ class SolicitudCreateView(CreateView):
         
         #context['object_list'] = Producto.objects.all()
         return context
+
+class SolicitudPendienteListView(ListView):
+    model = Solicitud
+    template_name = 'solicitudes/pendientes/listar.html'
+
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context['object_list']=Solicitud.objects.all().filter(estado="Pendiente")
+        return context

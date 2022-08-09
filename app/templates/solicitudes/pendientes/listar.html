@@ -21,6 +21,7 @@
                         <th>Regreso</th>
                         <th>Desde</th>
                         <th>Hasta</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +36,14 @@
                         <td>{{i.regreso}}</td>
                         <td>{{i.fecha_inicio}}</td>
                         <td>{{i.fecha_final}}</td>
+                        <td>
+                            <a href="#" type="button" class="btn btn-warning">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="#" type="button" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
