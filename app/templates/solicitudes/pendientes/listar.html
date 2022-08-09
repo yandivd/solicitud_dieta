@@ -1,5 +1,27 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block js %}
+    <script>
+        function aceptarSolicitud(id){
+            Swal.fire({
+                "title": "Estas Seguro?",
+                "text": "Esta accion no se puede deshacer",
+                "icon": "question",
+                "showCancelButton": true,
+                "cancelButtonText": "No, Cancelar",
+                "confirmButtonText": "Si, Aceptar Solicitud",
+                "reverseButtons": true,
+                "confirmButtonColor": "#dc3545"
+            })
+            .then(function(result){
+                if (result.isConfirmed){
+                    window.location.href = "/aceptar_solicitud/"+id+"/"
+                }
+            })
+        }
+    </script>
+{% endblock %}
 {% block content %}
     <div class=" card card-default">
         <div class="card-header px-3 mb-3 mt-3 container">
@@ -37,7 +59,7 @@
                         <td>{{i.fecha_inicio}}</td>
                         <td>{{i.fecha_final}}</td>
                         <td>
-                            <a href="#" type="button" class="btn btn-success">
+                            <a href="#" onclick="aceptarSolicitud({{i.id}})" type="button" class="btn btn-success">
                                 <i class="fas fa-check"></i>
                             </a>
                             <a href="#" type="button" class="btn btn-danger">
@@ -48,12 +70,6 @@
                     {% endfor %}
                 </tbody>
             </table>
-        </div>
-        <div class=" card-footer mt-3">
-            <a href="{% url 'crear_solicitud' %}" type="button" class="btn btn-primary btn-success">
-                <i class="fas fa-plus"></i>
-                Agregar Solicitud
-            </a>
         </div>
     </div>
 {% endblock %}

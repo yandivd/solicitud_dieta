@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView
 from .models import Solicitud
 from .forms import SolicitudForm
@@ -64,3 +64,10 @@ class SolicitudPendienteListView(ListView):
         context=super().get_context_data(**kwargs)
         context['object_list']=Solicitud.objects.all().filter(estado="Pendiente")
         return context
+
+def aceptar_solicitud(request, id):
+    solicitud=get_object_or_404(Solicitud, id=id)
+    solicitud.estado="Aceptada"
+    solicitud.save()
+    #messages.success(request, "Solicitud Aceptada")
+    return redirect(to='pendientes')
