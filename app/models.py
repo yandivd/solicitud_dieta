@@ -49,7 +49,7 @@ class Municipio(models.Model):
 
 class Solicitud(models.Model):
     numero=models.IntegerField()
-    solicitante=models.ForeignKey(PersonalCualificado, on_delete=models.CASCADE)
+    solicitante=models.ForeignKey(User, on_delete=models.CASCADE)
     trabajador=models.ForeignKey(Trabajador, on_delete=models.CASCADE)
     unidad_organizativa=models.ForeignKey(Unidad_Organizativa, on_delete=models.CASCADE)
     c_contable=models.CharField(max_length=4)
@@ -59,9 +59,10 @@ class Solicitud(models.Model):
     regreso=models.ForeignKey(Municipio, on_delete=models.CASCADE, related_name='municipio_regreso')
     fecha_inicio=models.DateField()
     fecha_final=models.DateField()
+    estado=models.CharField(max_length=20)
 
     def __str__(self):
-        return str(self.solicitante)
+        return str(self.numero)
 
     class Meta:
         verbose_name="Solicitud"

@@ -28,7 +28,8 @@ class SolicitudAdmin(admin.ModelAdmin):
         'destino',
         'regreso',
         'fecha_inicio',
-        'fecha_final'
+        'fecha_final',
+        'estado'
     )
 
     list_filter=(

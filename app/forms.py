@@ -1,8 +1,8 @@
 from .models import *
-from django.forms import ModelForm
+from django import forms
 
-class SolicitudForm(ModelForm):
+class SolicitudForm(forms.ModelForm):
 
     class Meta:
         model = Solicitud
-        fields = '__all__'
+        fields = 'solicitante','trabajador','unidad_organizativa','c_contable','provincia','origen','destino','regreso','fecha_inicio','fecha_final'

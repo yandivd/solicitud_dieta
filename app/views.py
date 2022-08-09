@@ -22,8 +22,28 @@ class SolicitudCreateView(CreateView):
     success_url=reverse_lazy('solicitudes')
 
     def post(self, request, *args, **kwargs):
-        data={}
         formulario=SolicitudForm(data=request.POST)
+        estado='Pendiente'
+        mayor=0
+        solicitudes=Solicitud.objects.all()
+        for i in solicitudes:
+            if i.numero > mayor:
+                mayor=i.numero
+        numero=mayor+1
+        if formulario.is_valid():
+            print(formulario.cleaned_data['solicitante'])
+            solicitante=formulario.cleaned_data['solicitante']
+            trabajador=formulario.cleaned_data['trabajador']
+            uo=formulario.cleaned_data['unidad_organizativa']
+            cc=formulario.cleaned_data['c_contable']
+            provincia=formulario.cleaned_data['provincia']
+            origen=formulario.cleaned_data['origen']
+            destino=formulario.cleaned_data['destino']
+            regreso=formulario.cleaned_data['regreso']
+            inicio=formulario.cleaned_data['fecha_inicio']
+            final=formulario.cleaned_data['fecha_final']
+            solicitud= Solicitud(numero=numero, solicitante=solicitante,trabajador=trabajador,unidad_organizativa=uo,c_contable=cc,provincia=provincia,origen=origen,destino=destino,regreso=regreso,fecha_inicio=inicio,fecha_final=final,estado=estado)
+            solicitud.save()
         return redirect('solicitudes')
 
 
