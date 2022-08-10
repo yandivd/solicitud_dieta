@@ -1,6 +1,29 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
+{% block js %}
+    <script>
+
+         function generarModelo(){
+            Swal.fire({
+                "title": "Estas Seguro?",
+                "text": "Esta accion no se puede deshacer",
+                "icon": "question",
+                "showCancelButton": true,
+                "cancelButtonText": "No, Cancelar",
+                "confirmButtonText": "Si, Aceptar Solicitudes",
+                "reverseButtons": true,
+                "confirmButtonColor": "#178f13"
+            })
+            .then(function(result){
+                if (result.isConfirmed){
+                    window.location.href = "/crear_modelo/"
+                    alert("OK")
+                }
+            })
+        }
+    </script>
+{% endblock %}
 {% block content %}
 <form action="." method="post" id="" enctype="multipart/form-data">
     <div class="card card-default">
@@ -53,6 +76,64 @@
     </div>
     </div>
 </form>
+    <div class=" card card-default">
+        <div class="card-header px-3 mb-3 mt-3 container">
+            <h3 class="card-title">
+            <i class="fas fa-exclamation-triangle bi bi-search"></i>
+                Listado de las Solicitudes Pendientes
+            </h3>
+            </div>
+        <div class="card card-body content-header mx-5 px-5">
+            <table id="myTable" class="display" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Nombre y Apellidos</th>
+                        <th>Carnet de Identidad</th>
+                        <th>Unidad Organizativa</th>
+                        <th>C. Contable que entrega el anticipio</th>
+                        <th>Origen</th>
+                        <th>Destino</th>
+                        <th>Regreso</th>
+                        <th>Desde</th>
+                        <th>Hasta</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in object_list %}
+                    <tr>
+                        <td style="width: 150px;">{{i.trabajador}}</td>
+                        <td>{{i.trabajador.ci}}</td>
+                        <td>{{i.unidad_organizativa}}</td>
+                        <td style="width: 80px;">{{i.c_contable}}</td>
+                        <td>{{i.origen}}</td>
+                        <td>{{i.destino}}</td>
+                        <td>{{i.regreso}}</td>
+                        <td>{{i.fecha_inicio}}</td>
+                        <td>{{i.fecha_final}}</td>
+                        <td style="width: 4cm"; height="4cm";>
+                            <a href="#" onclick="aceptarSolicitud({{i.id}})" type="button" class="btn btn-success">
+                                <i class="fas fa-check"></i>
+                            </a>
+                            <a href="#" type="button" class="btn btn-warning">
+                                <i class="fas fa-file"></i>
+                            </a>
+                            <a href="#" onclick="eliminarSolicitud({{i.id}})" type="button" class="btn btn-danger">
+                                <i class="fas fa-times-circle"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class=" card-footer mt-3">
+            <a href="#" onclick="generarModelo()" type="button" class="btn btn-primary btn-success">
+                <i class="fas fa-check"></i>
+                Generar Modelo
+            </a>
+        </div>
+    </div>
 
 
 {% endblock %}

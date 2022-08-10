@@ -28,41 +28,17 @@
             <table id="myTable" class="display" style="width: 100%;">
                 <thead>
                     <tr>
-                        <th>Nombre y Apellidos</th>
-                        <th>Carnet de Identidad</th>
-                        <th>Unidad Organizativa</th>
-                        <th>C. Contable que entrega el anticipio</th>
-                        <th>Origen</th>
-                        <th>Destino</th>
-                        <th>Regreso</th>
-                        <th>Desde</th>
-                        <th>Hasta</th>
-                        <th>Estado</th>
+                        <th>Consecutivo</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for i in object_list %}
+                    {% for i in data %}
                     <tr>
-                        <td style="width: 150px;">{{i.trabajador}}</td>
-                        <td>{{i.trabajador.ci}}</td>
-                        <td>{{i.unidad_organizativa}}</td>
-                        <td style="width: 80px;">{{i.c_contable}}</td>
-                        <td>{{i.origen}}</td>
-                        <td>{{i.destino}}</td>
-                        <td>{{i.regreso}}</td>
-                        <td>{{i.fecha_inicio}}</td>
-                        <td>{{i.fecha_final}}</td>
-                        <td>{{i.estado}}</td>
+                        <a href="#"><td style="width: 150px;">{{i.numero}}</td></a>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-        </div>
-        <div class=" card-footer mt-3">
-            <a href="{% url 'crear_solicitud' %}" type="button" class="btn btn-primary btn-success">
-                <i class="fas fa-plus"></i>
-                Agregar Solicitud
-            </a>
         </div>
     </div>
 {% endblock %}

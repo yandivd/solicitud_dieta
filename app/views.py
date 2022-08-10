@@ -49,15 +49,16 @@ class SolicitudCreateView(CreateView):
     model=Solicitud
     form_class=SolicitudForm
     template_name='solicitudes/create.html'
-    success_url=reverse_lazy('solicitudes')
+    success_url=reverse_lazy('crear_solicitud')
 
     @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
+        print("Primero o ultimo")
         formulario=SolicitudForm(data=request.POST)
-        estado='Pendiente'
+        estado='StandBye'
         mayor=0
         solicitudes=Solicitud.objects.all()
         for i in solicitudes:
@@ -78,7 +79,7 @@ class SolicitudCreateView(CreateView):
             final=formulario.cleaned_data['fecha_final']
             solicitud= Solicitud(numero=numero, solicitante=solicitante,trabajador=trabajador,unidad_organizativa=uo,c_contable=cc,provincia=provincia,origen=origen,destino=destino,regreso=regreso,fecha_inicio=inicio,fecha_final=final,estado=estado)
             solicitud.save()
-        return redirect('solicitudes')
+        return redirect('crear_solicitud')
 
 
     def get_context_data(self,  **kwargs):
@@ -87,196 +88,14 @@ class SolicitudCreateView(CreateView):
         context['action']='add'
         context['list_url']=reverse_lazy('solicitudes')
         
-        #context['object_list'] = Producto.objects.all()
+        context['object_list'] = Solicitud.objects.all().filter(estado="StandBye")
         return context
 
-class SolicitudPendienteListView(ListView):
-    model = Solicitud
-    template_name = 'solicitudes/pendientes/listar.html'
+def crear_modelo(request):
+        solicitudes=Solicitud.objects.all().filter(estado="StandBye")
+        for i in solicitudes:
+            i.estado="Check"
+            i.save()
+        return render(request,'modelos/listar.html',{'data': solicitudes})
 
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context=super().get_context_data(**kwargs)
-
-        context['object_list']=Solicitud.objects.all().filter(estado="Pendiente")
-        listaP = Solicitud.objects.all().filter(estado="Pendiente")
-        listaA = Solicitud.objects.all().filter(estado="Aceptada")
-        listaAut = Solicitud.objects.all().filter(estado="Autorizada")
-        listaC = Solicitud.objects.all().filter(estado="Cancelada")
-        if len(listaP) > 0:
-            context['cantP'] = len(listaP)
-        else:
-            context['cantP'] = 0
-
-        if len(listaA) > 0:
-            context['cantA'] = len(listaA)
-        else:
-            context['cantA'] = 0
-
-        if len(listaAut) > 0:
-            context['cantAut'] = len(listaAut)
-        else:
-            context['cantAut'] = 0
-
-        if len(listaC) > 0:
-            context['cantC'] = len(listaC)
-        else:
-            context['cantC'] = 0
-        return context
-
-class SolicitudAutorizadaListView(ListView):
-    model = Solicitud
-    template_name = 'solicitudes/autorizadas/listar.html'
-
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context=super().get_context_data(**kwargs)
-        context['object_list']=Solicitud.objects.all().filter(estado="Autorizada")
-        listaP = Solicitud.objects.all().filter(estado="Pendiente")
-        listaA = Solicitud.objects.all().filter(estado="Aceptada")
-        listaAut = Solicitud.objects.all().filter(estado="Autorizada")
-        listaC = Solicitud.objects.all().filter(estado="Cancelada")
-        if len(listaP) > 0:
-            context['cantP'] = len(listaP)
-        else:
-            context['cantP'] = 0
-
-        if len(listaA) > 0:
-            context['cantA'] = len(listaA)
-        else:
-            context['cantA'] = 0
-
-        if len(listaAut) > 0:
-            context['cantAut'] = len(listaAut)
-        else:
-            context['cantAut'] = 0
-
-        if len(listaC) > 0:
-            context['cantC'] = len(listaC)
-        else:
-            context['cantC'] = 0
-        return context
-
-class SolicitudAceptadaListView(ListView):
-    model = Solicitud
-    template_name = 'solicitudes/aceptadas/listar.html'
-
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context=super().get_context_data(**kwargs)
-        context['object_list']=Solicitud.objects.all().filter(estado="Aceptada")
-        listaP = Solicitud.objects.all().filter(estado="Pendiente")
-        listaA = Solicitud.objects.all().filter(estado="Aceptada")
-        listaAut = Solicitud.objects.all().filter(estado="Autorizada")
-        listaC = Solicitud.objects.all().filter(estado="Cancelada")
-        if len(listaP) > 0:
-            context['cantP'] = len(listaP)
-        else:
-            context['cantP'] = 0
-
-        if len(listaA) > 0:
-            context['cantA'] = len(listaA)
-        else:
-            context['cantA'] = 0
-
-        if len(listaAut) > 0:
-            context['cantAut'] = len(listaAut)
-        else:
-            context['cantAut'] = 0
-
-        if len(listaC) > 0:
-            context['cantC'] = len(listaC)
-        else:
-            context['cantC'] = 0
-
-        return context
-
-class SolicitudCanceladaListView(ListView):
-    model = Solicitud
-    template_name = 'solicitudes/canceladas/listar.html'
-
-    @method_decorator(login_required)
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context=super().get_context_data(**kwargs)
-        context['object_list']=Solicitud.objects.all().filter(estado="Cancelada")
-        listaP = Solicitud.objects.all().filter(estado="Pendiente")
-        listaA = Solicitud.objects.all().filter(estado="Aceptada")
-        listaAut = Solicitud.objects.all().filter(estado="Autorizada")
-        listaC = Solicitud.objects.all().filter(estado="Cancelada")
-        if len(listaP) > 0:
-            context['cantP'] = len(listaP)
-        else:
-            context['cantP'] = 0
-
-        if len(listaA) > 0:
-            context['cantA'] = len(listaA)
-        else:
-            context['cantA'] = 0
-
-        if len(listaAut) > 0:
-            context['cantAut'] = len(listaAut)
-        else:
-            context['cantAut'] = 0
-
-        if len(listaC) > 0:
-            context['cantC'] = len(listaC)
-        else:
-            context['cantC'] = 0
-
-        return context
-
-@login_required
-def aceptar_solicitud(request, id):
-    solicitud=get_object_or_404(Solicitud, id=id)
-    solicitud.estado="Aceptada"
-    solicitud.save()
-    return redirect(to='pendientes')
-
-@login_required
-def aceptar_todas(request):
-    solicitudes=Solicitud.objects.filter(estado="Pendiente")
-    for i in solicitudes:
-        i.estado="Aceptada"
-        i.save()
-    return redirect(to='pendientes')
-
-@login_required
-def autorizar_solicitud(request, id):
-    solicitud=get_object_or_404(Solicitud, id=id)
-    solicitud.estado="Autorizada"
-    solicitud.save()
-    return redirect(to='aceptadas')
-
-@login_required
-def autorizar_todas(request):
-    solicitudes=Solicitud.objects.filter(estado="Aceptada")
-    for i in solicitudes:
-        i.estado="Autorizada"
-        i.save()
-    return redirect(to='aceptadas')
-
-@login_required
-def eliminar_solicitud(request, id):
-    solicitud=get_object_or_404(Solicitud, id=id)
-    solicitud.estado="Cancelada"
-    solicitud.save()
-    return redirect(to='solicitudes')
-
-@login_required
-def recuperar_solicitud(request, id):
-    solicitud=get_object_or_404(Solicitud, id=id)
-    solicitud.estado="Pendiente"
-    solicitud.save()
-    return redirect(to='canceladas')
+#class ModeloListView(ListView)
