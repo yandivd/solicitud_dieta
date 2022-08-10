@@ -12,11 +12,29 @@
                 "cancelButtonText": "No, Cancelar",
                 "confirmButtonText": "Si, Aceptar Solicitud",
                 "reverseButtons": true,
-                "confirmButtonColor": "#dc3545"
+                "confirmButtonColor": "#178f13"
             })
             .then(function(result){
                 if (result.isConfirmed){
                     window.location.href = "/aceptar_solicitud/"+id+"/"
+                }
+            })
+        }
+
+         function aceptarTodas(){
+            Swal.fire({
+                "title": "Estas Seguro?",
+                "text": "Esta accion no se puede deshacer",
+                "icon": "question",
+                "showCancelButton": true,
+                "cancelButtonText": "No, Cancelar",
+                "confirmButtonText": "Si, Aceptar Solicitudes",
+                "reverseButtons": true,
+                "confirmButtonColor": "#178f13"
+            })
+            .then(function(result){
+                if (result.isConfirmed){
+                    window.location.href = "/aceptar_all/"
                 }
             })
         }
@@ -58,9 +76,12 @@
                         <td>{{i.regreso}}</td>
                         <td>{{i.fecha_inicio}}</td>
                         <td>{{i.fecha_final}}</td>
-                        <td>
+                        <td style="width: 4cm"; height="4cm";>
                             <a href="#" onclick="aceptarSolicitud({{i.id}})" type="button" class="btn btn-success">
                                 <i class="fas fa-check"></i>
+                            </a>
+                            <a href="#" type="button" class="btn btn-warning">
+                                <i class="fas fa-file"></i>
                             </a>
                             <a href="#" type="button" class="btn btn-danger">
                                 <i class="fas fa-times-circle"></i>
@@ -72,9 +93,14 @@
             </table>
         </div>
         <div class=" card-footer mt-3">
-            <a href="#" type="button" class="btn btn-primary btn-success">
+            <a href="#" onclick="aceptarTodas()" type="button" class="btn btn-primary btn-success">
                 <i class="fas fa-check"></i>
                 Aceptar Todas
+            </a>
+
+            <a href="#" type="button" class="btn btn-primary btn-warning ml-2">
+                <i class="fas fa-file"></i>
+                Cargar en Modelo
             </a>
         </div>
     </div>

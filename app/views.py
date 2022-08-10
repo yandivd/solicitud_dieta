@@ -95,3 +95,10 @@ def aceptar_solicitud(request, id):
     solicitud.estado="Aceptada"
     solicitud.save()
     return redirect(to='pendientes')
+
+def aceptar_todas(request):
+    solicitudes=Solicitud.objects.filter(estado="Pendiente")
+    for i in solicitudes:
+        i.estado="Aceptada"
+        i.save()
+    return redirect(to='pendientes')
