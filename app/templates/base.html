@@ -77,58 +77,6 @@
         
         <h1 class=" text-center"> {{titulo}} </h1>
 
-    <div class="row pl-3 pr-3" >
-
-        <div class="col-lg-3 ">
-            <div class="small-box bg-info">
-                <div class="inner">
-                    <h3>{{cantP}}</h3> <p>Pendientes</p>
-                </div> <div class="icon"><i class="fa fa-question"></i>
-            </div>
-                <a href="{% url 'pendientes' %}" class="small-box-footer">
-                    Ver listado <i class="fas fa-arrow-circle-right"></i>
-                </a>
-            </div>
-        </div>
-        <div class="col-lg-3 col-6 ">
-            <div class="small-box bg-warning">
-                <div class="inner">
-                    <h3 style="color: white;">{{cantA}}</h3> <p style="color: white;">Aceptadas</p>
-                </div>
-                <div class="icon"><i class="fas  fa-check"></i>
-                </div>
-                <a href="#/lista_gestor_proceden" class="small-box-footer" style="color: white !important;">
-                Ver listado <i class="fas fa-arrow-circle-right" style="color: white;"></i>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-6 ">
-            <div class="small-box bg-danger">
-                <div class="inner">
-                    <h3>0</h3> <p>Cancelada</p>
-                </div>
-                <div class="icon"><i class="fas fa-times-circle"></i>
-                </div>
-                <a href="#/lista_gestor_no_proceden" class="small-box-footer">
-                Ver listado <i class="fas fa-arrow-circle-right"></i>
-                </a>
-            </div>
-        </div>
-         <div class="col-lg-3 col-6 ">
-            <div class="small-box bg-success">
-                <div class="inner">
-                    <h3 style="color: white;">0</h3> <p style="color: white;">Autorizadas</p>
-                </div>
-                <div class="icon"><i class="fas fa-check-square"></i>
-                </div>
-                <a href="#/lista_gestor_proceden" class="small-box-footer" style="color: white !important;">
-                Ver listado <i class="fas fa-arrow-circle-right" style="color: white;"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-
         {%block content%}
         {% endblock %}
 
