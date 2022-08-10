@@ -9,9 +9,15 @@ class SolicitudListView(ListView):
     model = Solicitud
     template_name = 'solicitudes/listar.html'
 
-    def get_context(self, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request,*args,** kwargs)
+
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
+        listaP = Solicitud.objects.all().filter(estado="Pendiente")
         context['title'] = "Listado de Solicitudes"
+        context['catP'] = len(listaP)
         #context['action']='add'
         return context
 
