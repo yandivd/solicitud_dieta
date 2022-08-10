@@ -21,7 +21,7 @@
                 </div>
                 <div class="icon"><i class="fas  fa-check"></i>
                 </div>
-                <a href="#/lista_gestor_proceden" class="small-box-footer" style="color: white !important;">
+                <a href="{% url 'aceptadas' %}" class="small-box-footer" style="color: white !important;">
                 Ver listado <i class="fas fa-arrow-circle-right" style="color: white;"></i>
                 </a>
             </div>
@@ -42,11 +42,11 @@
          <div class="col-lg-3 col-6 ">
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3 style="color: white;">0</h3> <p style="color: white;">Autorizadas</p>
+                    <h3 style="color: white;">{{cantAut}}</h3> <p style="color: white;">Autorizadas</p>
                 </div>
                 <div class="icon"><i class="fas fa-check-square"></i>
                 </div>
-                <a href="#/lista_gestor_proceden" class="small-box-footer" style="color: white !important;">
+                <a href="#" class="small-box-footer" style="color: white !important;">
                 Ver listado <i class="fas fa-arrow-circle-right" style="color: white;"></i>
                 </a>
             </div>
