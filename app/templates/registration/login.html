@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Solicitud de Dietas</title>
+
+  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css'%}">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css'%}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css'%}">
+  <link rel="stylesheet" href="{% static 'plugins/toastr/toastr.min.css'%}">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box" style="width: auto !important;">
+	 {%if error%}<div id="error" style="color: transparent;height: 0px" class="hidden">{{error}}</div>{%endif%}
+  <!-- /.login-logo -->
+  <div class="card card-outline card-primary">
+    <div class="card-header text-center">
+      <a href="javascript:;" class="h2">Sistema de Solicitud de Dietas</a>
+    </div>
+    <div class="card-body">
+      <p class="login-box-msg">Ingrese sus credenciales</p>
+
+      <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" name="username" placeholder="Nombre de Usuario" required="">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" name="password" placeholder="Contraseña" required="">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="icheck-primary">
+              <input type="checkbox" id="remember">
+              <label for="remember">
+                Recordarme
+              </label>
+            </div>
+          </div>
+          <!-- /.col -->
+          <div class="col-4">
+            <button type="submit" class="btn btn-outline-primary btn-block">Acceder <i class="fa fa-arrow-right"></i></button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="{% static 'plugins/jquery/jquery.min.js'%}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+<script src="{% static 'plugins/toastr/toastr.min.js'%}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'dist/js/adminlte.min.js'%}"></script>
+
+    <script type="text/javascript">
+
+          jQuery(document).ready(function() {
+             
+            if($('#error').text()=='error'){
+            toastr.options = {
+                 closeButton: true,
+                 debug: false,
+                 positionClass: 'toast-top-center',
+                 onclick: null
+                 };
+            toastr.error('Usuario o contraseña incorrecta','ERROR DE AUTENTICACIÓN');
+              
+            }
+      
+         });
+
+    </script>
+</body>
+</html>

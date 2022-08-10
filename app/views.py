@@ -3,11 +3,15 @@ from django.views.generic import ListView, CreateView
 from .models import Solicitud
 from .forms import SolicitudForm
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 class SolicitudListView(ListView):
     model = Solicitud
     template_name = 'solicitudes/listar.html'
+
+    @method_decorator(login_required)
 
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request,*args,** kwargs)
@@ -46,6 +50,10 @@ class SolicitudCreateView(CreateView):
     form_class=SolicitudForm
     template_name='solicitudes/create.html'
     success_url=reverse_lazy('solicitudes')
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
         formulario=SolicitudForm(data=request.POST)
@@ -86,6 +94,10 @@ class SolicitudPendienteListView(ListView):
     model = Solicitud
     template_name = 'solicitudes/pendientes/listar.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
         context['object_list']=Solicitud.objects.all().filter(estado="Pendiente")
@@ -118,6 +130,10 @@ class SolicitudAutorizadaListView(ListView):
     model = Solicitud
     template_name = 'solicitudes/autorizadas/listar.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
         context['object_list']=Solicitud.objects.all().filter(estado="Autorizada")
@@ -149,6 +165,10 @@ class SolicitudAutorizadaListView(ListView):
 class SolicitudAceptadaListView(ListView):
     model = Solicitud
     template_name = 'solicitudes/aceptadas/listar.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
@@ -183,6 +203,10 @@ class SolicitudCanceladaListView(ListView):
     model = Solicitud
     template_name = 'solicitudes/canceladas/listar.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
         context['object_list']=Solicitud.objects.all().filter(estado="Cancelada")
@@ -212,12 +236,14 @@ class SolicitudCanceladaListView(ListView):
 
         return context
 
+@login_required
 def aceptar_solicitud(request, id):
     solicitud=get_object_or_404(Solicitud, id=id)
     solicitud.estado="Aceptada"
     solicitud.save()
     return redirect(to='pendientes')
 
+@login_required
 def aceptar_todas(request):
     solicitudes=Solicitud.objects.filter(estado="Pendiente")
     for i in solicitudes:
@@ -225,12 +251,14 @@ def aceptar_todas(request):
         i.save()
     return redirect(to='pendientes')
 
+@login_required
 def autorizar_solicitud(request, id):
     solicitud=get_object_or_404(Solicitud, id=id)
     solicitud.estado="Autorizada"
     solicitud.save()
     return redirect(to='aceptadas')
 
+@login_required
 def autorizar_todas(request):
     solicitudes=Solicitud.objects.filter(estado="Aceptada")
     for i in solicitudes:
@@ -238,12 +266,14 @@ def autorizar_todas(request):
         i.save()
     return redirect(to='aceptadas')
 
+@login_required
 def eliminar_solicitud(request, id):
     solicitud=get_object_or_404(Solicitud, id=id)
     solicitud.estado="Cancelada"
     solicitud.save()
     return redirect(to='solicitudes')
 
+@login_required
 def recuperar_solicitud(request, id):
     solicitud=get_object_or_404(Solicitud, id=id)
     solicitud.estado="Pendiente"

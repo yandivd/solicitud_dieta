@@ -2,8 +2,21 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+
+
+class Unidad_Organizativa(models.Model):
+    nombre=models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nombre
+
+    class Meta:
+        verbose_name="Unidad Organizativa"
+        verbose_name_plural="Unidades Organizativas"
 class PersonalCualificado(models.Model):
-    usuario=models.ForeignKey(User, on_delete=models.CASCADE)
+    usuario=models.OneToOneField(User, on_delete=models.CASCADE)
+    permiso=models.CharField(max_length=100)
+    unidad_organizativa=models.ForeignKey(Unidad_Organizativa, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.usuario.username
@@ -19,15 +32,6 @@ class Trabajador(models.Model):
         verbose_name = "Trabajador"
         verbose_name_plural = "Trabajadores"
 
-class Unidad_Organizativa(models.Model):
-    nombre=models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.nombre
-
-    class Meta:
-        verbose_name="Unidad Organizativa"
-        verbose_name_plural="Unidades Organizativas"
 
 class Provincia(models.Model):
     nombre=models.CharField(max_length=50)

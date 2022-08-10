@@ -129,6 +129,11 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+
+#Toda la configuracion del Jazzmin
 JAZZMIN_SETTINGS = {
     # title of the window
     "site_title": "Solicitud de Servicio de Dieta",
