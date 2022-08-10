@@ -94,6 +94,23 @@
             $('#myTable').DataTable();
     } );
 
+    function eliminarSolicitud(id){
+        Swal.fire({
+            "title": "Estas Seguro?",
+            "text": "Esta accion no se puede deshacer",
+            "icon": "question",
+            "showCancelButton": true,
+            "cancelButtonText": "No, Cancelar",
+            "confirmButtonText": "Si, Cancelar Solicitud",
+            "reverseButtons": true,
+            "confirmButtonColor": "#178f13"
+                })
+            .then(function(result){
+                if (result.isConfirmed){
+                    window.location.href = "/eliminar_solicitud/"+id+"/"
+                }
+            })
+        }
         </script>
     {% block js %}
     {% endblock %}

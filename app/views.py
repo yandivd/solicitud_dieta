@@ -19,6 +19,7 @@ class SolicitudListView(ListView):
         listaP = Solicitud.objects.all().filter(estado="Pendiente")
         listaA = Solicitud.objects.all().filter(estado="Aceptada")
         listaAut = Solicitud.objects.all().filter(estado="Autorizada")
+        listaC = Solicitud.objects.all().filter(estado="Cancelada")
         if len(listaP) > 0:
             context['cantP'] = len(listaP)
         else:
@@ -33,6 +34,11 @@ class SolicitudListView(ListView):
             context['cantAut'] = len(listaAut)
         else:
             context['cantAut'] = 0
+
+        if len(listaC) > 0:
+            context['cantC'] = len(listaC)
+        else:
+            context['cantC'] = 0
         return context
 
 class SolicitudCreateView(CreateView):
@@ -86,6 +92,7 @@ class SolicitudPendienteListView(ListView):
         listaP = Solicitud.objects.all().filter(estado="Pendiente")
         listaA = Solicitud.objects.all().filter(estado="Aceptada")
         listaAut = Solicitud.objects.all().filter(estado="Autorizada")
+        listaC = Solicitud.objects.all().filter(estado="Cancelada")
         if len(listaP) > 0:
             context['cantP'] = len(listaP)
         else:
@@ -100,6 +107,43 @@ class SolicitudPendienteListView(ListView):
             context['cantAut'] = len(listaAut)
         else:
             context['cantAut'] = 0
+
+        if len(listaC) > 0:
+            context['cantC'] = len(listaC)
+        else:
+            context['cantC'] = 0
+        return context
+
+class SolicitudAutorizadaListView(ListView):
+    model = Solicitud
+    template_name = 'solicitudes/autorizadas/listar.html'
+
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context['object_list']=Solicitud.objects.all().filter(estado="Autorizada")
+        listaP = Solicitud.objects.all().filter(estado="Pendiente")
+        listaA = Solicitud.objects.all().filter(estado="Aceptada")
+        listaAut = Solicitud.objects.all().filter(estado="Autorizada")
+        listaC = Solicitud.objects.all().filter(estado="Cancelada")
+        if len(listaP) > 0:
+            context['cantP'] = len(listaP)
+        else:
+            context['cantP'] = 0
+
+        if len(listaA) > 0:
+            context['cantA'] = len(listaA)
+        else:
+            context['cantA'] = 0
+
+        if len(listaAut) > 0:
+            context['cantAut'] = len(listaAut)
+        else:
+            context['cantAut'] = 0
+
+        if len(listaC) > 0:
+            context['cantC'] = len(listaC)
+        else:
+            context['cantC'] = 0
         return context
 
 class SolicitudAceptadaListView(ListView):
@@ -112,6 +156,7 @@ class SolicitudAceptadaListView(ListView):
         listaP = Solicitud.objects.all().filter(estado="Pendiente")
         listaA = Solicitud.objects.all().filter(estado="Aceptada")
         listaAut = Solicitud.objects.all().filter(estado="Autorizada")
+        listaC = Solicitud.objects.all().filter(estado="Cancelada")
         if len(listaP) > 0:
             context['cantP'] = len(listaP)
         else:
@@ -126,6 +171,44 @@ class SolicitudAceptadaListView(ListView):
             context['cantAut'] = len(listaAut)
         else:
             context['cantAut'] = 0
+
+        if len(listaC) > 0:
+            context['cantC'] = len(listaC)
+        else:
+            context['cantC'] = 0
+
+        return context
+
+class SolicitudCanceladaListView(ListView):
+    model = Solicitud
+    template_name = 'solicitudes/canceladas/listar.html'
+
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context['object_list']=Solicitud.objects.all().filter(estado="Cancelada")
+        listaP = Solicitud.objects.all().filter(estado="Pendiente")
+        listaA = Solicitud.objects.all().filter(estado="Aceptada")
+        listaAut = Solicitud.objects.all().filter(estado="Autorizada")
+        listaC = Solicitud.objects.all().filter(estado="Cancelada")
+        if len(listaP) > 0:
+            context['cantP'] = len(listaP)
+        else:
+            context['cantP'] = 0
+
+        if len(listaA) > 0:
+            context['cantA'] = len(listaA)
+        else:
+            context['cantA'] = 0
+
+        if len(listaAut) > 0:
+            context['cantAut'] = len(listaAut)
+        else:
+            context['cantAut'] = 0
+
+        if len(listaC) > 0:
+            context['cantC'] = len(listaC)
+        else:
+            context['cantC'] = 0
 
         return context
 
@@ -154,3 +237,15 @@ def autorizar_todas(request):
         i.estado="Autorizada"
         i.save()
     return redirect(to='aceptadas')
+
+def eliminar_solicitud(request, id):
+    solicitud=get_object_or_404(Solicitud, id=id)
+    solicitud.estado="Cancelada"
+    solicitud.save()
+    return redirect(to='solicitudes')
+
+def recuperar_solicitud(request, id):
+    solicitud=get_object_or_404(Solicitud, id=id)
+    solicitud.estado="Pendiente"
+    solicitud.save()
+    return redirect(to='canceladas')

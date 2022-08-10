@@ -30,11 +30,11 @@
         <div class="col-lg-3 col-6 ">
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>0</h3> <p>Cancelada</p>
+                    <h3>{{cantC}}</h3> <p>Cancelada</p>
                 </div>
                 <div class="icon"><i class="fas fa-times-circle"></i>
                 </div>
-                <a href="#/lista_gestor_no_proceden" class="small-box-footer">
+                <a href="{% url 'canceladas' %}" class="small-box-footer">
                 Ver listado <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="icon"><i class="fas fa-check-square"></i>
                 </div>
-                <a href="#" class="small-box-footer" style="color: white !important;">
+                <a href="{% url 'autorizadas' %}" class="small-box-footer" style="color: white !important;">
                 Ver listado <i class="fas fa-arrow-circle-right" style="color: white;"></i>
                 </a>
             </div>

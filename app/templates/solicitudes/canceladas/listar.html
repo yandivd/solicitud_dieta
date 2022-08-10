@@ -3,41 +3,24 @@
 
 {% block js %}
     <script>
-        function autorizarSolicitud(id){
+        function recuperarSolicitud(id){
             Swal.fire({
                 "title": "Estas Seguro?",
-                "text": "Esta accion no se puede deshacer",
+                "text": "La solicitud pasara a pendiente",
                 "icon": "question",
                 "showCancelButton": true,
                 "cancelButtonText": "No, Cancelar",
-                "confirmButtonText": "Si, Autorizar Solicitud",
+                "confirmButtonText": "Si, Recuperar Solicitud",
                 "reverseButtons": true,
                 "confirmButtonColor": "#178f13"
             })
             .then(function(result){
                 if (result.isConfirmed){
-                    window.location.href = "/autorizar_solicitud/"+id+"/"
+                    window.location.href = "/recuperar_solicitud/"+id+"/"
                 }
             })
         }
 
-         function autorizarTodas(){
-            Swal.fire({
-                "title": "Estas Seguro?",
-                "text": "Esta accion no se puede deshacer",
-                "icon": "question",
-                "showCancelButton": true,
-                "cancelButtonText": "No, Cancelar",
-                "confirmButtonText": "Si, Autorizar Solicitudes",
-                "reverseButtons": true,
-                "confirmButtonColor": "#178f13"
-            })
-            .then(function(result){
-                if (result.isConfirmed){
-                    window.location.href = "/autorizar_all/"
-                }
-            })
-        }
     </script>
 {% endblock %}
 {% block content %}
@@ -45,7 +28,7 @@
         <div class="card-header px-3 mb-3 mt-3 container">
             <h3 class="card-title">
             <i class="fas fa-exclamation-triangle bi bi-search"></i>
-                Listado de las Solicitudes Aceptadas
+                Listado de las Solicitudes Canceladas
             </h3>
             </div>
         <div class="card card-body content-header mx-5 px-5">
@@ -77,31 +60,14 @@
                         <td>{{i.fecha_inicio}}</td>
                         <td>{{i.fecha_final}}</td>
                         <td style="width: 4cm"; height="4cm";>
-                            <a href="#" onclick="autorizarSolicitud({{i.id}})" type="button" class="btn btn-success">
-                                <i class="fas fa-check"></i>
-                            </a>
-                            <a href="#" type="button" class="btn btn-warning">
-                                <i class="fas fa-file"></i>
-                            </a>
-                            <a href="#" onclick="eliminarSolicitud({{i.id}})" type="button" class="btn btn-danger">
-                                <i class="fas fa-times-circle"></i>
+                            <a href="#" onclick="recuperarSolicitud({{i.id}})" type="button" class="btn btn-success">
+                                <i class="fas fa-check"></i> Recuperar
                             </a>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-        </div>
-        <div class=" card-footer mt-3">
-            <a href="#" onclick="autorizarTodas()" type="button" class="btn btn-primary btn-success">
-                <i class="fas fa-check"></i>
-                Autorizar Todas
-            </a>
-
-            <a href="#" type="button" class="btn btn-primary btn-warning ml-2">
-                <i class="fas fa-file"></i>
-                Cargar en Modelo
-            </a>
         </div>
     </div>
 {% endblock %}
