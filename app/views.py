@@ -69,5 +69,4 @@ def aceptar_solicitud(request, id):
     solicitud=get_object_or_404(Solicitud, id=id)
     solicitud.estado="Aceptada"
     solicitud.save()
-    #messages.success(request, "Solicitud Aceptada")
     return redirect(to='pendientes')
