@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView
-from .models import Solicitud
+from .models import *
 from .forms import SolicitudForm
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -100,6 +100,7 @@ class SolicitudPendienteListView(ListView):
 
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
+
         context['object_list']=Solicitud.objects.all().filter(estado="Pendiente")
         listaP = Solicitud.objects.all().filter(estado="Pendiente")
         listaA = Solicitud.objects.all().filter(estado="Aceptada")
