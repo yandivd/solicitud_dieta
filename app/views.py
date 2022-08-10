@@ -15,10 +15,18 @@ class SolicitudListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        listaP = Solicitud.objects.all().filter(estado="Pendiente")
         context['title'] = "Listado de Solicitudes"
-        context['catP'] = len(listaP)
-        #context['action']='add'
+        listaP = Solicitud.objects.all().filter(estado="Pendiente")
+        listaA = Solicitud.objects.all().filter(estado="Aceptada")
+        if len(listaP) > 0:
+            context['cantP'] = len(listaP)
+        else:
+            context['cantP'] = 0
+
+        if len(listaA) > 0:
+            context['cantA'] = len(listaA)
+        else:
+            context['cantA'] = 0
         return context
 
 class SolicitudCreateView(CreateView):
@@ -69,6 +77,17 @@ class SolicitudPendienteListView(ListView):
     def get_context_data(self, **kwargs):
         context=super().get_context_data(**kwargs)
         context['object_list']=Solicitud.objects.all().filter(estado="Pendiente")
+        listaP = Solicitud.objects.all().filter(estado="Pendiente")
+        listaA = Solicitud.objects.all().filter(estado="Aceptada")
+        if len(listaP) > 0:
+            context['cantP'] = len(listaP)
+        else:
+            context['cantP'] = 0
+
+        if len(listaA) > 0:
+            context['cantA'] = len(listaA)
+        else:
+            context['cantA'] = 0
         return context
 
 def aceptar_solicitud(request, id):
