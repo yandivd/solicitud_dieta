@@ -54,34 +54,38 @@
             </div>
             {% endif %}
             <div class=" form-group form-card text-center">
-                <br>
                 <div class="container">
-                {{form | crispy}}
+                    <!---Aqui comienza a crear el formulario--->
+<!--                {{form | crispy}}-->
+                    <div class="col-md-2">
+                        <label for="">Solicitante: </label>
+                    {{form.solicitante}}
+                    </div>
+                    <div class="col-md-2">
+                        <label for="">Trabajador: </label>
+                    {{form.trabajador}}
+                    </div>
                 </div>
-              
-            </div> 
+
+            </div>
+
+            <button type="submit" class=" btn btn-success ml-5 ">
+            <i class="bi bi-plus"></i>
+        </button>
         </div>
 
     </div>
-    <div class="  card-footer mt-3 px-5 mb-3">
-        <button type="submit" class="  btn btn-primary btn-flat btnTest">
-            <i class="bi bi-cassette"></i> Guardar Solicitud
-        </button>
-        <a href="{% url 'solicitudes' %}">
-            <button type="button" class=" btn btn-danger">
-                <i class="bi bi-x"></i> Cancelar
-            </button>
-        </a>
-    </div>
+<!--    <div class=" card-footer mt-3 px-5">-->
+
+<!--        <a href="{% url 'solicitudes' %}">-->
+<!--            <button type="button" class=" btn btn-danger">-->
+<!--                <i class="bi bi-x"></i> Cancelar-->
+<!--            </button>-->
+<!--        </a>-->
+<!--    </div>-->
     </div>
 </form>
     <div class=" card card-default">
-        <div class="card-header px-3 mb-3 mt-3 container">
-            <h3 class="card-title">
-            <i class="fas fa-exclamation-triangle bi bi-search"></i>
-                Listado de las Solicitudes Pendientes
-            </h3>
-            </div>
         <div class="card card-body content-header mx-5 px-5">
             <table id="myTable" class="display" style="width: 100%;">
                 <thead>

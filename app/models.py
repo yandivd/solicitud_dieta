@@ -74,6 +74,9 @@ class Solicitud(models.Model):
 
 class Modelo(models.Model):
     nombre=models.CharField(max_length=50)
+    solicitante=models.CharField(max_length=50)
+    unidad_organizativa=models.CharField(max_length=100)
+    c_contable=models.CharField(max_length=4)
     consec=models.IntegerField()
     solicitudes=models.ManyToManyField(Solicitud)
 

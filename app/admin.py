@@ -18,7 +18,7 @@ class ProvinciaAdmin(admin.ModelAdmin):
     list_display=('nombre',)
 
 class ModeloAdmin(admin.ModelAdmin):
-    list_display = ('consec', 'nombre')
+    list_display = ('consec', 'nombre', 'solicitante')
 
 class SolicitudAdmin(admin.ModelAdmin):
     list_display=(

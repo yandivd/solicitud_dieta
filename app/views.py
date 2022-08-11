@@ -68,8 +68,17 @@ class SolicitudCreateView(CreateView):
         return context
 
 def crear_modelo(request):
+    modelos_para_consecutivos=Modelo.objects.all()
+    numero=0
+    mayor=0
+    for i in modelos_para_consecutivos:
+        if i.consec > mayor:
+            mayor = i.consec
+    numero=mayor+1
     solicitudes_list=Solicitud.objects.all().filter(estado="StandBye")
-    modelo = Modelo(consec=1, nombre=request.user.username)
+    modelo = Modelo(consec=numero, nombre=request.user.username, solicitante=solicitudes_list[0].solicitante.username,
+                    unidad_organizativa=solicitudes_list[0].unidad_organizativa.nombre,
+                    c_contable=solicitudes_list[0].c_contable)
     modelo.save()
     for i in solicitudes_list:
         i.estado="Check"
@@ -107,13 +116,13 @@ class ModeloListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        modelo_test=Modelo.objects.first()
-        solicitud_test=modelo_test.solicitudes.first()
-        solicitante=solicitud_test.solicitante
-        uo=solicitud_test.unidad_organizativa
+        lista_solicitantes=[]
+        modelos=Modelo.objects.all()
+        pos=0
+        for i in modelos:
+            lista_solicitantes.append(i.solicitudes.first().solicitante)
         context['title'] = "Listado de Solicitudes"
-        context['solicitante'] = solicitante
-        context['uo'] = uo
+        context['solicitantes'] = lista_solicitantes
 
         return context
 

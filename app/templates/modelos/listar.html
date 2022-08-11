@@ -12,21 +12,32 @@
             <table id="myTable" class="display" style="width: 100%;">
                 <thead>
                     <tr>
-                        <th>Consecutivo</th>
+                        <th style="width: 2cm">Consecutivo</th>
                         <th>Creador</th>
                         <th>Solicitante</th>
                         <th>Unidad Organizativa</th>
                         <th>Centro Contable</th>
-                        <th>Opciones</th>
+                        <th style="width: 3cm">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for i in object_list %}
                     <tr>
-                        <td style="width: 150px;"><a href="{% url 'solicitudModel' i.id%} ">{{i.consec}}</a></td>
+                        <td style="width: 20px;"><a href="{% url 'solicitudModel' i.id%} ">{{i.consec}}</a></td>
                         <td style="width: 150px;"><a href="{% url 'solicitudModel' i.id%} ">{{i.nombre}}</a></td>
-                        <td style="width: 150px;">{{solicitante}}</td>
-                        <td style="width: 150px;">{{uo}}</td>
+                        <td style="width: 150px;">{{i.solicitante}}</td>
+                        <td style="width: 150px;">{{i.unidad_organizativa}}</td>
+                        <td style="width: 150px;"><div class="pl-5">{{i.c_contable}}</div></td>
+                        <td>
+                <a href="#" type="button" class="btn btn-success">
+                    <i class="fas fa-file"></i>
+                </a>
+                <a href="#" type="button" class="btn btn-warning">
+                    <i class="fas fa-edit"></i>
+                </a>
+                <a href="#" type="button" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i>
+                </a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

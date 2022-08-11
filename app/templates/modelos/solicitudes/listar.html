@@ -1,22 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <div class="row pl-3 pr-3" >
-         <div class="col-lg-3 col-6 ">
-            <div class="small-box bg-success">
-                <div class="inner">
-                    <h3 style="color: white;">
-                        <i class=" bi bi-check-square"></i>
-                    </h3> <p style="color: white;">Modelos</p>
-                </div>
-                <div class="icon"><i class="fas fa-check-square"></i>
-                </div>
-                <a href="{% url 'listarMod' %}" class="small-box-footer" style="color: white !important;">
-                Ver listado <i class="fas fa-arrow-circle-right" style="color: white;"></i>
-                </a>
-            </div>
-        </div>
-    </div>
     <div class=" card card-default">
         <div class="card-header px-3 mb-3 mt-3 container">
             <h3 class="card-title">
@@ -37,7 +21,6 @@
                         <th>Regreso</th>
                         <th>Desde</th>
                         <th>Hasta</th>
-                        <th>Estado</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,16 +35,19 @@
                         <td>{{i.regreso}}</td>
                         <td>{{i.fecha_inicio}}</td>
                         <td>{{i.fecha_final}}</td>
-                        <td>{{i.estado}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
         <div class=" card-footer mt-3">
-            <a href="{% url 'crear_solicitud' %}" type="button" class="btn btn-primary btn-success">
-                <i class="fas fa-plus"></i>
-                Generar el Modelo
+            <a href="#" type="button" class="btn btn-primary btn-warning">
+                <i class="fas fa-file"></i>
+                Previsualizar el Modelo
+            </a>
+            <a href="{% url 'listarMod' %}" type="button" class="btn btn-primary btn-danger">
+                <!---<i class="fas fa-arrow"></i>-->
+                Atras
             </a>
         </div>
     </div>
