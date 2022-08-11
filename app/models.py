@@ -73,10 +73,12 @@ class Solicitud(models.Model):
         verbose_name_plural="Solicitudes"
 
 class Modelo(models.Model):
-    consec=models.IntegerField(auto_created=True)
+    nombre=models.CharField(max_length=50)
+    consec=models.IntegerField()
     solicitudes=models.ManyToManyField(Solicitud)
 
     def __str__(self):
-        return self.consec
+        return self.nombre
+
     
 

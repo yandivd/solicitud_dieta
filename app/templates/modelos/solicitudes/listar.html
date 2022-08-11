@@ -41,7 +41,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for i in object_list %}
+                    {% for i in soli %}
                     <tr>
                         <td style="width: 150px;">{{i.trabajador}}</td>
                         <td>{{i.trabajador.ci}}</td>
@@ -61,7 +61,7 @@
         <div class=" card-footer mt-3">
             <a href="{% url 'crear_solicitud' %}" type="button" class="btn btn-primary btn-success">
                 <i class="fas fa-plus"></i>
-                Agregar Solicitud
+                Generar el Modelo
             </a>
         </div>
     </div>

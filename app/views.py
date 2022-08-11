@@ -20,29 +20,7 @@ class SolicitudListView(ListView):
         context = super().get_context_data(**kwargs)
 
         context['title'] = "Listado de Solicitudes"
-        listaP = Solicitud.objects.all().filter(estado="Pendiente")
-        listaA = Solicitud.objects.all().filter(estado="Aceptada")
-        listaAut = Solicitud.objects.all().filter(estado="Autorizada")
-        listaC = Solicitud.objects.all().filter(estado="Cancelada")
-        if len(listaP) > 0:
-            context['cantP'] = len(listaP)
-        else:
-            context['cantP'] = 0
 
-        if len(listaA) > 0:
-            context['cantA'] = len(listaA)
-        else:
-            context['cantA'] = 0
-
-        if len(listaAut) > 0:
-            context['cantAut'] = len(listaAut)
-        else:
-            context['cantAut'] = 0
-
-        if len(listaC) > 0:
-            context['cantC'] = len(listaC)
-        else:
-            context['cantC'] = 0
         return context
 
 class SolicitudCreateView(CreateView):
@@ -56,7 +34,6 @@ class SolicitudCreateView(CreateView):
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        print("Primero o ultimo")
         formulario=SolicitudForm(data=request.POST)
         estado='StandBye'
         mayor=0
@@ -66,7 +43,6 @@ class SolicitudCreateView(CreateView):
                 mayor=i.numero
         numero=mayor+1
         if formulario.is_valid():
-            print(formulario.cleaned_data['solicitante'])
             solicitante=formulario.cleaned_data['solicitante']
             trabajador=formulario.cleaned_data['trabajador']
             uo=formulario.cleaned_data['unidad_organizativa']
@@ -92,8 +68,60 @@ class SolicitudCreateView(CreateView):
         return context
 
 def crear_modelo(request):
-        solicitudes=Solicitud.objects.all().filter(estado="StandBye")
-        for i in solicitudes:
-            i.estado="Check"
-            i.save()
-        return render(request,'modelos/listar.html',{'data': solicitudes})
+    solicitudes_list=Solicitud.objects.all().filter(estado="StandBye")
+    modelo = Modelo(consec=1, nombre=request.user.username)
+    modelo.save()
+    for i in solicitudes_list:
+        i.estado="Check"
+        i.save()
+        modelo.solicitudes.add(i)
+        modelo.save()
+    modelos=Modelo.objects.all()
+    data={
+        'sol': solicitudes_list,
+        'mod':modelos
+    }
+
+    return render(request,'solicitudes/listar.html',data)
+
+def listar_modelos(request):
+    data={}
+    modelos=Modelo.objects.all()
+    consecutivos=[]
+    for i in modelos:
+        consecutivos.append(i.consec)
+        print(i.consec)
+    data={
+        'mod': consecutivos
+    }
+
+    return render(request,'modelos/listar.html',data)
+
+class ModeloListView(ListView):
+    model = Modelo
+    template_name = 'modelos/listar.html'
+
+    @method_decorator(login_required)
+
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request,*args,** kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['title'] = "Listado de Solicitudes"
+
+        return context
+
+def listar_solicitudes_de_modelo(request, id):
+    lista=[]
+    modelo=Modelo.objects.get(id=id)
+    print(modelo.consec)
+    print(modelo.nombre)
+    lista_solicitudes=modelo.solicitudes.all()
+    for i in lista_solicitudes:
+        lista.append(i)
+    data={
+        'soli': lista,
+    }
+    return render(request, 'modelos/solicitudes/listar.html', data)

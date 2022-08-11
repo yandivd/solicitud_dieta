@@ -17,6 +17,9 @@ class Unidad_OrganizativaAdmin(admin.ModelAdmin):
 class ProvinciaAdmin(admin.ModelAdmin):
     list_display=('nombre',)
 
+class ModeloAdmin(admin.ModelAdmin):
+    list_display = ('consec', 'nombre')
+
 class SolicitudAdmin(admin.ModelAdmin):
     list_display=(
         'numero',
@@ -51,3 +54,4 @@ admin.site.register(Solicitud, SolicitudAdmin)
 admin.site.register(Unidad_Organizativa, Unidad_OrganizativaAdmin)
 admin.site.register(Provincia, ProvinciaAdmin)
 admin.site.register(PersonalCualificado, PersonalCualificadoAdmin)
+admin.site.register(Modelo, ModeloAdmin)

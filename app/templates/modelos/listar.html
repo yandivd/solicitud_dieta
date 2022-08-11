@@ -1,27 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <div class="row pl-3 pr-3" >
-         <div class="col-lg-3 col-6 ">
-            <div class="small-box bg-success">
-                <div class="inner">
-                    <h3 style="color: white;">
-                        <i class=" bi bi-check-square"></i>
-                    </h3> <p style="color: white;">Modelos</p>
-                </div>
-                <div class="icon"><i class="fas fa-check-square"></i>
-                </div>
-                <a href="#" class="small-box-footer" style="color: white !important;">
-                Ver listado <i class="fas fa-arrow-circle-right" style="color: white;"></i>
-                </a>
-            </div>
-        </div>
-    </div>
     <div class=" card card-default">
         <div class="card-header px-3 mb-3 mt-3 container">
             <h3 class="card-title">
             <i class="fas fa-search"></i>
-                Listado de las Solicitudes de Dietas
+                Listado de los Modelos
             </h3>
             </div>
         <div class="card card-body content-header mx-5 px-5">
@@ -29,12 +13,14 @@
                 <thead>
                     <tr>
                         <th>Consecutivo</th>
+                        <th>Creador</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for i in data %}
+                    {% for i in object_list %}
                     <tr>
-                        <a href="#"><td style="width: 150px;">{{i.numero}}</td></a>
+                        <td style="width: 150px;"><a href="{% url 'solicitudModel' i.id%} ">{{i.consec}}</a></td>
+                        <td style="width: 150px;"><a href="{% url 'solicitudModel' i.id%} ">{{i.nombre}}</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>
