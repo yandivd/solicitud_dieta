@@ -14,6 +14,10 @@
                     <tr>
                         <th>Consecutivo</th>
                         <th>Creador</th>
+                        <th>Solicitante</th>
+                        <th>Unidad Organizativa</th>
+                        <th>Centro Contable</th>
+                        <th>Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,6 +25,8 @@
                     <tr>
                         <td style="width: 150px;"><a href="{% url 'solicitudModel' i.id%} ">{{i.consec}}</a></td>
                         <td style="width: 150px;"><a href="{% url 'solicitudModel' i.id%} ">{{i.nombre}}</a></td>
+                        <td style="width: 150px;">{{solicitante}}</td>
+                        <td style="width: 150px;">{{uo}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

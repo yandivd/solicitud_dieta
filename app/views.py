@@ -90,7 +90,6 @@ def listar_modelos(request):
     consecutivos=[]
     for i in modelos:
         consecutivos.append(i.consec)
-        print(i.consec)
     data={
         'mod': consecutivos
     }
@@ -108,16 +107,19 @@ class ModeloListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
+        modelo_test=Modelo.objects.first()
+        solicitud_test=modelo_test.solicitudes.first()
+        solicitante=solicitud_test.solicitante
+        uo=solicitud_test.unidad_organizativa
         context['title'] = "Listado de Solicitudes"
+        context['solicitante'] = solicitante
+        context['uo'] = uo
 
         return context
 
 def listar_solicitudes_de_modelo(request, id):
     lista=[]
     modelo=Modelo.objects.get(id=id)
-    print(modelo.consec)
-    print(modelo.nombre)
     lista_solicitudes=modelo.solicitudes.all()
     for i in lista_solicitudes:
         lista.append(i)
