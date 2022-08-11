@@ -97,5 +97,3 @@ def crear_modelo(request):
             i.estado="Check"
             i.save()
         return render(request,'modelos/listar.html',{'data': solicitudes})
-
-#class ModeloListView(ListView)

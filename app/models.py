@@ -71,5 +71,12 @@ class Solicitud(models.Model):
     class Meta:
         verbose_name="Solicitud"
         verbose_name_plural="Solicitudes"
+
+class Modelo(models.Model):
+    consec=models.IntegerField(auto_created=True)
+    solicitudes=models.ManyToManyField(Solicitud)
+
+    def __str__(self):
+        return self.consec
     
 
