@@ -32,7 +32,10 @@ class SolicitudAdmin(admin.ModelAdmin):
         'regreso',
         'fecha_inicio',
         'fecha_final',
-        'estado'
+        'estado',
+        'parleg',
+        'cargo_presupuesto',
+        'autoriza',
     )
 
     list_filter=(

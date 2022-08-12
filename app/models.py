@@ -21,6 +21,12 @@ class PersonalCualificado(models.Model):
     def __str__(self):
         return self.usuario.username
 
+class Cargo_al_Presupuesto(models.Model):
+    cueta=models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.cueta
+
 class Trabajador(models.Model):
     nombre_y_apellidos = models.CharField(max_length=80)
     ci=models.CharField(max_length=11, unique=True)
@@ -32,6 +38,11 @@ class Trabajador(models.Model):
         verbose_name = "Trabajador"
         verbose_name_plural = "Trabajadores"
 
+class PARLEG(models.Model):
+    trabajador=models.ForeignKey(Trabajador, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.trabajador.nombre_y_apellidos
 
 class Provincia(models.Model):
     nombre=models.CharField(max_length=50)
@@ -63,6 +74,10 @@ class Solicitud(models.Model):
     regreso=models.ForeignKey(Municipio, on_delete=models.CASCADE, related_name='municipio_regreso')
     fecha_inicio=models.DateField()
     fecha_final=models.DateField()
+    #nuevos models add
+    parleg=models.ForeignKey(PARLEG, on_delete=models.CASCADE)
+    cargo_presupuesto=models.ForeignKey(Cargo_al_Presupuesto, on_delete=models.CASCADE)
+    autoriza=models.ForeignKey(PersonalCualificado, on_delete=models.CASCADE)
     estado=models.CharField(max_length=20)
 
     def __str__(self):
