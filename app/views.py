@@ -43,6 +43,7 @@ class SolicitudCreateView(CreateView):
             if i.numero > mayor:
                 mayor=i.numero
         numero=mayor+1
+        print("OOOo")
         if formulario.is_valid():
             solicitante=formulario.cleaned_data['solicitante']
             trabajador=formulario.cleaned_data['trabajador']
@@ -54,8 +55,17 @@ class SolicitudCreateView(CreateView):
             regreso=formulario.cleaned_data['regreso']
             inicio=formulario.cleaned_data['fecha_inicio']
             final=formulario.cleaned_data['fecha_final']
-            solicitud= Solicitud(numero=numero, solicitante=solicitante,trabajador=trabajador,unidad_organizativa=uo,c_contable=cc,provincia=provincia,origen=origen,destino=destino,regreso=regreso,fecha_inicio=inicio,fecha_final=final,estado=estado)
+            #nuevos campos
+            cp=formulario.cleaned_data['cargo_presupuesto']
+            print(cp)
+            parleg=formulario.cleaned_data['parleg']
+            print(parleg)
+            autoriza=formulario.cleaned_data['autoriza']
+            print(autoriza)
+            solicitud= Solicitud(numero=numero, solicitante=solicitante,trabajador=trabajador,unidad_organizativa=uo,c_contable=cc,provincia=provincia,origen=origen,destino=destino,regreso=regreso,fecha_inicio=inicio,fecha_final=final,estado=estado,cargo_presupuesto=cp,parleg=parleg,autoriza=autoriza)
             solicitud.save()
+        else:
+            print("No es valido")
         return redirect('crear_solicitud')
 
 
@@ -189,7 +199,7 @@ class SolicitudUpdateView(UpdateView):
 
     def get_context_data(self,**kwargs):
         context=super().get_context_data(**kwargs)
-        context['title']='Solicitud'
+        context['title']='Editar Solicitud'
         context['list_url']=reverse_lazy('listarCat')
         context['action']='edit'
         return context

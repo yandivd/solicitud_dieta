@@ -50,6 +50,12 @@ class SolicitudAdmin(admin.ModelAdmin):
         'fecha_inicio',
         'fecha_final')
 
+class Cargo_al_PresupuestoAdmin(admin.ModelAdmin):
+    list_display = ('cuenta',)
+
+class PARLEGAdmin(admin.ModelAdmin):
+    list_display = ('trabajador',)
+
 # Register your models here.
 admin.site.register(Trabajador, TrabajadorAdmin)
 admin.site.register(Municipio, MunicipioAdmin)
@@ -58,3 +64,5 @@ admin.site.register(Unidad_Organizativa, Unidad_OrganizativaAdmin)
 admin.site.register(Provincia, ProvinciaAdmin)
 admin.site.register(PersonalCualificado, PersonalCualificadoAdmin)
 admin.site.register(Modelo, ModeloAdmin)
+admin.site.register(Cargo_al_Presupuesto, Cargo_al_PresupuestoAdmin)
+admin.site.register(PARLEG, PARLEGAdmin)

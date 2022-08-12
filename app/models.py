@@ -22,10 +22,10 @@ class PersonalCualificado(models.Model):
         return self.usuario.username
 
 class Cargo_al_Presupuesto(models.Model):
-    cueta=models.CharField(max_length=20)
+    cuenta=models.CharField(max_length=20)
 
     def __str__(self):
-        return self.cueta
+        return self.cuenta
 
 class Trabajador(models.Model):
     nombre_y_apellidos = models.CharField(max_length=80)

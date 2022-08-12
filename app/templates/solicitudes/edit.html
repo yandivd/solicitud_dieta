@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block js %}
+
     <script>
 
          function generarModelo(){
@@ -31,6 +32,7 @@
     <div class="card card-default">
         <div class="card-body ">
             {% csrf_token %}
+
             <div class=" form-group form-card text-center">
                 <div class="container">
                     <!---Aqui comienza a crear el formulario--->
@@ -44,7 +46,7 @@
                                 <div class="col-sm-6">
                                     <!---Solicitante-->
                                     <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Solicitante:</label>
+                                        <label class="col-sm-4 col-form-label">Solicita:</label>
                                             <div class="col-sm-5">
                                                 {{form.solicitante}}
                                             </div>
@@ -71,6 +73,12 @@
                                         <label class="col-sm-4 col-form-label">Centro Contable:</label>
                                             <div class="col-sm-5">
                                                 {{form.c_contable}}
+                                            </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Con Cargo al Presupuesto:</label>
+                                            <div class="col-sm-5">
+                                                {{form.cargo_presupuesto}}
                                             </div>
                                     </div>
                                     <!---Fin Centro COntable-->
@@ -126,7 +134,19 @@
                                                 </div>
                                             </div>
 			                        </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Persona autorizada a Recibir y Loquidar el efectivo del grupo:</label>
+                                            <div class="col-sm-5">
+                                                {{form.parleg}}
+                                            </div>
+                                    </div>
                                 </div>
+                                <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Autoriza:</label>
+				                            <div class="col-sm-4">
+                                                {{form.autoriza}}
+                                            </div>
+			                        </div>
                             </div>
                             {% if action == 'add' %}
                     <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Agregar
@@ -144,4 +164,4 @@
         </div>
     </div>
 </form>
-{%endblock%}
+{% endblock %}

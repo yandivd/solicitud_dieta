@@ -15,6 +15,12 @@
                 Ver listado <i class="fas fa-arrow-circle-right" style="color: white;"></i>
                 </a>
             </div>
+             <div class=" card-footer mt-3">
+            <a href="{% url 'crear_solicitud' %}" type="button" class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+                Agregar Solicitud
+            </a>
+        </div>
         </div>
     </div>
     <div class=" card card-default">
@@ -58,11 +64,6 @@
                 </tbody>
             </table>
         </div>
-        <div class=" card-footer mt-3">
-            <a href="{% url 'crear_solicitud' %}" type="button" class="btn btn-primary btn-success">
-                <i class="fas fa-plus"></i>
-                Agregar Solicitud
-            </a>
-        </div>
+
     </div>
 {% endblock %}
