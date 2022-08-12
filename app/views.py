@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 from .models import *
 from .forms import SolicitudForm
 from django.urls import reverse_lazy
@@ -88,7 +88,9 @@ def crear_modelo(request):
     modelos=Modelo.objects.all()
     data={
         'sol': solicitudes_list,
-        'mod':modelos
+        'mod':modelos,
+        'action': 'add',
+        'title': 'Agregar Solicitud',
     }
 
     return render(request,'solicitudes/listar.html',data)
@@ -136,3 +138,50 @@ def listar_solicitudes_de_modelo(request, id):
         'soli': lista,
     }
     return render(request, 'modelos/solicitudes/listar.html', data)
+
+# def editar_solicitud(request, id):
+#
+#     producto= get_object_or_404(Solicitud, id=id) #toma el producto de la id
+#
+#     data={
+#         "form": AgregarProductoForm(instance=producto) #toma el formulario agregar producto con los datos del instance
+#     }
+#
+#     if request.method=='POST':
+#         formulario=AgregarProductoForm(data=request.POST, instance=producto, files=request.FILES)
+#         if formulario.is_valid():
+#             formulario.save()
+#             messages.success(request,"Modificado Correctamente")
+#             return redirect(to='listar_productos') #te redirige al listado de productos ya editados
+#         else:
+#             data["form"]=formulario
+#
+#     return render(request,'app/producto/modificar.html', data)
+class SolicitudUpdateView(UpdateView):
+    model=Solicitud
+    form_class=SolicitudForm
+    template_name='solicitudes/edit.html'
+    success_url=reverse_lazy('crear_solicitud')
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        self.object=self.get_object()
+        return super().dispatch(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        print("Hello")
+        data={}
+        try:
+            print("LOOLL")
+            form=self.get_form()
+            form.save()
+        except Exception as e:
+            data['error']=str(e)
+        return redirect(to='crear_solicitud')
+
+    def get_context_data(self,**kwargs):
+        context=super().get_context_data(**kwargs)
+        context['title']='Solicitud'
+        context['list_url']=reverse_lazy('listarCat')
+        context['action']='edit'
+        return context

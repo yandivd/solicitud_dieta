@@ -7,4 +7,5 @@ urlpatterns = [
     path('crear_modelo/', crear_modelo, name='crear_modelo'),
     path('listar_modelos/', ModeloListView.as_view(), name='listarMod'),
     path('modelo/solicitudes/listar/<id>/', listar_solicitudes_de_modelo, name='solicitudModel'),
+    path('editar/solicitud/<int:pk>/',SolicitudUpdateView.as_view(), name='solicitudEdit'),
 ]
