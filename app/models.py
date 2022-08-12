@@ -94,6 +94,9 @@ class Modelo(models.Model):
     c_contable=models.CharField(max_length=4)
     consec=models.IntegerField()
     solicitudes=models.ManyToManyField(Solicitud)
+    parleg=models.CharField(max_length=20)
+    autoriza=models.CharField(max_length=50)
+    cargo_presupuesto=models.CharField(max_length=20)
 
     def __str__(self):
         return self.nombre
