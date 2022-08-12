@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView
 from .models import *
@@ -68,30 +69,38 @@ class SolicitudCreateView(CreateView):
         return context
 
 def crear_modelo(request):
-    modelos_para_consecutivos=Modelo.objects.all()
-    numero=0
-    mayor=0
-    for i in modelos_para_consecutivos:
-        if i.consec > mayor:
-            mayor = i.consec
-    numero=mayor+1
-    solicitudes_list=Solicitud.objects.all().filter(estado="StandBye")
-    modelo = Modelo(consec=numero, nombre=request.user.username, solicitante=solicitudes_list[0].solicitante.username,
-                    unidad_organizativa=solicitudes_list[0].unidad_organizativa.nombre,
-                    c_contable=solicitudes_list[0].c_contable)
-    modelo.save()
-    for i in solicitudes_list:
-        i.estado="Check"
-        i.save()
-        modelo.solicitudes.add(i)
+    data={}
+    try:
+        modelos_para_consecutivos=Modelo.objects.all()
+        numero=0
+        mayor=0
+        for i in modelos_para_consecutivos:
+            if i.consec > mayor:
+                mayor = i.consec
+        numero=mayor+1
+        solicitudes_list=Solicitud.objects.all().filter(estado="StandBye")
+        modelo = Modelo(consec=numero, nombre=request.user.username, solicitante=solicitudes_list[0].solicitante.username,
+                        unidad_organizativa=solicitudes_list[0].unidad_organizativa.nombre,
+                        c_contable=solicitudes_list[0].c_contable)
         modelo.save()
-    modelos=Modelo.objects.all()
-    data={
-        'sol': solicitudes_list,
-        'mod':modelos,
-        'action': 'add',
-        'title': 'Agregar Solicitud',
-    }
+        for i in solicitudes_list:
+            i.estado="Check"
+            i.save()
+            modelo.solicitudes.add(i)
+            modelo.save()
+        modelos=Modelo.objects.all()
+        data={
+            'sol': solicitudes_list,
+            'mod':modelos,
+            'action': 'add',
+            'title': 'Agregar Solicitud',
+        }
+    except:
+        data['error1']= "Ha ocurrido un error"
+        data['action']='add'
+        data['title']='Agregar Solicitud'
+        return render(request,'solicitudes/listar.html',data)
+
 
     return render(request,'solicitudes/listar.html',data)
 
@@ -158,6 +167,7 @@ def listar_solicitudes_de_modelo(request, id):
 #
 #     return render(request,'app/producto/modificar.html', data)
 class SolicitudUpdateView(UpdateView):
+
     model=Solicitud
     form_class=SolicitudForm
     template_name='solicitudes/edit.html'
@@ -169,10 +179,8 @@ class SolicitudUpdateView(UpdateView):
         return super().dispatch(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        print("Hello")
         data={}
         try:
-            print("LOOLL")
             form=self.get_form()
             form.save()
         except Exception as e:
@@ -185,3 +193,8 @@ class SolicitudUpdateView(UpdateView):
         context['list_url']=reverse_lazy('listarCat')
         context['action']='edit'
         return context
+
+def eliminarSolicitud(request,id):
+    solicitud=Solicitud.objects.get(id=id)
+    solicitud.delete()
+    return redirect(to='crear_solicitud')

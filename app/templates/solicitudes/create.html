@@ -2,6 +2,7 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block js %}
+
     <script>
 
          function generarModelo(){
@@ -31,6 +32,7 @@
     <div class="card card-default">
         <div class="card-body ">
             {% csrf_token %}
+
             <div class=" form-group form-card text-center">
                 <div class="container">
                     <!---Aqui comienza a crear el formulario--->
