@@ -4,7 +4,7 @@ from django.views.generic import ListView, CreateView, UpdateView
 from .models import *
 from .forms import SolicitudForm
 from django.urls import reverse_lazy
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
 
 # Create your views here.
@@ -13,7 +13,6 @@ class SolicitudListView(ListView):
     template_name = 'solicitudes/listar.html'
 
     @method_decorator(login_required)
-
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request,*args,** kwargs)
 
@@ -30,7 +29,7 @@ class SolicitudCreateView(CreateView):
     template_name='solicitudes/create.html'
     success_url=reverse_lazy('crear_solicitud')
 
-    @method_decorator(login_required)
+    @method_decorator(permission_required('app.add_solicitud'))
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
@@ -76,6 +75,7 @@ class SolicitudCreateView(CreateView):
         context['object_list'] = Solicitud.objects.all().filter(estado="StandBye")
         return context
 
+@permission_required('app.add_modelo')
 def crear_modelo(request):
     data={}
     try:
@@ -114,6 +114,7 @@ def crear_modelo(request):
 
     return render(request,'solicitudes/listar.html',data)
 
+@permission_required('app.view_modelo')
 def listar_modelos(request):
     data={}
     modelos=Modelo.objects.all()
@@ -131,7 +132,6 @@ class ModeloListView(ListView):
     template_name = 'modelos/listar.html'
 
     @method_decorator(login_required)
-
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request,*args,** kwargs)
 
@@ -147,6 +147,7 @@ class ModeloListView(ListView):
 
         return context
 
+@permission_required('app.view_solicitud')
 def listar_solicitudes_de_modelo(request, id):
     lista=[]
     modelo=Modelo.objects.get(id=id)
@@ -165,7 +166,7 @@ class SolicitudUpdateView(UpdateView):
     template_name='solicitudes/edit.html'
     success_url=reverse_lazy('crear_solicitud')
 
-    @method_decorator(login_required)
+    @method_decorator(permission_required('app.change_solicitud'))
     def dispatch(self, request, *args, **kwargs):
         self.object=self.get_object()
         return super().dispatch(request, *args, **kwargs)
@@ -186,7 +187,14 @@ class SolicitudUpdateView(UpdateView):
         context['action']='edit'
         return context
 
+@permission_required('app.delete_solicitud')
 def eliminarSolicitud(request,id):
     solicitud=Solicitud.objects.get(id=id)
     solicitud.delete()
     return redirect(to='crear_solicitud')
+
+@permission_required('app.delete_modelo')
+def eliminarModelo(request,id):
+    modelo=Modelo.objects.get(id=id)
+    modelo.delete()
+    return redirect(to='listarMod')

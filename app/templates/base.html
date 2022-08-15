@@ -113,6 +113,23 @@
                 }
             })
         }
+    function eliminarModelo(id){
+        Swal.fire({
+            "title": "Estas Seguro?",
+            "text": "Esta accion no se puede deshacer",
+            "icon": "question",
+            "showCancelButton": true,
+            "cancelButtonText": "No, Cancelar",
+            "confirmButtonText": "Si, Eliminar este Modelo",
+            "reverseButtons": true,
+            "confirmButtonColor": "#cc1417"
+                })
+            .then(function(result){
+                if (result.isConfirmed){
+                    window.location.href = "/eliminar_modelo/"+id+"/"
+                }
+            })
+        }
 
         </script>
     {% block js %}
