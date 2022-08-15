@@ -58,7 +58,9 @@ class SolicitudCreateView(CreateView):
             cp=formulario.cleaned_data['cargo_presupuesto']
             parleg=formulario.cleaned_data['parleg']
             autoriza=formulario.cleaned_data['autoriza']
-            solicitud= Solicitud(numero=numero, solicitante=solicitante,trabajador=trabajador,unidad_organizativa=uo,c_contable=cc,provincia=provincia,origen=origen,destino=destino,regreso=regreso,fecha_inicio=inicio,fecha_final=final,estado=estado,cargo_presupuesto=cp,parleg=parleg,autoriza=autoriza)
+            observaciones=formulario.cleaned_data['observaciones']
+            solicitud= Solicitud(numero=numero, solicitante=solicitante,trabajador=trabajador,unidad_organizativa=uo,c_contable=cc,provincia=provincia,origen=origen,destino=destino,regreso=regreso,fecha_inicio=inicio,fecha_final=final,estado=estado,cargo_presupuesto=cp,parleg=parleg,autoriza=autoriza,
+                                 observaciones=observaciones)
             solicitud.save()
         else:
             print("No es valido")
@@ -88,7 +90,8 @@ def crear_modelo(request):
         modelo = Modelo(consec=numero, nombre=request.user.username, solicitante=solicitudes_list[0].solicitante.usuario.username,
                         unidad_organizativa=solicitudes_list[0].unidad_organizativa.nombre,
                         c_contable=solicitudes_list[0].c_contable,parleg=solicitudes_list[0].parleg.trabajador.usuario.username,
-                        autoriza=solicitudes_list[0].autoriza.usuario.username, cargo_presupuesto=solicitudes_list[0].cargo_presupuesto.cuenta)
+                        autoriza=solicitudes_list[0].autoriza.usuario.username, cargo_presupuesto=solicitudes_list[0].cargo_presupuesto.cuenta,
+                        observaciones=solicitudes_list[0].observaciones)
         modelo.save()
         for i in solicitudes_list:
             i.estado="Check"

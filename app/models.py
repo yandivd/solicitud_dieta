@@ -89,6 +89,7 @@ class Solicitud(models.Model):
     cargo_presupuesto=models.ForeignKey(Cargo_al_Presupuesto, on_delete=models.CASCADE)
     autoriza=models.ForeignKey(Autoriza, on_delete=models.CASCADE)
     estado=models.CharField(max_length=20)
+    observaciones=models.CharField(max_length=500)
 
     def __str__(self):
         return str(self.numero)
@@ -107,6 +108,7 @@ class Modelo(models.Model):
     parleg=models.CharField(max_length=20)
     autoriza=models.CharField(max_length=50)
     cargo_presupuesto=models.CharField(max_length=20)
+    observaciones = models.CharField(max_length=500)
 
     def __str__(self):
         return self.nombre
