@@ -114,23 +114,15 @@
 				                        <label class="col-sm-4 col-form-label">Fecha de Inicio:</label>
 				                            <div class="col-sm-5">
 					                            <div id="fecha_inicio" data-target-input="nearest" class="input-group date">
-						                            {{form.fecha_inicio}}
-						                                <div data-target="#fecha_inicio" data-toggle="datetimepicker" class="input-group-append">
-							                                <div class="input-group-text"><i class="fa fa-calendar"></i>
-							                                </div>
-						                                </div>
+						                            <input type="date" name="fecha_inicio" class="dateinput form-control" required="" id="id_fecha_inicio">
 					                            </div>
 				                            </div>
 			                        </div>
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Fecha Final:</label>
                                             <div class="col-sm-5">
-                                                <div id="finaldate" data-target-input="nearest" class="input-group date">
-                                                    {{form.fecha_final}}
-                                                        <div data-target="#reservationdate" data-toggle="datetimepicker" class="input-group-append">
-                                                            <div class="input-group-text"><i class="fa fa-calendar"></i>
-                                                            </div>
-                                                        </div>
+                                                <div id="finaldate" data-target-input="nearest" class="input-group date input-with-post-icon datepicker">
+                                                    <input type="date" name="fecha_final" class="dateinput form-control datepicker" required id="id_fecha_final">
                                                 </div>
                                             </div>
 			                        </div>
