@@ -20,6 +20,9 @@ class ProvinciaAdmin(admin.ModelAdmin):
 class ModeloAdmin(admin.ModelAdmin):
     list_display = ('consec', 'nombre', 'solicitante')
 
+class SolicitanteAdmin(admin.ModelAdmin):
+    list_display = ('usuario',)
+
 class SolicitudAdmin(admin.ModelAdmin):
     list_display=(
         'numero',
@@ -66,3 +69,4 @@ admin.site.register(PersonalCualificado, PersonalCualificadoAdmin)
 admin.site.register(Modelo, ModeloAdmin)
 admin.site.register(Cargo_al_Presupuesto, Cargo_al_PresupuestoAdmin)
 admin.site.register(PARLEG, PARLEGAdmin)
+admin.site.register(Solicitante, SolicitanteAdmin)

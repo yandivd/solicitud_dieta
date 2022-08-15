@@ -62,9 +62,13 @@ class Municipio(models.Model):
         verbose_name_plural="Municipios"
 
 
+class Solicitante(models.Model):
+    usuario=models.ForeignKey(User, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.usuario.username
 class Solicitud(models.Model):
     numero=models.IntegerField()
-    solicitante=models.ForeignKey(User, on_delete=models.CASCADE)
+    solicitante=models.ForeignKey(Solicitante, on_delete=models.CASCADE)
     trabajador=models.ForeignKey(Trabajador, on_delete=models.CASCADE)
     unidad_organizativa=models.ForeignKey(Unidad_Organizativa, on_delete=models.CASCADE)
     c_contable=models.CharField(max_length=4)

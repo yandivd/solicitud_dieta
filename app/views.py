@@ -89,7 +89,7 @@ def crear_modelo(request):
                 mayor = i.consec
         numero=mayor+1
         solicitudes_list=Solicitud.objects.all().filter(estado="StandBye")
-        modelo = Modelo(consec=numero, nombre=request.user.username, solicitante=solicitudes_list[0].solicitante.username,
+        modelo = Modelo(consec=numero, nombre=request.user.username, solicitante=solicitudes_list[0].solicitante.usuario.username,
                         unidad_organizativa=solicitudes_list[0].unidad_organizativa.nombre,
                         c_contable=solicitudes_list[0].c_contable,parleg=solicitudes_list[0].parleg.trabajador.nombre_y_apellidos,
                         autoriza=solicitudes_list[0].autoriza.usuario.username, cargo_presupuesto=solicitudes_list[0].cargo_presupuesto.cuenta)
