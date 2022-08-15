@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-
 class Unidad_Organizativa(models.Model):
     nombre=models.CharField(max_length=100)
 
@@ -13,7 +12,7 @@ class Unidad_Organizativa(models.Model):
     class Meta:
         verbose_name="Unidad Organizativa"
         verbose_name_plural="Unidades Organizativas"
-class PersonalCualificado(models.Model):
+class Autoriza(models.Model):
     usuario=models.OneToOneField(User, on_delete=models.CASCADE)
     permiso=models.CharField(max_length=100)
     unidad_organizativa=models.ForeignKey(Unidad_Organizativa, on_delete=models.CASCADE)
@@ -66,6 +65,13 @@ class Solicitante(models.Model):
     usuario=models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.usuario.username
+
+class Crea(models.Model):
+    usuario=models.ForeignKey(User, on_delete=models.CASCADE)
+    unidad_organizativa=models.ForeignKey(Unidad_Organizativa, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.usuario.username
+
 class Solicitud(models.Model):
     numero=models.IntegerField()
     solicitante=models.ForeignKey(Solicitante, on_delete=models.CASCADE)
@@ -81,7 +87,7 @@ class Solicitud(models.Model):
     #nuevos models add
     parleg=models.ForeignKey(PARLEG, on_delete=models.CASCADE)
     cargo_presupuesto=models.ForeignKey(Cargo_al_Presupuesto, on_delete=models.CASCADE)
-    autoriza=models.ForeignKey(PersonalCualificado, on_delete=models.CASCADE)
+    autoriza=models.ForeignKey(Autoriza, on_delete=models.CASCADE)
     estado=models.CharField(max_length=20)
 
     def __str__(self):

@@ -4,7 +4,7 @@ from .models import *
 class TrabajadorAdmin(admin.ModelAdmin):
     list_display=('usuario', 'ci')
 
-class PersonalCualificadoAdmin(admin.ModelAdmin):
+class AutorizaAdmin(admin.ModelAdmin):
     list_display=('usuario',)
 
 class MunicipioAdmin(admin.ModelAdmin):
@@ -58,14 +58,18 @@ class Cargo_al_PresupuestoAdmin(admin.ModelAdmin):
 class PARLEGAdmin(admin.ModelAdmin):
     list_display = ('trabajador',)
 
+class CreaAdmin(admin.ModelAdmin):
+    list_display = ('usuario',)
+
 # Register your models here.
 admin.site.register(Trabajador, TrabajadorAdmin)
 admin.site.register(Municipio, MunicipioAdmin)
 admin.site.register(Solicitud, SolicitudAdmin)
 admin.site.register(Unidad_Organizativa, Unidad_OrganizativaAdmin)
 admin.site.register(Provincia, ProvinciaAdmin)
-admin.site.register(PersonalCualificado, PersonalCualificadoAdmin)
+admin.site.register(Autoriza, AutorizaAdmin)
 admin.site.register(Modelo, ModeloAdmin)
 admin.site.register(Cargo_al_Presupuesto, Cargo_al_PresupuestoAdmin)
 admin.site.register(PARLEG, PARLEGAdmin)
 admin.site.register(Solicitante, SolicitanteAdmin)
+admin.site.register(Crea, CreaAdmin)
