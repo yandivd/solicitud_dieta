@@ -78,23 +78,23 @@ WSGI_APPLICATION = 'solicitud_dietas.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-#Postgre SQL
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'NAME': os.path.join('solicitud_dietas'),
-       'USER': 'postgres',
-       'PASSWORD': 'Seguimos/25',
-      'HOST': 'localhost',
-      'DATABASE_PORT': '5432',
-   }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+#Postgre SQL
+# DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': os.path.join('solicitud_dietas'),
+#        'USER': 'postgres',
+#        'PASSWORD': 'Seguimos/25',
+#       'HOST': 'localhost',
+#       'DATABASE_PORT': '5432',
+#    }
+# }
 
 
 # Password validation
