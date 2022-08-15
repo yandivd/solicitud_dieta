@@ -2,8 +2,7 @@ from django.contrib import admin
 from .models import *
 
 class TrabajadorAdmin(admin.ModelAdmin):
-    list_display=('nombre_y_apellidos', 'ci')
-    list_filter=('nombre_y_apellidos',)
+    list_display=('usuario', 'ci')
 
 class PersonalCualificadoAdmin(admin.ModelAdmin):
     list_display=('usuario',)

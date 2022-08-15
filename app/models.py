@@ -28,11 +28,11 @@ class Cargo_al_Presupuesto(models.Model):
         return self.cuenta
 
 class Trabajador(models.Model):
-    nombre_y_apellidos = models.CharField(max_length=80)
+    usuario=models.OneToOneField(User, on_delete=models.CASCADE)
     ci=models.CharField(max_length=11, unique=True)
 
     def __str__(self):
-            return self.nombre_y_apellidos
+            return self.usuario.username
 
     class Meta:
         verbose_name = "Trabajador"
@@ -42,7 +42,7 @@ class PARLEG(models.Model):
     trabajador=models.ForeignKey(Trabajador, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.trabajador.nombre_y_apellidos
+        return self.trabajador.usuario.username
 
 class Provincia(models.Model):
     nombre=models.CharField(max_length=50)

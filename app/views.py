@@ -43,7 +43,6 @@ class SolicitudCreateView(CreateView):
             if i.numero > mayor:
                 mayor=i.numero
         numero=mayor+1
-        print("OOOo")
         if formulario.is_valid():
             solicitante=formulario.cleaned_data['solicitante']
             trabajador=formulario.cleaned_data['trabajador']
@@ -57,11 +56,8 @@ class SolicitudCreateView(CreateView):
             final=formulario.cleaned_data['fecha_final']
             #nuevos campos
             cp=formulario.cleaned_data['cargo_presupuesto']
-            print(cp)
             parleg=formulario.cleaned_data['parleg']
-            print(parleg)
             autoriza=formulario.cleaned_data['autoriza']
-            print(autoriza)
             solicitud= Solicitud(numero=numero, solicitante=solicitante,trabajador=trabajador,unidad_organizativa=uo,c_contable=cc,provincia=provincia,origen=origen,destino=destino,regreso=regreso,fecha_inicio=inicio,fecha_final=final,estado=estado,cargo_presupuesto=cp,parleg=parleg,autoriza=autoriza)
             solicitud.save()
         else:
@@ -91,7 +87,7 @@ def crear_modelo(request):
         solicitudes_list=Solicitud.objects.all().filter(estado="StandBye")
         modelo = Modelo(consec=numero, nombre=request.user.username, solicitante=solicitudes_list[0].solicitante.usuario.username,
                         unidad_organizativa=solicitudes_list[0].unidad_organizativa.nombre,
-                        c_contable=solicitudes_list[0].c_contable,parleg=solicitudes_list[0].parleg.trabajador.nombre_y_apellidos,
+                        c_contable=solicitudes_list[0].c_contable,parleg=solicitudes_list[0].parleg.trabajador.usuario.username,
                         autoriza=solicitudes_list[0].autoriza.usuario.username, cargo_presupuesto=solicitudes_list[0].cargo_presupuesto.cuenta)
         modelo.save()
         for i in solicitudes_list:
@@ -159,24 +155,6 @@ def listar_solicitudes_de_modelo(request, id):
     }
     return render(request, 'modelos/solicitudes/listar.html', data)
 
-# def editar_solicitud(request, id):
-#
-#     producto= get_object_or_404(Solicitud, id=id) #toma el producto de la id
-#
-#     data={
-#         "form": AgregarProductoForm(instance=producto) #toma el formulario agregar producto con los datos del instance
-#     }
-#
-#     if request.method=='POST':
-#         formulario=AgregarProductoForm(data=request.POST, instance=producto, files=request.FILES)
-#         if formulario.is_valid():
-#             formulario.save()
-#             messages.success(request,"Modificado Correctamente")
-#             return redirect(to='listar_productos') #te redirige al listado de productos ya editados
-#         else:
-#             data["form"]=formulario
-#
-#     return render(request,'app/producto/modificar.html', data)
 class SolicitudUpdateView(UpdateView):
 
     model=Solicitud
