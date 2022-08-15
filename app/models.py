@@ -18,7 +18,7 @@ class Autoriza(models.Model):
     unidad_organizativa=models.ForeignKey(Unidad_Organizativa, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.usuario.username
+        return self.usuario.first_name+' '+self.usuario.last_name
 
 class Cargo_al_Presupuesto(models.Model):
     cuenta=models.CharField(max_length=20)
@@ -31,7 +31,7 @@ class Trabajador(models.Model):
     ci=models.CharField(max_length=11, unique=True)
 
     def __str__(self):
-            return self.usuario.username
+            return self.usuario.first_name+' '+self.usuario.last_name
 
     class Meta:
         verbose_name = "Trabajador"
@@ -41,7 +41,7 @@ class PARLEG(models.Model):
     trabajador=models.ForeignKey(Trabajador, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.trabajador.usuario.username
+        return self.trabajador.usuario.first_name+' '+self.trabajador.usuario.last_name
 
 class Provincia(models.Model):
     nombre=models.CharField(max_length=50)
@@ -64,7 +64,7 @@ class Municipio(models.Model):
 class Solicitante(models.Model):
     usuario=models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
-        return self.usuario.username
+        return self.usuario.first_name+' '+self.usuario.last_name
 
 class Crea(models.Model):
     usuario=models.ForeignKey(User, on_delete=models.CASCADE)
