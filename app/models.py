@@ -14,8 +14,6 @@ class Unidad_Organizativa(models.Model):
         verbose_name_plural="Unidades Organizativas"
 class Autoriza(models.Model):
     usuario=models.OneToOneField(User, on_delete=models.CASCADE)
-    permiso=models.CharField(max_length=100)
-    unidad_organizativa=models.ForeignKey(Unidad_Organizativa, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.usuario.first_name+' '+self.usuario.last_name
@@ -63,6 +61,8 @@ class Municipio(models.Model):
 
 class Solicitante(models.Model):
     usuario=models.ForeignKey(User, on_delete=models.CASCADE)
+    permiso=models.CharField(max_length=100)
+    unidad_organizativa=models.ForeignKey(Unidad_Organizativa, on_delete=models.CASCADE)
     def __str__(self):
         return self.usuario.first_name+' '+self.usuario.last_name
 
