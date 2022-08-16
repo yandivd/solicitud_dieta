@@ -74,6 +74,10 @@ class SolicitudCreateView(CreateView):
         context['title'] = "Agregar Solicitud"
         context['action']='add'
         context['list_url']=reverse_lazy('solicitudes')
+        lista=Solicitud.objects.all().filter(estado="StandBye")
+        if len(lista)>0:
+            solicitante=lista[0].solicitante
+            context['solicitante'] = solicitante
         
         context['object_list'] = Solicitud.objects.all().filter(estado="StandBye")
         return context
