@@ -79,6 +79,7 @@
                 <h5><i class="icon bi bi-x-octagon"></i>Ha ocurrido un error al generar el Modelo</h5>
             </div>
             {% endif %}
+
         {%block content%}
         {% endblock %}
 
@@ -132,6 +133,17 @@
         }
 
         </script>
+        {% if messages %}
+        {% for i in messages %}
+            <script>
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: "{{i}}",
+                })
+            </script>
+        {% endfor %}
+    {%endif%}
     {% block js %}
     {% endblock %}
     </body>

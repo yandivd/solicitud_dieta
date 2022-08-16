@@ -6,6 +6,7 @@ from .forms import SolicitudForm
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
+from django.contrib import messages
 
 # Create your views here.
 class SolicitudListView(ListView):
@@ -65,6 +66,7 @@ class SolicitudCreateView(CreateView):
             validaciones=Solicitud.objects.all().filter(fecha_inicio=inicio)
             for i in validaciones:
                 if i.trabajador.usuario.username == trabajador.usuario.username:
+                    messages.error(request, "Ya se solicito una dieta ese dia para el trabajador")
                     return redirect('crear_solicitud')
             #end validaciones de fechas section
 
