@@ -39,15 +39,20 @@
                         <td>{{i.autoriza}}</td>
                         <td>{{i.observaciones}}</td>
                         <td>
+                {% if perms.app.view_modelo %}
                 <a href="#" type="button" class="btn btn-success">
                     <i class="fas fa-download"></i>
                 </a>
+                {% endif %}
 <!--                <a href="{% url 'solicitudModel' i.id%}" type="button" class="btn btn-warning">-->
 <!--                    <i class="fas fa-edit"></i>-->
 <!--                </a>-->
+                {% if perms.app.delete_modelo %}
                 <a href="#" onclick="eliminarModelo({{i.id}})" type="button" class="btn btn-danger">
                     <i class="fas fa-trash-alt"></i>
-                </a></td>
+                </a>
+                        {% endif %}
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
