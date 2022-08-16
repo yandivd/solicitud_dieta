@@ -147,12 +147,14 @@
                                                 {{form.observaciones}}
                                             </div>
 			                        </div>
+                            {% if perms.app.add_solicitud or perms.app.change_solicitud %}
                             {% if action == 'add' %}
                     <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Agregar
                     </button>
                             {% else %}
-                    <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i> Editar
+                    <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Editar
                     </button>
+                            {% endif %}
                             {% endif %}
                     </div>
                 </div>
@@ -209,10 +211,12 @@
             </table>
         </div>
         <div class=" card-footer mt-3">
+            {% if perms.app.add_modelo %}
             <a href="#" onclick="generarModelo()" type="button" class="btn btn-primary btn-success">
                 <i class="fas fa-check"></i>
                 Generar Modelo
             </a>
+            {% endif %}
         </div>
     </div>
 

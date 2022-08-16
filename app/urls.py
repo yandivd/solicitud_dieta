@@ -9,4 +9,5 @@ urlpatterns = [
     path('modelo/solicitudes/listar/<id>/', listar_solicitudes_de_modelo, name='solicitudModel'),
     path('editar/solicitud/<int:pk>/',SolicitudUpdateView.as_view(), name='solicitudEdit'),
     path('eliminar_solicitud/<id>/', eliminarSolicitud, name='solicitudDel'),
+    path('eliminar_modelo/<id>/', eliminarModelo, name='modeloDel'),
 ]
