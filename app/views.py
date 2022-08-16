@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, CreateView, UpdateView
@@ -6,6 +8,7 @@ from .forms import SolicitudForm
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
+from django.contrib import messages
 
 # Create your views here.
 class SolicitudListView(ListView):
@@ -44,7 +47,6 @@ class SolicitudCreateView(CreateView):
         numero=mayor+1
 
         u_o=Crea.objects.get(id=request.user.id)
-        print(u_o.unidad_organizativa.nombre)
         if formulario.is_valid():
             solicitante=formulario.cleaned_data['solicitante']
             trabajador=formulario.cleaned_data['trabajador']
@@ -61,6 +63,19 @@ class SolicitudCreateView(CreateView):
             parleg=formulario.cleaned_data['parleg']
             autoriza=formulario.cleaned_data['autoriza']
             observaciones=formulario.cleaned_data['observaciones']
+
+            #validaciones de las fechas section
+            validaciones=Solicitud.objects.all().filter(fecha_inicio=inicio)
+            if final > inicio and inicio >= date.today():
+                for i in validaciones:
+                    if i.trabajador.usuario.username == trabajador.usuario.username:
+                        messages.error(request, "Ya se solicito una dieta ese dia para el trabajador")
+                        return redirect('crear_solicitud')
+            else:
+                messages.error(request, "Fechas Invalidas")
+                return redirect('crear_solicitud')
+            #end validaciones de fechas section
+
             solicitud= Solicitud(numero=numero, solicitante=solicitante,trabajador=trabajador,unidad_organizativa=u_o.unidad_organizativa,c_contable=cc,provincia=provincia,origen=origen,destino=destino,regreso=regreso,fecha_inicio=inicio,fecha_final=final,estado=estado,cargo_presupuesto=cp,parleg=parleg,autoriza=autoriza,
                                  observaciones=observaciones)
             solicitud.save()
@@ -74,14 +89,6 @@ class SolicitudCreateView(CreateView):
         context['title'] = "Agregar Solicitud"
         context['action']='add'
         context['list_url']=reverse_lazy('solicitudes')
-        lista=Solicitud.objects.all().filter(estado="StandBye")
-        # if len(lista)>0:
-        #     solicitante=lista[0].solicitante
-        #     c_contable=lista[0].c_contable
-        #     cargo_presupuesto=lista[0].cargo_presupuesto
-        #     context['solicitante'] = solicitante
-        #     context['c_contable'] = c_contable
-        #     context['c_presupuesto'] = cargo_presupuesto
 
         context['object_list'] = Solicitud.objects.all().filter(estado="StandBye")
         return context
@@ -91,17 +98,20 @@ def crear_modelo(request):
     data={}
     try:
         modelos_para_consecutivos=Modelo.objects.all()
-        numero=0
         mayor=0
         for i in modelos_para_consecutivos:
             if i.consec > mayor:
                 mayor = i.consec
         numero=mayor+1
         solicitudes_list=Solicitud.objects.all().filter(estado="StandBye")
-        modelo = Modelo(consec=numero, nombre=request.user.username, solicitante=solicitudes_list[0].solicitante.usuario.username,
+        modelo = Modelo(consec=numero,
+                        nombre=request.user.first_name+' '+request.user.last_name,
+                        solicitante=solicitudes_list[0].solicitante.usuario.first_name+' '+solicitudes_list[0].solicitante.usuario.last_name,
                         unidad_organizativa=solicitudes_list[0].unidad_organizativa.nombre,
-                        c_contable=solicitudes_list[0].c_contable,parleg=solicitudes_list[0].parleg.trabajador.usuario.username,
-                        autoriza=solicitudes_list[0].autoriza.usuario.username, cargo_presupuesto=solicitudes_list[0].cargo_presupuesto.cuenta,
+                        c_contable=solicitudes_list[0].c_contable,
+                        parleg=solicitudes_list[0].parleg.trabajador.usuario.first_name+' '+solicitudes_list[0].parleg.trabajador.usuario.last_name,
+                        autoriza=solicitudes_list[0].autoriza.usuario.first_name+' '+solicitudes_list[0].autoriza.usuario.last_name,
+                        cargo_presupuesto=solicitudes_list[0].cargo_presupuesto.cuenta,
                         observaciones=solicitudes_list[0].observaciones)
         modelo.save()
         for i in solicitudes_list:
