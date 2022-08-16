@@ -44,7 +44,6 @@ class SolicitudCreateView(CreateView):
         numero=mayor+1
 
         u_o=Crea.objects.get(id=request.user.id)
-        print(u_o.unidad_organizativa.nombre)
         if formulario.is_valid():
             solicitante=formulario.cleaned_data['solicitante']
             trabajador=formulario.cleaned_data['trabajador']
@@ -61,6 +60,14 @@ class SolicitudCreateView(CreateView):
             parleg=formulario.cleaned_data['parleg']
             autoriza=formulario.cleaned_data['autoriza']
             observaciones=formulario.cleaned_data['observaciones']
+
+            #validaciones de las fechas section
+            validaciones=Solicitud.objects.all().filter(fecha_inicio=inicio)
+            for i in validaciones:
+                if i.trabajador.usuario.username == trabajador.usuario.username:
+                    return redirect('crear_solicitud')
+            #end validaciones de fechas section
+
             solicitud= Solicitud(numero=numero, solicitante=solicitante,trabajador=trabajador,unidad_organizativa=u_o.unidad_organizativa,c_contable=cc,provincia=provincia,origen=origen,destino=destino,regreso=regreso,fecha_inicio=inicio,fecha_final=final,estado=estado,cargo_presupuesto=cp,parleg=parleg,autoriza=autoriza,
                                  observaciones=observaciones)
             solicitud.save()
