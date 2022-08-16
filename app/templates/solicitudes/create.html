@@ -65,45 +65,24 @@
                                     </div>
                                     {% endif %}
                                     <!---Fin Solicitante-->
-                                    {% if c_contable %}
-                                    <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Centro Contable:</label>
-                                            <div class="col-sm-5">
-                                                <input type="text" name="c_contable" maxlength="4" value={{c_contable}} class="textinput textInput form-control" required="" id="id_c_contable">
-                                            </div>
-                                    </div>
-                                    {% else %}
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Centro Contable:</label>
                                             <div class="col-sm-5">
                                                 {{form.c_contable}}
                                             </div>
                                     </div>
-                                    {% endif %}
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Trabajador:</label>
                                             <div class="col-sm-5">
                                                 {{form.trabajador}}
                                             </div>
                                     </div>
-                                    {% if c_presupuesto %}
-                                    <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Con Cargo al Presupuesto:</label>
-                                            <div class="col-sm-5">
-                                            <select name="cargo_presupuesto" class="select form-control" required="" id="id_cargo_presupuesto">
-                                                <option value="1">{{c_presupuesto}}</option>
-
-                                            </select>
-                                            </div>
-                                    </div>
-                                    {% else %}
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Con Cargo al Presupuesto:</label>
                                             <div class="col-sm-5">
                                                 {{form.cargo_presupuesto}}
                                             </div>
                                     </div>
-                                    {% endif %}
                                     <!---Fin Centro COntable-->
                                     <!---Provincia-->
                                     <div class="form-group row">
