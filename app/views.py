@@ -42,10 +42,13 @@ class SolicitudCreateView(CreateView):
             if i.numero > mayor:
                 mayor=i.numero
         numero=mayor+1
+
+        u_o=Crea.objects.get(id=request.user.id)
+        print(u_o.unidad_organizativa.nombre)
         if formulario.is_valid():
             solicitante=formulario.cleaned_data['solicitante']
             trabajador=formulario.cleaned_data['trabajador']
-            uo=formulario.cleaned_data['unidad_organizativa']
+            # uo=formulario.cleaned_data['unidad_organizativa']
             cc=formulario.cleaned_data['c_contable']
             provincia=formulario.cleaned_data['provincia']
             origen=formulario.cleaned_data['origen']
@@ -58,7 +61,7 @@ class SolicitudCreateView(CreateView):
             parleg=formulario.cleaned_data['parleg']
             autoriza=formulario.cleaned_data['autoriza']
             observaciones=formulario.cleaned_data['observaciones']
-            solicitud= Solicitud(numero=numero, solicitante=solicitante,trabajador=trabajador,unidad_organizativa=uo,c_contable=cc,provincia=provincia,origen=origen,destino=destino,regreso=regreso,fecha_inicio=inicio,fecha_final=final,estado=estado,cargo_presupuesto=cp,parleg=parleg,autoriza=autoriza,
+            solicitud= Solicitud(numero=numero, solicitante=solicitante,trabajador=trabajador,unidad_organizativa=u_o.unidad_organizativa,c_contable=cc,provincia=provincia,origen=origen,destino=destino,regreso=regreso,fecha_inicio=inicio,fecha_final=final,estado=estado,cargo_presupuesto=cp,parleg=parleg,autoriza=autoriza,
                                  observaciones=observaciones)
             solicitud.save()
         else:
@@ -71,6 +74,10 @@ class SolicitudCreateView(CreateView):
         context['title'] = "Agregar Solicitud"
         context['action']='add'
         context['list_url']=reverse_lazy('solicitudes')
+        lista=Solicitud.objects.all().filter(estado="StandBye")
+        if len(lista)>0:
+            solicitante=lista[0].solicitante
+            context['solicitante'] = solicitante
         
         context['object_list'] = Solicitud.objects.all().filter(estado="StandBye")
         return context

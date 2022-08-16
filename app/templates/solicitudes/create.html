@@ -45,14 +45,32 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <!---Solicitante-->
+                                    {% if solicitante %}
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Solicita:</label>
+                                            <div class="col-sm-5">
+                                                <select name="solicitante" class="select form-control" required="" id="id_solicitante" value="1">
+
+                                                      <option value="1">{{solicitante}}</option>
+
+                                                    </select>
+                                            </div>
+                                    </div>
+                                    {% else %}
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Solicita:</label>
                                             <div class="col-sm-5">
                                                 {{form.solicitante}}
                                             </div>
                                     </div>
+                                    {% endif %}
                                     <!---Fin Solicitante-->
-                                    <!---Trabajador-->
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Centro Contable:</label>
+                                            <div class="col-sm-5">
+                                                {{form.c_contable}}
+                                            </div>
+                                    </div>
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Trabajador:</label>
                                             <div class="col-sm-5">
@@ -61,20 +79,14 @@
                                     </div>
                                     <!---Fin Trabajador-->
                                     <!---UO-->
-                                    <div class="form-group row">
-				                        <label class="col-sm-4 col-form-label">Unidad Organizativa:</label>
-				                            <div class="col-sm-5">
-                                                {{form.unidad_organizativa}}
-                                            </div>
-			                        </div>
+<!--                                    <div class="form-group row">-->
+<!--				                        <label class="col-sm-4 col-form-label">Unidad Organizativa:</label>-->
+<!--				                            <div class="col-sm-5">-->
+<!--                                                {{form.unidad_organizativa}}-->
+<!--                                            </div>-->
+<!--			                        </div>-->
                                     <!---Fin UO-->
                                     <!---Centro Contable-->
-                                    <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Centro Contable:</label>
-                                            <div class="col-sm-5">
-                                                {{form.c_contable}}
-                                            </div>
-                                    </div>
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Con Cargo al Presupuesto:</label>
                                             <div class="col-sm-5">
@@ -89,15 +101,21 @@
                                                 {{form.provincia}}
                                             </div>
 			                        </div>
-                                    <!---Fin Provincia-->
-                                </div>
-                                <div class="col-sm-6">
                                     <div class="form-group row">
 				                        <label class="col-sm-4 col-form-label">Origen:</label>
 				                            <div class="col-sm-5">
                                                 {{form.origen}}
                                             </div>
 			                        </div>
+                                    <!---Fin Provincia-->
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Persona autorizada a Recibir y Loquidar el efectivo del grupo:</label>
+                                            <div class="col-sm-5">
+                                                {{form.parleg}}
+                                            </div>
+                                    </div>
                                     <div class="form-group row">
 				                        <label class="col-sm-4 col-form-label">Destino:</label>
 				                            <div class="col-sm-5">
@@ -125,20 +143,14 @@
                                                     <input type="date" name="fecha_final" class="dateinput form-control datepicker" required id="id_fecha_final">
                                                 </div>
                                             </div>
-			                        </div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Persona autorizada a Recibir y Loquidar el efectivo del grupo:</label>
-                                            <div class="col-sm-5">
-                                                {{form.parleg}}
-                                            </div>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
+			                        </div><div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Autoriza:</label>
 				                            <div class="col-sm-4">
                                                 {{form.autoriza}}
                                             </div>
 			                        </div>
+                                </div>
+
                             </div>
 
                             <div class="form-group row">
