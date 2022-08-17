@@ -41,6 +41,8 @@ class SolicitudCreateView(CreateView):
         estado='StandBye'
         mayor=0
         solicitudes=Solicitud.objects.all()
+        lista=Solicitud.objects.all().filter(estado="StandBye")
+
         for i in solicitudes:
             if i.numero > mayor:
                 mayor=i.numero
@@ -66,7 +68,7 @@ class SolicitudCreateView(CreateView):
 
             #validaciones de las fechas section
             validaciones=Solicitud.objects.all().filter(fecha_inicio=inicio)
-            if final > inicio and inicio >= date.today():
+            if final >= inicio and inicio >= date.today():
                 for i in validaciones:
                     if i.trabajador.usuario.username == trabajador.usuario.username:
                         messages.error(request, "Ya se solicito una dieta ese dia para el trabajador")
@@ -76,8 +78,47 @@ class SolicitudCreateView(CreateView):
                 return redirect('crear_solicitud')
             #end validaciones de fechas section
 
-            solicitud= Solicitud(numero=numero, solicitante=solicitante,trabajador=trabajador,unidad_organizativa=u_o.unidad_organizativa,c_contable=cc,provincia=provincia,origen=origen,destino=destino,regreso=regreso,fecha_inicio=inicio,fecha_final=final,estado=estado,cargo_presupuesto=cp,parleg=parleg,autoriza=autoriza,
-                                 observaciones=observaciones)
+            if len(lista)>0:
+                solFijo=lista[0].solicitante
+                ccFijo=lista[0].c_contable
+                parlegFijo=lista[0].parleg
+                cp_Fijo=lista[0].cargo_presupuesto
+                autorizaFijo=lista[0].autoriza
+                obsFijo=lista[0].observaciones
+
+                solicitud= Solicitud(numero=numero, 
+                                    solicitante=solFijo,
+                                    trabajador=trabajador,
+                                    unidad_organizativa=u_o.unidad_organizativa,
+                                    c_contable=ccFijo,
+                                    provincia=provincia,
+                                    origen=origen,
+                                    destino=destino,
+                                    regreso=regreso,
+                                    fecha_inicio=inicio,
+                                    fecha_final=final,
+                                    estado=estado,
+                                    cargo_presupuesto=cp_Fijo,
+                                    parleg=parlegFijo,
+                                    autoriza=autorizaFijo,
+                                    observaciones=obsFijo)
+            else:
+                solicitud= Solicitud(numero=numero, 
+                                    solicitante=solicitante,
+                                    trabajador=trabajador,
+                                    unidad_organizativa=u_o.unidad_organizativa,
+                                    c_contable=cc,
+                                    provincia=provincia,
+                                    origen=origen,
+                                    destino=destino,
+                                    regreso=regreso,
+                                    fecha_inicio=inicio,
+                                    fecha_final=final,
+                                    estado=estado,
+                                    cargo_presupuesto=cp,
+                                    parleg=parleg,
+                                    autoriza=autoriza,
+                                    observaciones=observaciones)
             solicitud.save()
         else:
             print("No es valido")
@@ -89,6 +130,17 @@ class SolicitudCreateView(CreateView):
         context['title'] = "Agregar Solicitud"
         context['action']='add'
         context['list_url']=reverse_lazy('solicitudes')
+        #validaciones de que hayan campos establecidos
+        lista=Solicitud.objects.all().filter(estado="StandBye")
+        if len(lista)>0:
+            context['solicitante'] = lista[0].solicitante
+            context['cc'] = lista[0].c_contable
+            context['parleg'] = lista[0].parleg
+            context['cp'] = lista[0].cargo_presupuesto
+            context['autoriza'] = lista[0].autoriza
+            context['obs'] = lista[0].observaciones
+
+        #fin de las validaciones
 
         context['object_list'] = Solicitud.objects.all().filter(estado="StandBye")
         return context
