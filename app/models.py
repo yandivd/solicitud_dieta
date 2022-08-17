@@ -109,6 +109,7 @@ class Modelo(models.Model):
     autoriza=models.CharField(max_length=50)
     cargo_presupuesto=models.CharField(max_length=20)
     observaciones = models.CharField(max_length=500)
+    estado=models.CharField(max_length=10)
 
     def __str__(self):
         return self.nombre
