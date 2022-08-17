@@ -87,12 +87,24 @@
                                                 {{form.trabajador}}
                                             </div>
                                     </div>
+                                    {% if cp %}
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Con Cargo al Presupuesto:</label>
+                                            <div class="col-sm-5">
+                                                <select name="cargo_presupuesto" class="select form-control" required="" id="id_cargo_presupuesto">
+                                                    <option value="2">{{cp}}</option>
+                                                </select>
+                                            </div>
+                                    </div>
+                                    {% else %}
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Con Cargo al Presupuesto:</label>
                                             <div class="col-sm-5">
                                                 {{form.cargo_presupuesto}}
                                             </div>
                                     </div>
+
+                                    {% endif %}
                                     <!---Fin Centro COntable-->
                                     <!---Provincia-->
                                     <div class="form-group row">
