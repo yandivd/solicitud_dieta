@@ -38,17 +38,18 @@ class SolicitudCreateView(CreateView):
 
     def post(self, request, *args, **kwargs):
         formulario=SolicitudForm(data=request.POST)
-        estado='StandBye'
+        trabajadorTest=Crea.objects.get(usuario=request.user.id)
+        estado='StandBye'+trabajadorTest.unidad_organizativa.nombre
         mayor=0
         solicitudes=Solicitud.objects.all()
-        lista=Solicitud.objects.all().filter(estado="StandBye")
+        lista=Solicitud.objects.all().filter(estado="StandBye"+trabajadorTest.unidad_organizativa.nombre)
 
         for i in solicitudes:
             if i.numero > mayor:
                 mayor=i.numero
         numero=mayor+1
 
-        u_o=Crea.objects.get(id=request.user.id)
+        u_o=Crea.objects.get(usuario=request.user.id)
         if formulario.is_valid():
             solicitante=formulario.cleaned_data['solicitante']
             trabajador=formulario.cleaned_data['trabajador']
@@ -131,7 +132,9 @@ class SolicitudCreateView(CreateView):
         context['action']='add'
         context['list_url']=reverse_lazy('solicitudes')
         #validaciones de que hayan campos establecidos
-        lista=Solicitud.objects.all().filter(estado="StandBye")
+        trabajadorTest = Crea.objects.get(usuario=self.request.user.id)
+        estado = 'StandBye' + trabajadorTest.unidad_organizativa.nombre
+        lista=Solicitud.objects.all().filter(estado=estado)
         if len(lista)>0:
             context['solicitante'] = lista[0].solicitante
             context['cc'] = lista[0].c_contable
@@ -142,7 +145,7 @@ class SolicitudCreateView(CreateView):
 
         #fin de las validaciones
 
-        context['object_list'] = Solicitud.objects.all().filter(estado="StandBye")
+        context['object_list'] = Solicitud.objects.all().filter(estado=estado)
         return context
 
 @permission_required('app.add_modelo')
@@ -155,7 +158,9 @@ def crear_modelo(request):
             if i.consec > mayor:
                 mayor = i.consec
         numero=mayor+1
-        solicitudes_list=Solicitud.objects.all().filter(estado="StandBye")
+        trabajadorTest = Crea.objects.get(usuario=request.user.id)
+        estado = 'StandBye' + trabajadorTest.unidad_organizativa.nombre
+        solicitudes_list=Solicitud.objects.all().filter(estado=estado)
         modelo = Modelo(consec=numero,
                         nombre=request.user.first_name+' '+request.user.last_name,
                         solicitante=solicitudes_list[0].solicitante.usuario.first_name+' '+solicitudes_list[0].solicitante.usuario.last_name,
