@@ -110,12 +110,24 @@
                                     <!---Fin Provincia-->
                                 </div>
                                 <div class="col-sm-6">
+                                    {% if parleg %}
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Persona autorizada a Recibir y Loquidar el efectivo del grupo:</label>
+                                            <div class="col-sm-5">
+                                                <select name="parleg" class="select form-control" required="" id="id_parleg">
+                                                    <option value="3">{{parleg}}</option>
+                                                  </select>
+                                            </div>
+                                    </div>
+                                    {% else %}
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Persona autorizada a Recibir y Loquidar el efectivo del grupo:</label>
                                             <div class="col-sm-5">
                                                 {{form.parleg}}
                                             </div>
                                     </div>
+
+                                    {% endif %}
                                     <div class="form-group row">
 				                        <label class="col-sm-4 col-form-label">Destino:</label>
 				                            <div class="col-sm-5">
