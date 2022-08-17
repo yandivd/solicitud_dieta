@@ -189,13 +189,22 @@
                                 </div>
 
                             </div>
-
+                            {% if obs %}
+                            <div class="form-group row">
+                                        <label class=" col-form-label">Observaciones:</label>
+				                            <div class="">
+                                                <input type="text" readonly name="observaciones" maxlength="500" class="textinput textInput form-control" required="" id="id_observaciones" value={{obs}}>
+                                            </div>
+			                        </div>
+                            {% else %}
                             <div class="form-group row">
                                         <label class=" col-form-label">Observaciones:</label>
 				                            <div class="">
                                                 {{form.observaciones}}
                                             </div>
 			                        </div>
+                            {% endif %}
+
                             {% if perms.app.add_solicitud or perms.app.change_solicitud %}
                             {% if action == 'add' %}
                     <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Agregar
