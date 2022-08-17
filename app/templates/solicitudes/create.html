@@ -167,12 +167,25 @@
                                                     <input type="date" name="fecha_final" class="dateinput form-control datepicker" required id="id_fecha_final">
                                                 </div>
                                             </div>
-			                        </div><div class="form-group row">
+			                        </div>
+                                    {% if autoriza %}
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Autoriza:</label>
+				                            <div class="col-sm-4">
+                                                <select name="autoriza" class="select form-control" required="" id="id_autoriza">
+                                                  <option value="1">{{autoriza}}</option>
+                                                </select>
+                                            </div>
+			                        </div>
+                                    {% else %}
+                                    <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Autoriza:</label>
 				                            <div class="col-sm-4">
                                                 {{form.autoriza}}
                                             </div>
 			                        </div>
+
+                                    {% endif %}
                                 </div>
 
                             </div>

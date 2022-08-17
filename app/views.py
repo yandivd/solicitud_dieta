@@ -99,7 +99,7 @@ class SolicitudCreateView(CreateView):
                                     fecha_final=final,
                                     estado=estado,
                                     cargo_presupuesto=cp_Fijo,
-                                    parleg=parleg,
+                                    parleg=parlegFijo,
                                     autoriza=autorizaFijo,
                                     observaciones=obsFijo)
             else:
