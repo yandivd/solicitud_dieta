@@ -161,6 +161,7 @@ def crear_modelo(request):
         trabajadorTest = Crea.objects.get(usuario=request.user.id)
         estado = 'StandBye' + trabajadorTest.unidad_organizativa.nombre
         solicitudes_list=Solicitud.objects.all().filter(estado=estado)
+        estadoM='ok'
         modelo = Modelo(consec=numero,
                         nombre=request.user.first_name+' '+request.user.last_name,
                         solicitante=solicitudes_list[0].solicitante.usuario.first_name+' '+solicitudes_list[0].solicitante.usuario.last_name,
@@ -169,7 +170,8 @@ def crear_modelo(request):
                         parleg=solicitudes_list[0].parleg.trabajador.usuario.first_name+' '+solicitudes_list[0].parleg.trabajador.usuario.last_name,
                         autoriza=solicitudes_list[0].autoriza.usuario.first_name+' '+solicitudes_list[0].autoriza.usuario.last_name,
                         cargo_presupuesto=solicitudes_list[0].cargo_presupuesto.cuenta,
-                        observaciones=solicitudes_list[0].observaciones)
+                        observaciones=solicitudes_list[0].observaciones,
+                        estado=estadoM)
         modelo.save()
         for i in solicitudes_list:
             i.estado="Check"
@@ -222,6 +224,7 @@ class ModeloListView(ListView):
             lista_solicitantes.append(i.solicitudes.first().solicitante)
         context['title'] = "Listado de Solicitudes"
         context['solicitantes'] = lista_solicitantes
+        context['object_list'] = Modelo.objects.all().filter(estado="ok")
 
         return context
 
@@ -274,5 +277,27 @@ def eliminarSolicitud(request,id):
 @permission_required('app.delete_modelo')
 def eliminarModelo(request,id):
     modelo=Modelo.objects.get(id=id)
-    modelo.delete()
+    modelo.estado="cancel"
+    modelo.save()
     return redirect(to='listarMod')
+
+class ModeloCancelListView(ListView):
+    model = Modelo
+    template_name = 'modelos/listarCancelados.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request,*args,** kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        lista_solicitantes=[]
+        modelos=Modelo.objects.all()
+        pos=0
+        for i in modelos:
+            lista_solicitantes.append(i.solicitudes.first().solicitante)
+        context['title'] = "Listado de Solicitudes"
+        context['solicitantes'] = lista_solicitantes
+        context['object_list'] = Modelo.objects.all().filter(estado="cancel")
+
+        return context

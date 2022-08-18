@@ -2,11 +2,12 @@
 {% load static %}
 {% block content %}
     <div class="row pl-5 pr-5" >
-         <div>
+        <div class="col-lg-3 col-6"></div>
+         <div class="col-lg-3 col-6">
             <div class="small-box bg-success">
                 <div class="inner">
                     <h1 style="color: white;" class="text-center">
-                        Modelos
+                        Modelos Aceptados
                     </h1>
                 </div>
                 <div class="icon"><i class="fas fa-check-square"></i>
@@ -15,11 +16,37 @@
                 <a href="{% url 'listarMod' %}" class="small-box-footer" style="color: white !important;">
                 Ver listado <i class="fas fa-arrow-circle-right" style="color: white;"></i>
                 </a>
+
                 {% else %}
                 <a href="#" class="small-box-footer" style="color: white !important;">
                 No tiene permisos para ver los Modelos <i class="fas fa-eye-slash" style="color: white;"></i>
                 </a>
                 {% endif %}
+            </div>
+            </div>
+
+        <div class="col-lg-3 col-6">
+        <div class="small-box bg-danger">
+                <div class="inner">
+                    <h1 style="color: white;" class="text-center">
+                        Modelos Cancelados
+                    </h1>
+                </div>
+                <div class="icon"><i class="fas fa-times-circle"></i>
+                </div>
+                {% if perms.app.view_modelo %}
+                <a href="{% url 'listarModCancel' %}" class="small-box-footer" style="color: white !important;">
+                Ver listado <i class="fas fa-arrow-circle-right" style="color: white;"></i>
+                </a>
+
+                {% else %}
+                <a href="#" class="small-box-footer" style="color: white !important;">
+                No tiene permisos para ver los Modelos <i class="fas fa-eye-slash" style="color: white;"></i>
+                </a>
+                {% endif %}
+            </div>
+
+        <div class="col-lg-3 col-6"></div>
             </div>
              {% if perms.app.add_solicitud %}
              <div class=" card-footer mt-3">
