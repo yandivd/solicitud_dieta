@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class=" card card-default">
+        <div class="card-header px-3 mb-3 mt-3 container">
+            <h3 class="card-title">
+            <i class="fas fa-search"></i>
+                Listado de los Modelos
+            </h3>
+            </div>
+        <div class="card card-body content-header mx-5 px-5">
+            <table id="myTable" class="display" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Ver</th>
+                        <th style="width: 2cm">Cons</th>
+                        <th>Creador</th>
+                        <th>Solicitante</th>
+                        <th>Unidad Organizativa</th>
+                        <th>Centro Contable</th>
+                        <th>Cargo al Presupuesto</th>
+                        <th>Autoriza</th>
+                        <th>Observaciones</th>
+                        <th style="width: 3cm">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in object_list %}
+                    <tr>
+                        <td style="width: 1cm"><a href="{% url 'solicitudModel' i.id%}" type="button" class="btn btn-warning">
+                    <i class="fas fa-eye" style="width: 1cm"></i>
+                </a></td>
+                        <td style="width: 20px;">{{i.consec}}</td>
+                        <td style="width: 150px;">{{i.nombre}}</td>
+                        <td style="width: 150px;">{{i.solicitante}}</td>
+                        <td style="width: 150px;">{{i.unidad_organizativa}}</td>
+                        <td style="width: 150px;"><div class="pl-5">{{i.c_contable}}</div></td>
+                        <td>{{i.cargo_presupuesto}}</td>
+                        <td>{{i.autoriza}}</td>
+                        <td>{{i.observaciones}}</td>
+                        <td>
+                {% if perms.app.view_modelo %}
+                <a href="#" type="button" class="btn btn-success">
+                    <i class="fas fa-download"></i>
+                </a>
+                {% endif %}
+<!--                <a href="{% url 'solicitudModel' i.id%}" type="button" class="btn btn-warning">-->
+<!--                    <i class="fas fa-edit"></i>-->
+<!--                </a>-->
+                {% if perms.app.delete_modelo %}
+                <a href="#" onclick="eliminarModelo({{i.id}})" type="button" class="btn btn-danger">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+                        {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

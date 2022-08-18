@@ -10,4 +10,6 @@ urlpatterns = [
     path('editar/solicitud/<int:pk>/',SolicitudUpdateView.as_view(), name='solicitudEdit'),
     path('eliminar_solicitud/<id>/', eliminarSolicitud, name='solicitudDel'),
     path('eliminar_modelo/<id>/', eliminarModelo, name='modeloDel'),
+
+    path('listar/modelos/cancelados/', ModeloCancelListView.as_view(), name='listarModCancel'),
 ]

@@ -280,3 +280,24 @@ def eliminarModelo(request,id):
     modelo.estado="cancel"
     modelo.save()
     return redirect(to='listarMod')
+
+class ModeloCancelListView(ListView):
+    model = Modelo
+    template_name = 'modelos/listarCancelados.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request,*args,** kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        lista_solicitantes=[]
+        modelos=Modelo.objects.all()
+        pos=0
+        for i in modelos:
+            lista_solicitantes.append(i.solicitudes.first().solicitante)
+        context['title'] = "Listado de Solicitudes"
+        context['solicitantes'] = lista_solicitantes
+        context['object_list'] = Modelo.objects.all().filter(estado="cancel")
+
+        return context
