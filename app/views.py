@@ -131,9 +131,13 @@ class SolicitudCreateView(CreateView):
         context['action']='add'
         context['list_url']=reverse_lazy('solicitudes')
         #validaciones de que hayan campos establecidos
-        trabajadorTest = Crea.objects.get(usuario=self.request.user.id)
-        estado = 'StandBye' + trabajadorTest.unidad_organizativa.nombre
-        lista=Solicitud.objects.all().filter(estado=estado)
+        try:
+            trabajadorTest = Crea.objects.get(usuario=self.request.user.id)
+            estado = 'StandBye' + trabajadorTest.unidad_organizativa.nombre
+            lista=Solicitud.objects.all().filter(estado=estado)
+        except Exception as e:
+            print(e)
+            return HttpResponseRedirect('solicitudes')
         if len(lista)>0:
             context['solicitante'] = lista[0].solicitante
             context['cc'] = lista[0].c_contable
@@ -220,8 +224,7 @@ class ModeloListView(ListView):
         modelos=Modelo.objects.all()
         pos=0
         for i in modelos:
-            pass
-            # lista_solicitantes.append(i.solicitudes.first().solicitante)
+            lista_solicitantes.append(i.solicitudes.first().solicitante)
         context['title'] = "Listado de Solicitudes"
         context['solicitantes'] = lista_solicitantes
         context['object_list'] = Modelo.objects.all().filter(estado="ok")
