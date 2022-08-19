@@ -68,15 +68,22 @@ class SolicitudCreateView(CreateView):
             observaciones=formulario.cleaned_data['observaciones']
 
             #validaciones de las fechas section
-            validaciones=Solicitud.objects.all().filter(fecha_inicio=inicio)
+            validaciones=Solicitud.objects.all().filter(trabajador=trabajador)
             if final >= inicio and inicio >= date.today():
                 for i in validaciones:
-                    if i.trabajador.usuario.username == trabajador.usuario.username:
+                    if inicio>=i.fecha_inicio and inicio<=i.fecha_final:
                         messages.error(request, "Ya se solicito una dieta ese dia para el trabajador")
                         return redirect('crear_solicitud')
             else:
                 messages.error(request, "Fechas Invalidas")
                 return redirect('crear_solicitud')
+
+            #         if i.trabajador.usuario.username == trabajador.usuario.username:
+            #             messages.error(request, "Ya se solicito una dieta ese dia para el trabajador")
+            #             return redirect('crear_solicitud')
+            # else:
+            #     messages.error(request, "Fechas Invalidas")
+            #     return redirect('crear_solicitud')
             #end validaciones de fechas section
 
             if len(lista)>0:
