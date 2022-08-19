@@ -1,7 +1,7 @@
 from datetime import date
 
 from django.contrib import messages
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.views.generic import ListView, CreateView, UpdateView
 from .models import *
 from .forms import SolicitudForm
@@ -78,14 +78,6 @@ class SolicitudCreateView(CreateView):
                 messages.error(request, "Fechas Invalidas")
                 return redirect('crear_solicitud')
 
-            #         if i.trabajador.usuario.username == trabajador.usuario.username:
-            #             messages.error(request, "Ya se solicito una dieta ese dia para el trabajador")
-            #             return redirect('crear_solicitud')
-            # else:
-            #     messages.error(request, "Fechas Invalidas")
-            #     return redirect('crear_solicitud')
-            #end validaciones de fechas section
-
             if len(lista)>0:
                 solFijo=lista[0].solicitante
                 ccFijo=lista[0].c_contable
@@ -139,9 +131,13 @@ class SolicitudCreateView(CreateView):
         context['action']='add'
         context['list_url']=reverse_lazy('solicitudes')
         #validaciones de que hayan campos establecidos
-        trabajadorTest = Crea.objects.get(usuario=self.request.user.id)
-        estado = 'StandBye' + trabajadorTest.unidad_organizativa.nombre
-        lista=Solicitud.objects.all().filter(estado=estado)
+        try:
+            trabajadorTest = Crea.objects.get(usuario=self.request.user.id)
+            estado = 'StandBye' + trabajadorTest.unidad_organizativa.nombre
+            lista=Solicitud.objects.all().filter(estado=estado)
+        except Exception as e:
+            print(e)
+            return HttpResponseRedirect('solicitudes')
         if len(lista)>0:
             context['solicitante'] = lista[0].solicitante
             context['cc'] = lista[0].c_contable
