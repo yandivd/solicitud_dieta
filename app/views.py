@@ -313,18 +313,19 @@ class ModeloCancelListView(ListView):
 class ModeloPDFView(View):
 
     def get(self, request, *args, **kwargs):
-        template = get_template('pdf/modelo.html')
-        context = {
-            'title': 'Mi Primer PDF'
-        }
-        html = template.render(context)
-        response = HttpResponse(content_type='application/pdf')
-        response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+        try:
+            template = get_template('pdf/modelo.html')
+            context = {
+                'title': 'Mi Primer PDF',
+            }
+            html = template.render(context)
+            response = HttpResponse(content_type='application/pdf')
+            # response['Content-Disposition'] = 'attachment; filename="report.pdf"'
 
-        #creacion del pdf
-        pisa_status = pisa.CreatePDF(
-            html, dest=response)
-        # if error then show some funny view
-        if pisa_status.err:
-            return HttpResponse('We had some errors <pre>' + html + '</pre>')
-        return response
+            #creacion del pdf
+            pisa_status = pisa.CreatePDF(
+                html, dest=response)
+            return response
+        except:
+            pass
+        return HttpResponseRedirect(reverse_lazy('listarMod'))
