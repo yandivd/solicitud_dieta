@@ -64,12 +64,21 @@
                                     </div>
                                     {% endif %}
                                     <!---Fin Solicitante-->
+                                    {% if cc %}
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Centro Contable:</label>
+                                            <div class="col-sm-5">
+                                                <input type="text" name="c_contable" value="{{cc}}" maxlength="4" class="textinput textInput form-control" required="" id="id_c_contable">
+                                            </div>
+                                    </div>
+                                    {% else %}
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Centro Contable:</label>
                                             <div class="col-sm-5">
                                                 {{form.c_contable}}
                                             </div>
                                     </div>
+                                    {% endif %}
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Trabajador:</label>
                                             <div class="col-sm-5">
