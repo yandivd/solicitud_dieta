@@ -293,8 +293,8 @@ class ModeloCancelListView(ListView):
         lista_solicitantes=[]
         modelos=Modelo.objects.all()
         pos=0
-        for i in modelos:
-            lista_solicitantes.append(i.solicitudes.first().solicitante)
+        # for i in modelos:
+        #     lista_solicitantes.append(i.solicitudes.first().solicitante)
         context['title'] = "Listado de Solicitudes"
         context['solicitantes'] = lista_solicitantes
         context['object_list'] = Modelo.objects.all().filter(estado="cancel")
