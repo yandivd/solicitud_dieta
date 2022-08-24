@@ -78,47 +78,47 @@ class SolicitudCreateView(CreateView):
                 messages.error(request, "Fechas Invalidas")
                 return redirect('crear_solicitud')
 
-            # if len(lista)>0:
-            #     solFijo=lista[0].solicitante
-            #     ccFijo=lista[0].c_contable
-            #     parlegFijo=lista[0].parleg
-            #     cp_Fijo=lista[0].cargo_presupuesto
-            #     autorizaFijo=lista[0].autoriza
-            #     obsFijo=lista[0].observaciones
-            #
-            #     solicitud= Solicitud(numero=numero,
-            #                         solicitante=solFijo,
-            #                         trabajador=trabajador,
-            #                         unidad_organizativa=u_o.unidad_organizativa,
-            #                         c_contable=ccFijo,
-            #                         provincia=provincia,
-            #                         origen=origen,
-            #                         destino=destino,
-            #                         regreso=regreso,
-            #                         fecha_inicio=inicio,
-            #                         fecha_final=final,
-            #                         estado=estado,
-            #                         cargo_presupuesto=cp_Fijo,
-            #                         parleg=parlegFijo,
-            #                         autoriza=autorizaFijo,
-            #                         observaciones=obsFijo)
-            # else:
-            solicitud= Solicitud(numero=numero,
-                                solicitante=solicitante,
-                                trabajador=trabajador,
-                                unidad_organizativa=u_o.unidad_organizativa,
-                                c_contable=cc,
-                                provincia=provincia,
-                                origen=origen,
-                                destino=destino,
-                                regreso=regreso,
-                                fecha_inicio=inicio,
-                                fecha_final=final,
-                                estado=estado,
-                                cargo_presupuesto=cp,
-                                parleg=parleg,
-                                autoriza=autoriza,
-                                observaciones=observaciones)
+            if len(lista)>0:
+                solFijo=lista[0].solicitante
+                ccFijo=lista[0].c_contable
+                parlegFijo=lista[0].parleg
+                cp_Fijo=lista[0].cargo_presupuesto
+                autorizaFijo=lista[0].autoriza
+                obsFijo=lista[0].observaciones
+
+                solicitud= Solicitud(numero=numero,
+                                    solicitante=solFijo,
+                                    trabajador=trabajador,
+                                    unidad_organizativa=u_o.unidad_organizativa,
+                                    c_contable=ccFijo,
+                                    provincia=provincia,
+                                    origen=origen,
+                                    destino=destino,
+                                    regreso=regreso,
+                                    fecha_inicio=inicio,
+                                    fecha_final=final,
+                                    estado=estado,
+                                    cargo_presupuesto=cp_Fijo,
+                                    parleg=parlegFijo,
+                                    autoriza=autorizaFijo,
+                                    observaciones=obsFijo)
+            else:
+                solicitud= Solicitud(numero=numero,
+                                    solicitante=solicitante,
+                                    trabajador=trabajador,
+                                    unidad_organizativa=u_o.unidad_organizativa,
+                                    c_contable=cc,
+                                    provincia=provincia,
+                                    origen=origen,
+                                    destino=destino,
+                                    regreso=regreso,
+                                    fecha_inicio=inicio,
+                                    fecha_final=final,
+                                    estado=estado,
+                                    cargo_presupuesto=cp,
+                                    parleg=parleg,
+                                    autoriza=autoriza,
+                                    observaciones=observaciones)
             solicitud.save()
         else:
             print("No es valido")
@@ -134,13 +134,13 @@ class SolicitudCreateView(CreateView):
         trabajadorTest = Crea.objects.get(usuario=self.request.user.id)
         estado = 'StandBye' + trabajadorTest.unidad_organizativa.nombre
         lista=Solicitud.objects.all().filter(estado=estado)
-        # if len(lista)>0:
-        #     context['solicitante'] = lista[0].solicitante
-        #     context['cc'] = lista[0].c_contable
-        #     context['parleg'] = lista[0].parleg
-        #     context['cp'] = lista[0].cargo_presupuesto
-        #     context['autoriza'] = lista[0].autoriza
-        #     context['obs'] = lista[0].observaciones
+        if len(lista)>0:
+            context['solicitante'] = lista[0].solicitante
+            context['cc'] = lista[0].c_contable
+            context['parleg'] = lista[0].parleg
+            context['cp'] = lista[0].cargo_presupuesto
+            context['autoriza'] = lista[0].autoriza
+            context['obs'] = lista[0].observaciones
 
         #fin de las validaciones
 
