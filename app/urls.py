@@ -12,4 +12,6 @@ urlpatterns = [
     path('eliminar_modelo/<id>/', eliminarModelo, name='modeloDel'),
 
     path('listar/modelos/cancelados/', ModeloCancelListView.as_view(), name='listarModCancel'),
+
+    path('modelo/pdf/<int:pk>/', ModeloPDFView.as_view(), name='modelo_pdf'),
 ]

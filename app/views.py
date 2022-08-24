@@ -1,14 +1,23 @@
 from datetime import date
 
 from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, View
 from .models import *
 from .forms import SolicitudForm
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
+
+#librerias del html2pdf
+import os
+from django.conf import settings
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.contrib.staticfiles import finders
 
 # Create your views here.
 class SolicitudListView(ListView):
@@ -300,3 +309,22 @@ class ModeloCancelListView(ListView):
         context['object_list'] = Modelo.objects.all().filter(estado="cancel")
 
         return context
+
+class ModeloPDFView(View):
+
+    def get(self, request, *args, **kwargs):
+        template = get_template('pdf/modelo.html')
+        context = {
+            'title': 'Mi Primer PDF'
+        }
+        html = template.render(context)
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+
+        #creacion del pdf
+        pisa_status = pisa.CreatePDF(
+            html, dest=response)
+        # if error then show some funny view
+        if pisa_status.err:
+            return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        return response
