@@ -49,11 +49,10 @@
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Solicita:</label>
                                             <div class="col-sm-5">
-                                                <select name="solicitante" class="select form-control" required="" id="id_solicitante" value="1">
+                                                <select name="solicitante" class="select form-control" required="" id="id_solicitante">
+                                                  <option value="1" selected="1">{{solicitante}}</option>
 
-                                                      <option value="1">{{solicitante}}</option>
-
-                                                    </select>
+                                                </select>
                                             </div>
                                     </div>
                                     {% else %}
@@ -69,7 +68,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Centro Contable:</label>
                                             <div class="col-sm-5">
-                                                <input type="text" name="c_contable" value={{cc}} maxlength="4" class="textinput textInput form-control" required="" id="id_c_contable">
+                                                <input type="text" name="c_contable" value="{{cc}}" maxlength="4" class="textinput textInput form-control" required="" id="id_c_contable">
                                             </div>
                                     </div>
                                     {% else %}
@@ -79,7 +78,6 @@
                                                 {{form.c_contable}}
                                             </div>
                                     </div>
-
                                     {% endif %}
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Trabajador:</label>
@@ -121,8 +119,9 @@
                                         <label class="col-sm-4 col-form-label">Persona autorizada a Recibir y Loquidar el efectivo del grupo:</label>
                                             <div class="col-sm-5">
                                                 <select name="parleg" class="select form-control" required="" id="id_parleg">
-                                                    <option value="3">{{parleg}}</option>
-                                                  </select>
+                                                  <option value="1" selected="1">{{parleg}}</option>
+
+                                                </select>
                                             </div>
                                     </div>
                                     {% else %}
@@ -132,14 +131,15 @@
                                                 {{form.parleg}}
                                             </div>
                                     </div>
-
                                     {% endif %}
+
                                     {% if cp %}
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Con Cargo al Presupuesto:</label>
                                             <div class="col-sm-5">
                                                 <select name="cargo_presupuesto" class="select form-control" required="" id="id_cargo_presupuesto">
-                                                    <option value="2">{{cp}}</option>
+                                                  <option value="1" selected="1">{{cp}}</option>
+
                                                 </select>
                                             </div>
                                     </div>
@@ -150,7 +150,6 @@
                                                 {{form.cargo_presupuesto}}
                                             </div>
                                     </div>
-
                                     {% endif %}
                                     <div class="form-group row">
 				                        <label class="col-sm-4 col-form-label">Fecha de Inicio:</label>
@@ -173,7 +172,7 @@
                                         <label class="col-sm-4 col-form-label">Autoriza:</label>
 				                            <div class="col-sm-4">
                                                 <select name="autoriza" class="select form-control" required="" id="id_autoriza">
-                                                  <option value="1">{{autoriza}}</option>
+                                                  <option value="1" selected="{{autoriza}}">{{autoriza}}</option>
                                                 </select>
                                             </div>
 			                        </div>
@@ -184,16 +183,14 @@
                                                 {{form.autoriza}}
                                             </div>
 			                        </div>
-
                                     {% endif %}
                                 </div>
-
                             </div>
                             {% if obs %}
                             <div class="form-group row">
                                         <label class=" col-form-label">Observaciones:</label>
 				                            <div class="">
-                                                <input type="text" readonly name="observaciones" maxlength="500" class="textinput textInput form-control" required="" id="id_observaciones" value={{obs}}>
+                                                <input type="text" value="{{obs}}" readonly name="observaciones" maxlength="500" class="textinput textInput form-control" required="" id="id_observaciones">
                                             </div>
 			                        </div>
                             {% else %}
