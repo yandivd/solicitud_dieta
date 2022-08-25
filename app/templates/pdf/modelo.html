@@ -3,49 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>{{title}}</title>
+    <style>
+        table, th, td, tr {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 1px;
+        }
+    </style>
 </head>
 <body>
-    <div class="row pl-5 pr-5">
-        <div class="col-lg-3 col-6">
             <table class="table">
                 <tr>
-                <th class="row-border">AUTORIZA(3)</th>
+                <td class="row-border" style="width: 15%; height: 0.4cm";>AUTORIZA(3)</td>
                 </tr>
+            </table>
+            <table>
                 <tr>
-                <th>Firma</th>
+                <td style="width: 4.4cm; height: 0.7cm";>Firma </td>
                 </tr>
-                <th>Nombre y Apellidos</th>
-                <td>{{modelo.autoriza}}</td>
+                <td style="width: 15%; height: 0.4cm"; >Nombre y Apellidos</td>
+                <td style="width: 6.6cm">{{modelo.autoriza}}</td>
                 <tr>
-                <th>Cargo:</th>
+                <td style="width: 15%; height: 0.4cm";>Cargo:</td>
                 <td>Director Territorial</td>
                 </tr>
                 <tr>
-                    <th>Dependencia</th>
+                    <td style="width: 15%; height: 0.4cm";>Dependencia</td>
                     <td>DT Artemisa</td>
                 </tr>
             </table>
-        </div>
-    </div>
-        <div class="card card-body content-header mx-5 px-5">
-            <table class="table">
-                 <tr>
-                <th class="row-border">Solicita(3)</th>
-                </tr>
-                <tr>
-                <th>Firma</th>
-                </tr>
-                <th>Nombre y Apellidos</th>
-                <td>{{modelo.solicita}}</td>
-                <tr>
-                <th>CARGO:</th>
-                <td>J Servicios en funciones Jefe Dpto. Logistica y Servivios</td>
-                </tr>
-                <tr>
-                    <th>AREA DE TRABAJO:</th>
-                    <td>Logistica y Servicios</td>
-                </tr>
-            </table>
-        </div>
 </body>
 </html>
