@@ -317,7 +317,6 @@ class ModeloPDFView(View):
         modelo1 = Modelo.objects.get(pk=self.kwargs['pk'])
         lista_solicitudes = modelo1.solicitudes.all()
         for i in lista_solicitudes:
-            print(i.numero)
             lista.append(i)
         try:
             template = get_template('pdf/modelo.html')
