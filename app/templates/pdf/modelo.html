@@ -6,13 +6,13 @@
     <title>{{title}}</title>
     <style>
         table, th, td, tr {
-            border: 1px solid black;
+            border: solid black;
             border-collapse: collapse;
             padding: 1px;
         }
         @page {
             size: letter landscape;
-            margin: 2cm;
+            margin: 0.5cm;
         }
     </style>
 </head>
@@ -52,9 +52,12 @@
                 <th style="width: 3.8cm; height: 0.5cm;">(7)</th>
                 <th style="width: 2.2cm; height: 0.5cm;">(8)</th>
                 <th style="width: 1.4cm; height: 0.5cm;">(9)</th>
-                <th style="width: 1.7cm; height: 0.5cm;">(10)</th>
+                <th style="width: 1.5cm; height: 0.5cm;">(10)</th>
                 <th style="width: 1.7cm; height: 0.5cm;" rowspan="2" colspan="3">Provincias</th>
                 <th style="width: 1.7cm; height: 0.5cm;" rowspan="2" colspan="2">Dieta</th>
+                <th style="width: 1.7cm; height: 0.5cm;" rowspan="2" colspan="2">Hospedaje</th>
+                <th style="width: 1.7cm; height: 0.5cm;" rowspan="2" colspan="2">Pasaje</th>
+                <th rowspan="2" colspan="2">Via Transportacion</th>
             </tr>
             <tr>
                 <th style="width: 0.6cm; height: 0.5cm;"> </th>
@@ -73,6 +76,12 @@
                 <th style="width: 1.7cm; height: 0.5cm;">Regreso(13)</th>
                 <th style="width: 1.7cm; height: 0.5cm;">Desde(14)</th>
                 <th style="width: 1.7cm; height: 0.5cm;">Hasta(15)</th>
+                <th style="width: 1.5cm; height: 0.5cm;">Entrada(16)</th>
+                <th style="width: 1.5cm; height: 0.5cm;">Salida(17)</th>
+                <th style="width: 1cm; height: 0.5cm;">Ida(18)</th>
+                <th style="width: 1.7cm; height: 0.5cm;">Regreso(19)</th>
+                <th>Ida(20)</th>
+                <th>Regreso(21)</th>
             </tr>
             </thead>
             <tbody>
@@ -88,40 +97,43 @@
                         <td>{{i.regreso}}</td>
                         <td>{{i.fecha_inicio}}</td>
                         <td>{{i.fecha_final}}</td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
                     </tr>
                     {% endfor %}
                     <tr>
-                        <td colspan="10" style="height: 0.7cm">LABOR A REALIZAR: MTTO. GENERAL AL CTLP SAN CRISTOBAL</td>
+                        <td colspan="16" style="height: 0.7cm">LABOR A REALIZAR: MTTO. GENERAL AL CTLP SAN CRISTOBAL</td>
                     </tr>
                     <tr>
-                        <th colspan="5" style="height: 0.4cm;">PERSONA AUTORIZADA A RECIBIR Y LIQUIDAR EL EFECTIVO DEL GRUPO(23)</th>
-                        <td colspan="5">OBSERVACIONES(24):
-                        {{modelo.observaciones}}</td>
+                        <th colspan="7" style="text-align: left; height: 0.4cm;">PERSONA AUTORIZADA A RECIBIR Y LIQUIDAR EL EFECTIVO DEL GRUPO(23)</th>
+                        <td colspan="9">OBSERVACIONES(24): </td>
                     </tr>
                     <tr>
-                        <td colspan="5">NOMBRE Y APELLIDOS: {{modelo.parleg}}</td>
-                        <td colspan="5" rowspan="2"></td>
+                        <td colspan="7">NOMBRE Y APELLIDOS: {{modelo.parleg}}</td>
+                        <td colspan="9" rowspan="2" style="text-align: center">{{modelo.observaciones}}</td>
                     </tr>
                     <tr>
-                        <td colspan="5" style="height: 0.8cm;">FIRMA:</td>
+                        <td colspan="7" style="height: 0.8cm;">FIRMA:</td>
                     </tr>
                     <tr>
-                        <td colspan="5" style="height: 0.3cm">CONFECCIONADO POR (25):</td>
-                        <td colspan="4" style="height: 0.3cm">RECIBIDO POR (26):</td>
-                        <td rowspan="4" style="height: 0.3cm">CONSEC
+                        <td colspan="7" style="height: 0.3cm">CONFECCIONADO POR (25):</td>
+                        <td colspan="7" style="height: 0.3cm">RECIBIDO POR (26):</td>
+                        <td rowspan="4" colspan="2" style="height: 0.3cm">CONSEC
                         {{modelo.consec}}</td>
                     </tr>
                     <tr>
-                        <td colspan="5">NOMBRE Y APELLIDOS: {{modelo.nombre}}</td>
-                        <td colspan="4">NOMBRE Y APELLIDOS: </td>
+                        <td colspan="7">NOMBRE Y APELLIDOS: {{modelo.nombre}}</td>
+                        <td colspan="7">NOMBRE Y APELLIDOS: </td>
                     </tr>
                     <tr>
-                        <td colspan="5" style="height: 1.2cm">FIRMA:</td>
-                        <td colspan="4" style="height: 1.2cm">FIRMA:</td>
+                        <td colspan="7" style="height: 1.2cm">FIRMA:</td>
+                        <td colspan="7" style="height: 1.2cm">FIRMA:</td>
                     </tr>
                     <tr>
-                        <td colspan="5">CON CARGO AL PRESUPUESTO: {{modelo.cargo_presupuesto}}</td>
-                        <td colspan="4">FECHA</td>
+                        <td colspan="7">CON CARGO AL PRESUPUESTO: {{modelo.cargo_presupuesto}}</td>
+                        <td colspan="7">FECHA</td>
                     </tr>
             </tbody>
         </table>
