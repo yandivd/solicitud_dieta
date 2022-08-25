@@ -2,9 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{{title}}</title>
 </head>
 <body>
-    <h1>{{title}}</h1>
+    <div class="row pl-5 pr-5">
+        <div class="col-lg-3 col-6">
+            <table class="table">
+                <tr>
+                <th class="row-border">AUTORIZA(3)</th>
+                </tr>
+                <tr>
+                <th>Firma</th>
+                </tr>
+                <th>Nombre y Apellidos</th>
+                <td>{{modelo.autoriza}}</td>
+                <tr>
+                <th>Cargo:</th>
+                <td>Director Territorial</td>
+                </tr>
+                <tr>
+                    <th>Dependencia</th>
+                    <td>DT Artemisa</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+        <div class="card card-body content-header mx-5 px-5">
+            <table class="table">
+                 <tr>
+                <th class="row-border">Solicita(3)</th>
+                </tr>
+                <tr>
+                <th>Firma</th>
+                </tr>
+                <th>Nombre y Apellidos</th>
+                <td>{{modelo.solicita}}</td>
+                <tr>
+                <th>CARGO:</th>
+                <td>J Servicios en funciones Jefe Dpto. Logistica y Servivios</td>
+                </tr>
+                <tr>
+                    <th>AREA DE TRABAJO:</th>
+                    <td>Logistica y Servicios</td>
+                </tr>
+            </table>
+        </div>
 </body>
 </html>

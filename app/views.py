@@ -316,6 +316,7 @@ class ModeloPDFView(View):
         try:
             template = get_template('pdf/modelo.html')
             context = {
+                'modelo' : Modelo.objects.get(pk=self.kwargs['pk']),
                 'title': 'Mi Primer PDF',
             }
             html = template.render(context)

@@ -14,6 +14,8 @@ class Unidad_Organizativa(models.Model):
         verbose_name_plural="Unidades Organizativas"
 class Autoriza(models.Model):
     usuario=models.OneToOneField(User, on_delete=models.CASCADE)
+    cargo=models.CharField(max_length=150)
+    dependencia=models.CharField(max_length=100)
 
     def __str__(self):
         return self.usuario.first_name+' '+self.usuario.last_name
