@@ -312,6 +312,37 @@ class ModeloCancelListView(ListView):
 
 class ModeloPDFView(View):
 
+    def link_callback(self, uri, rel):
+        """
+        Convert HTML URIs to absolute system paths so xhtml2pdf can access those
+        resources
+        """
+        result = finders.find(uri)
+        if result:
+            if not isinstance(result, (list, tuple)):
+                result = [result]
+            result = list(os.path.realpath(path) for path in result)
+            path = result[0]
+        else:
+            sUrl = settings.STATIC_URL  # Typically /static/
+            sRoot = settings.STATIC_ROOT  # Typically /home/userX/project_static/
+            mUrl = settings.MEDIA_URL  # Typically /media/
+            mRoot = settings.MEDIA_ROOT  # Typically /home/userX/project_static/media/
+
+            if uri.startswith(mUrl):
+                path = os.path.join(mRoot, uri.replace(mUrl, ""))
+            elif uri.startswith(sUrl):
+                path = os.path.join(sRoot, uri.replace(sUrl, ""))
+            else:
+                return uri
+
+        # make sure that file exists
+        if not os.path.isfile(path):
+            raise Exception(
+                'media URI must start with %s or %s' % (sUrl, mUrl)
+            )
+        return path
+
     def get(self, request, *args, **kwargs):
         lista = []
         modelo1 = Modelo.objects.get(pk=self.kwargs['pk'])
@@ -324,6 +355,7 @@ class ModeloPDFView(View):
                 'modelo' : Modelo.objects.get(pk=self.kwargs['pk']),
                 'title': 'Solicitud de Dietas',
                 'soli': lista,
+                # 'logo': '{}{}'.format(settings.STATIC_URL, 'etecsa.png'),
             }
             html = template.render(context)
             response = HttpResponse(content_type='application/pdf')
@@ -331,8 +363,11 @@ class ModeloPDFView(View):
 
             #creacion del pdf
             pisa_status = pisa.CreatePDF(
-                html, dest=response)
+                html, dest=response,
+            link_callback=self.link_callback
+            )
             return response
-        except:
-            pass
+        except Exception as e:
+            print(e)
+
         return HttpResponseRedirect(reverse_lazy('listarMod'))

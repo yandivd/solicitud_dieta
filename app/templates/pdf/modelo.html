@@ -17,7 +17,9 @@
     </style>
 </head>
 <body>
+<!--<img src="{% static 'etecsa.png' %}" alt="">-->
         <div class="col">
+            <h5>SOLICITUD DE DIETAS</h5>
             <table class="table">
                 <tr>
                 <td class="row-border" style="width: 15%; height: 0.4cm";>AUTORIZA(3)</td>
@@ -88,13 +90,39 @@
                         <td>{{i.fecha_final}}</td>
                     </tr>
                     {% endfor %}
-
-<!--                <tr>-->
-<!--                    <td style="height: 0.8cm">1</td>-->
-<!--                    <td>Jorge Luis Miranda</td>-->
-<!--                    <td>67101002829</td>-->
-<!--                    <td>Logistica y Servicios</td>-->
-<!--                </tr>-->
+                    <tr>
+                        <td colspan="10" style="height: 0.7cm">LABOR A REALIZAR: MTTO. GENERAL AL CTLP SAN CRISTOBAL</td>
+                    </tr>
+                    <tr>
+                        <th colspan="5" style="height: 0.4cm;">PERSONA AUTORIZADA A RECIBIR Y LIQUIDAR EL EFECTIVO DEL GRUPO(23)</th>
+                        <td colspan="5">OBSERVACIONES(24):
+                        {{modelo.observaciones}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">NOMBRE Y APELLIDOS: {{modelo.parleg}}</td>
+                        <td colspan="5" rowspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="height: 0.8cm;">FIRMA:</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="height: 0.3cm">CONFECCIONADO POR (25):</td>
+                        <td colspan="4" style="height: 0.3cm">RECIBIDO POR (26):</td>
+                        <td rowspan="4" style="height: 0.3cm">CONSEC
+                        {{modelo.consec}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">NOMBRE Y APELLIDOS: {{modelo.nombre}}</td>
+                        <td colspan="4">NOMBRE Y APELLIDOS: </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="height: 1.2cm">FIRMA:</td>
+                        <td colspan="4" style="height: 1.2cm">FIRMA:</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">CON CARGO AL PRESUPUESTO: {{modelo.cargo_presupuesto}}</td>
+                        <td colspan="4">FECHA</td>
+                    </tr>
             </tbody>
         </table>
 </body>
