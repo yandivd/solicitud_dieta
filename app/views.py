@@ -313,11 +313,18 @@ class ModeloCancelListView(ListView):
 class ModeloPDFView(View):
 
     def get(self, request, *args, **kwargs):
+        lista = []
+        modelo1 = Modelo.objects.get(pk=self.kwargs['pk'])
+        lista_solicitudes = modelo1.solicitudes.all()
+        for i in lista_solicitudes:
+            print(i.numero)
+            lista.append(i)
         try:
             template = get_template('pdf/modelo.html')
             context = {
                 'modelo' : Modelo.objects.get(pk=self.kwargs['pk']),
-                'title': 'Mi Primer PDF',
+                'title': 'Solicitud de Dietas',
+                'soli': lista,
             }
             html = template.render(context)
             response = HttpResponse(content_type='application/pdf')
