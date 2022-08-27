@@ -114,7 +114,14 @@
                     </tr>
                     <tr>
                         <td colspan="7">NOMBRE Y APELLIDOS: {{modelo.parleg}}</td>
-                        <td colspan="9" rowspan="2" style="text-align: center">{{modelo.observaciones}}</td>
+                        {% if modelo.observaciones != none %}
+                        <td colspan="9" rowspan="2" style="text-align: center">
+                            {{modelo.observaciones}}
+                        </td>
+                        {% else %}
+                        <td colspan="9" rowspan="2" style="text-align: center">
+                        </td>
+                        {% endif %}
                     </tr>
                     <tr>
                         <td colspan="7" style="height: 0.8cm;">FIRMA:</td>
