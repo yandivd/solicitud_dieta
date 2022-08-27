@@ -179,7 +179,11 @@ def crear_modelo(request):
                         autoriza=solicitudes_list[0].autoriza.usuario.first_name+' '+solicitudes_list[0].autoriza.usuario.last_name,
                         cargo_presupuesto=solicitudes_list[0].cargo_presupuesto.cuenta,
                         observaciones=solicitudes_list[0].observaciones,
-                        estado=estadoM)
+                        estado=estadoM,
+                        cargo_autoriza=solicitudes_list[0].autoriza.cargo,
+                        dependencia_autoriza=solicitudes_list[0].autoriza.dependencia,
+                        cargo_solicita=solicitudes_list[0].solicitante.cargo,
+                        area_trabajo_solicita=solicitudes_list[0].solicitante.unidad_organizativa.nombre)
         modelo.save()
         for i in solicitudes_list:
             i.estado="Check"

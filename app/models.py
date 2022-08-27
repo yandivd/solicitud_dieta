@@ -63,7 +63,7 @@ class Municipio(models.Model):
 
 class Solicitante(models.Model):
     usuario=models.ForeignKey(User, on_delete=models.CASCADE)
-    permiso=models.CharField(max_length=100)
+    cargo=models.CharField(max_length=100)
     unidad_organizativa=models.ForeignKey(Unidad_Organizativa, on_delete=models.CASCADE)
     def __str__(self):
         return self.usuario.first_name+' '+self.usuario.last_name
@@ -112,6 +112,11 @@ class Modelo(models.Model):
     cargo_presupuesto=models.CharField(max_length=20)
     observaciones = models.CharField(max_length=500)
     estado=models.CharField(max_length=10)
+    #campos nuevos del autoriza y el solicita
+    cargo_autoriza=models.CharField(max_length=100)
+    dependencia_autoriza=models.CharField(max_length=100)
+    cargo_solicita=models.CharField(max_length=100)
+    area_trabajo_solicita=models.CharField(max_length=100)
 
     def __str__(self):
         return self.nombre
