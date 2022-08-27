@@ -1,14 +1,23 @@
 from datetime import date
 
 from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, View
 from .models import *
 from .forms import SolicitudForm
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
+
+#librerias del html2pdf
+import os
+from django.conf import settings
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.contrib.staticfiles import finders
 
 # Create your views here.
 class SolicitudListView(ListView):
@@ -300,3 +309,65 @@ class ModeloCancelListView(ListView):
         context['object_list'] = Modelo.objects.all().filter(estado="cancel")
 
         return context
+
+class ModeloPDFView(View):
+
+    def link_callback(self, uri, rel):
+        """
+        Convert HTML URIs to absolute system paths so xhtml2pdf can access those
+        resources
+        """
+        result = finders.find(uri)
+        if result:
+            if not isinstance(result, (list, tuple)):
+                result = [result]
+            result = list(os.path.realpath(path) for path in result)
+            path = result[0]
+        else:
+            sUrl = settings.STATIC_URL  # Typically /static/
+            sRoot = settings.STATIC_ROOT  # Typically /home/userX/project_static/
+            mUrl = settings.MEDIA_URL  # Typically /media/
+            mRoot = settings.MEDIA_ROOT  # Typically /home/userX/project_static/media/
+
+            if uri.startswith(mUrl):
+                path = os.path.join(mRoot, uri.replace(mUrl, ""))
+            elif uri.startswith(sUrl):
+                path = os.path.join(sRoot, uri.replace(sUrl, ""))
+            else:
+                return uri
+
+        # make sure that file exists
+        if not os.path.isfile(path):
+            raise Exception(
+                'media URI must start with %s or %s' % (sUrl, mUrl)
+            )
+        return path
+
+    def get(self, request, *args, **kwargs):
+        lista = []
+        modelo1 = Modelo.objects.get(pk=self.kwargs['pk'])
+        lista_solicitudes = modelo1.solicitudes.all()
+        for i in lista_solicitudes:
+            lista.append(i)
+        try:
+            template = get_template('pdf/modelo.html')
+            context = {
+                'modelo' : Modelo.objects.get(pk=self.kwargs['pk']),
+                'title': 'Solicitud de Dietas',
+                'soli': lista,
+                # 'logo': '{}{}'.format(settings.STATIC_URL, 'etecsa.png'),
+            }
+            html = template.render(context)
+            response = HttpResponse(content_type='application/pdf')
+            # response['Content-Disposition'] = 'attachment; filename="report.pdf"' Descargar directamente
+
+            #creacion del pdf
+            pisa_status = pisa.CreatePDF(
+                html, dest=response,
+            link_callback=self.link_callback
+            )
+            return response
+        except Exception as e:
+            print(e)
+
+        return HttpResponseRedirect(reverse_lazy('listarMod'))

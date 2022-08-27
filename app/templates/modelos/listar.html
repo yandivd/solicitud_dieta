@@ -40,7 +40,7 @@
                         <td>{{i.observaciones}}</td>
                         <td>
                 {% if perms.app.view_modelo %}
-                <a href="#" type="button" class="btn btn-success">
+                <a href="{% url 'modelo_pdf' i.id %}" type="button" class="btn btn-success">
                     <i class="fas fa-download"></i>
                 </a>
                 {% endif %}
