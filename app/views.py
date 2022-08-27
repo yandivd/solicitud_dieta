@@ -384,6 +384,7 @@ class ModeloPDFView(View):
             lista.append(i)
         try:
             template = get_template('pdf/modelo.html')
+            #template = get_template('modelos/solicitudes/modeloList.html')
             context = {
                 'modelo' : Modelo.objects.get(pk=self.kwargs['pk']),
                 'title': 'Solicitud de Dietas',
