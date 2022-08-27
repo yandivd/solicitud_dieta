@@ -16,28 +16,48 @@
         }
     </style>
 </head>
-<body>
+<body style="width: max-content;">
 <!--<img src="{% static 'etecsa.png' %}" alt="">-->
-            <h5>SOLICITUD DE DIETAS</h5>
-    <div class="row">
-        <div class="col-sm-6">
-            <table class="table" style="position: relative; float: left">
+    <h4 style="display: flex; justify-content: center;">SOLICITUD DE DIETAS</h5>
+    <div style="display: flex; justify-content: space-between;">
+        <div style="width: 30vw;">
+            <table style="position: relative; float: left; width: max-content; border-bottom: hidden;">
+                <td style="width: 4.4cm; height: 0.4cm; font-size: 0.83rem;";>AUTORIZA(3)</td>
+            </table>
+            <table style="position: relative; float: left">
                 <tr>
-                <td class="row-border" style="width: 15%; height: 0.4cm";>AUTORIZA(3)</td>
+                <td style="width: 4.4cm; height: 0.7cm";>Firma </td>
+                </tr>
+                <td style="width: 4.4cm; height: 0.4cm"; >Nombre y Apellidos</td>
+                <td style="width: 6.6cm">{{modelo.autoriza}}</td>
+                <tr>
+                <td style="width: 4.4cm; height: 0.4cm";>Cargo:</td>
+                <td>{{modelo.cargo_autoriza}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 4.4cm; height: 0.4cm";>Dependencia</td>
+                    <td>{{modelo.dependencia_autoriza}}</td>
+                </tr>
+            </table>
+        </div>
+        <div style="width: 30vw;">
+            <table style="position: relative; float: left; width: max-content; border-bottom: hidden;">
+                <tr>
+                <td style="width: 4.4cm; height: 0.4cm; font-size: 0.83rem;";>AUTORIZA(4)</td>
                 </tr>
             </table>
             <table style="position: relative; float: left">
                 <tr>
                 <td style="width: 4.4cm; height: 0.7cm";>Firma </td>
                 </tr>
-                <td style="width: 15%; height: 0.4cm"; >Nombre y Apellidos</td>
+                <td style="width: 4.4cm; height: 0.4cm"; >Nombre y Apellidos</td>
                 <td style="width: 6.6cm">{{modelo.autoriza}}</td>
                 <tr>
-                <td style="width: 15%; height: 0.4cm";>Cargo:</td>
+                <td style="width: 4.4cm; height: 0.4cm";>Cargo:</td>
                 <td>{{modelo.cargo_autoriza}}</td>
                 </tr>
                 <tr>
-                    <td style="width: 15%; height: 0.4cm";>Dependencia</td>
+                    <td style="width: 4.4cm; height: 0.4cm";>Dependencia</td>
                     <td>{{modelo.dependencia_autoriza}}</td>
                 </tr>
             </table>
@@ -47,7 +67,7 @@
             <p>TIPO DE SOLICITUD(5):</p>
         </div>
 
-        <table class="mt-3">
+        <table style="margin-top: 2rem; width: auto;">
             <thead>
             <tr>
                 <th style="width: 0.6cm; height: 0.5cm;">(6)</th>
