@@ -248,9 +248,10 @@ def listar_solicitudes_de_modelo(request, id):
     for i in lista_solicitudes:
         lista.append(i)
     data={
+        'modelo': Modelo.objects.get(pk=id),
         'soli': lista,
     }
-    return render(request, 'modelos/solicitudes/listar.html', data)
+    return render(request, 'modelos/solicitudes/modeloList.html', data)
 
 class SolicitudUpdateView(UpdateView):
 
@@ -293,6 +294,13 @@ def eliminarModelo(request,id):
     modelo.save()
     return redirect(to='listarMod')
 
+@permission_required('app.view_modelo')
+def archivarModelo(request,id):
+    modelo=Modelo.objects.get(id=id)
+    modelo.estado="archivado"
+    modelo.save()
+    return redirect(to='listarMod')
+
 class ModeloCancelListView(ListView):
     model = Modelo
     template_name = 'modelos/listarCancelados.html'
@@ -311,6 +319,27 @@ class ModeloCancelListView(ListView):
         context['title'] = "Listado de Solicitudes"
         context['solicitantes'] = lista_solicitantes
         context['object_list'] = Modelo.objects.all().filter(estado="cancel")
+
+        return context
+
+class ModeloArchivedListView(ListView):
+    model = Modelo
+    template_name = 'modelos/listarArchivados.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request,*args,** kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        lista_solicitantes=[]
+        modelos=Modelo.objects.all()
+        pos=0
+        # for i in modelos:
+        #     lista_solicitantes.append(i.solicitudes.first().solicitante)
+        context['title'] = "Listado de Solicitudes"
+        context['solicitantes'] = lista_solicitantes
+        context['object_list'] = Modelo.objects.all().filter(estado="archivado")
 
         return context
 
@@ -363,13 +392,14 @@ class ModeloPDFView(View):
             }
             html = template.render(context)
             response = HttpResponse(content_type='application/pdf')
-            # response['Content-Disposition'] = 'attachment; filename="report.pdf"' Descargar directamente
+            response['Content-Disposition'] = 'attachment; filename="report.pdf"' #Descargar directamente
 
             #creacion del pdf
             pisa_status = pisa.CreatePDF(
                 html, dest=response,
             link_callback=self.link_callback
             )
+            archivarModelo(request,self.kwargs['pk'])
             return response
         except Exception as e:
             print(e)

@@ -1,9 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <div class="row pl-5 pr-5" >
-        <div class="col-lg-3 col-6"></div>
-         <div class="col-lg-3 col-6">
+    <div class="row pl-5 pr-5 ml-5" >
+         <div class="col-lg-3 col-6 ml-5">
             <div class="small-box bg-success">
                 <div class="inner">
                     <h1 style="color: white;" class="text-center">
@@ -25,7 +24,29 @@
             </div>
             </div>
 
-        <div class="col-lg-3 col-6">
+        <div class="col-lg-3 col-6 ml-5">
+            <div class="small-box btn-primary">
+                <div class="inner">
+                    <h1 style="color: white;" class="text-center">
+                        Modelos Archivados
+                    </h1>
+                </div>
+                <div class="icon"><i class="fas fa-folder"></i>
+                </div>
+                {% if perms.app.view_modelo %}
+                <a href="{% url 'listarModArch' %}" class="small-box-footer" style="color: white !important;">
+                Ver listado <i class="fas fa-arrow-circle-right" style="color: white;"></i>
+                </a>
+
+                {% else %}
+                <a href="#" class="small-box-footer" style="color: white !important;">
+                No tiene permisos para ver los Modelos <i class="fas fa-eye-slash" style="color: white;"></i>
+                </a>
+                {% endif %}
+            </div>
+            </div>
+
+        <div class="col-lg-3 col-6 ml-5">
         <div class="small-box bg-danger">
                 <div class="inner">
                     <h1 style="color: white;" class="text-center">
