@@ -97,6 +97,7 @@ class Solicitud(models.Model):
     autoriza=models.ForeignKey(Autoriza, on_delete=models.CASCADE)
     estado=models.CharField(max_length=20)
     observaciones=models.CharField(max_length=500, blank=True, null=True)
+    labor=models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return str(self.numero)
@@ -122,6 +123,7 @@ class Modelo(models.Model):
     dependencia_autoriza=models.CharField(max_length=100)
     cargo_solicita=models.CharField(max_length=100)
     area_trabajo_solicita=models.CharField(max_length=100)
+    labor=models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return self.nombre

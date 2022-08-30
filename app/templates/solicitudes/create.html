@@ -188,6 +188,21 @@
                                     {% endif %}
                                 </div>
                             </div>
+                            {% if labor %}
+                            <div class="form-group row">
+                                        <label class=" col-form-label">Labor a Realizar:</label>
+				                            <div class="">
+                                                <input type="text" value="{{labor}}" readonly name="labor" maxlength="500" class="textinput textInput form-control" required="" id="id_labor">
+                                            </div>
+			                        </div>
+                            {% else %}
+                            <div class="form-group row">
+                                        <label class=" col-form-label">Labor a Realizar:</label>
+				                            <div class="">
+                                                {{form.labor}}
+                                            </div>
+			                        </div>
+                            {% endif %}
                             {% if obs %}
                             <div class="form-group row">
                                         <label class=" col-form-label">Observaciones:</label>

@@ -75,6 +75,7 @@ class SolicitudCreateView(CreateView):
             parleg=formulario.cleaned_data['parleg']
             autoriza=formulario.cleaned_data['autoriza']
             observaciones=formulario.cleaned_data['observaciones']
+            labor=formulario.cleaned_data['labor']
 
             #validaciones de las fechas section
             validaciones=Solicitud.objects.all().filter(trabajador=trabajador)
@@ -94,6 +95,7 @@ class SolicitudCreateView(CreateView):
                 cp_Fijo=lista[0].cargo_presupuesto
                 autorizaFijo=lista[0].autoriza
                 obsFijo=lista[0].observaciones
+                laborFijo=lista[0].labor#comprobar si se deja en blanco q pasa(form invalid)
 
                 solicitud= Solicitud(numero=numero,
                                     solicitante=solFijo,
@@ -110,7 +112,8 @@ class SolicitudCreateView(CreateView):
                                     cargo_presupuesto=cp_Fijo,
                                     parleg=parlegFijo,
                                     autoriza=autorizaFijo,
-                                    observaciones=obsFijo)
+                                    observaciones=obsFijo,
+                                    labor=laborFijo,)
             else:
                 solicitud= Solicitud(numero=numero,
                                     solicitante=solicitante,
@@ -127,7 +130,8 @@ class SolicitudCreateView(CreateView):
                                     cargo_presupuesto=cp,
                                     parleg=parleg,
                                     autoriza=autoriza,
-                                    observaciones=observaciones)
+                                    observaciones=observaciones,
+                                    labor=labor,)
             solicitud.save()
         else:
             print("No es valido")
@@ -150,6 +154,7 @@ class SolicitudCreateView(CreateView):
             context['cp'] = lista[0].cargo_presupuesto
             context['autoriza'] = lista[0].autoriza
             context['obs'] = lista[0].observaciones
+            context['labor'] = lista[0].labor
 
         #fin de las validaciones
 
@@ -187,7 +192,8 @@ def crear_modelo(request):
                         cargo_autoriza=solicitudes_list[0].autoriza.cargo,
                         dependencia_autoriza=solicitudes_list[0].autoriza.dependencia,
                         cargo_solicita=solicitudes_list[0].solicitante.cargo,
-                        area_trabajo_solicita=solicitudes_list[0].solicitante.unidad_organizativa.nombre)
+                        area_trabajo_solicita=solicitudes_list[0].solicitante.unidad_organizativa.nombre,
+                        labor=solicitudes_list[0].labor,)
         modelo.save()
         for i in solicitudes_list:
             i.estado="Check"
