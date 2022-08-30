@@ -74,12 +74,17 @@ class Crea(models.Model):
     def __str__(self):
         return self.usuario.username
 
+class C_Contable(models.Model):
+    nombre=models.CharField(max_length=4)
+    def __str__(self):
+        return self.nombre
+
 class Solicitud(models.Model):
     numero=models.IntegerField()
     solicitante=models.ForeignKey(Solicitante, on_delete=models.CASCADE)
     trabajador=models.ForeignKey(Trabajador, on_delete=models.CASCADE)
     unidad_organizativa=models.ForeignKey(Unidad_Organizativa, on_delete=models.CASCADE)
-    c_contable=models.CharField(max_length=4)
+    c_contable=models.ForeignKey(C_Contable, on_delete=models.CASCADE)
     provincia=models.ForeignKey(Provincia, on_delete=models.CASCADE)
     origen=models.ForeignKey(Municipio, on_delete=models.CASCADE, related_name='municipio_origen')
     destino=models.ForeignKey(Municipio, on_delete=models.CASCADE, related_name='municipio_destino')
@@ -87,11 +92,12 @@ class Solicitud(models.Model):
     fecha_inicio=models.DateField()
     fecha_final=models.DateField()
     #nuevos models add
-    parleg=models.ForeignKey(PARLEG, on_delete=models.CASCADE)
+    parleg=models.ForeignKey(Trabajador, on_delete=models.CASCADE, related_name='Trabajador_parleg', null=True, blank=True)
     cargo_presupuesto=models.ForeignKey(Cargo_al_Presupuesto, on_delete=models.CASCADE)
     autoriza=models.ForeignKey(Autoriza, on_delete=models.CASCADE)
     estado=models.CharField(max_length=20)
     observaciones=models.CharField(max_length=500, blank=True, null=True)
+    labor=models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return str(self.numero)
@@ -107,7 +113,7 @@ class Modelo(models.Model):
     c_contable=models.CharField(max_length=4)
     consec=models.IntegerField()
     solicitudes=models.ManyToManyField(Solicitud)
-    parleg=models.CharField(max_length=20)
+    parleg=models.CharField(max_length=20, blank=True, null=True)
     autoriza=models.CharField(max_length=50)
     cargo_presupuesto=models.CharField(max_length=20)
     observaciones = models.CharField(max_length=500, blank=True, null=True)
@@ -117,6 +123,7 @@ class Modelo(models.Model):
     dependencia_autoriza=models.CharField(max_length=100)
     cargo_solicita=models.CharField(max_length=100)
     area_trabajo_solicita=models.CharField(max_length=100)
+    labor=models.CharField(max_length=500, blank=True, null=True)
 
     def __str__(self):
         return self.nombre

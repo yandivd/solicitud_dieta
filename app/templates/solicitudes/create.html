@@ -5,7 +5,7 @@
 
     <script>
 
-         function generarModelo(){
+        function generarModelo(){
             Swal.fire({
                 "title": "Estas Seguro?",
                 "icon": "question",
@@ -50,7 +50,7 @@
                                         <label class="col-sm-4 col-form-label">Solicita:</label>
                                             <div class="col-sm-5">
                                                 <select name="solicitante" class="select form-control" required="" id="id_solicitante">
-                                                  <option value="1" selected="1">{{solicitante}}</option>
+                                                <option value="1" selected="1">{{solicitante}}</option>
 
                                                 </select>
                                             </div>
@@ -68,7 +68,9 @@
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Centro Contable:</label>
                                             <div class="col-sm-5">
-                                                <input type="text" name="c_contable" value="{{cc}}" maxlength="4" class="textinput textInput form-control" required="" id="id_c_contable">
+                                                <select name="c_contable" class="select form-control" required="" id="id_c_contable">
+                                                    <option value="1" selected="1">{{cc}}</option>
+                                                </select>
                                             </div>
                                     </div>
                                     {% else %}
@@ -186,6 +188,21 @@
                                     {% endif %}
                                 </div>
                             </div>
+                            {% if labor %}
+                            <div class="form-group row">
+                                        <label class=" col-form-label">Labor a Realizar:</label>
+				                            <div class="">
+                                                <input type="text" value="{{labor}}" readonly name="labor" maxlength="500" class="textinput textInput form-control" required="" id="id_labor">
+                                            </div>
+			                        </div>
+                            {% else %}
+                            <div class="form-group row">
+                                        <label class=" col-form-label">Labor a Realizar:</label>
+				                            <div class="">
+                                                {{form.labor}}
+                                            </div>
+			                        </div>
+                            {% endif %}
                             {% if obs %}
                             <div class="form-group row">
                                         <label class=" col-form-label">Observaciones:</label>

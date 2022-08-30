@@ -75,6 +75,7 @@ class SolicitudCreateView(CreateView):
             parleg=formulario.cleaned_data['parleg']
             autoriza=formulario.cleaned_data['autoriza']
             observaciones=formulario.cleaned_data['observaciones']
+            labor=formulario.cleaned_data['labor']
 
             #validaciones de las fechas section
             validaciones=Solicitud.objects.all().filter(trabajador=trabajador)
@@ -94,6 +95,7 @@ class SolicitudCreateView(CreateView):
                 cp_Fijo=lista[0].cargo_presupuesto
                 autorizaFijo=lista[0].autoriza
                 obsFijo=lista[0].observaciones
+                laborFijo=lista[0].labor#comprobar si se deja en blanco q pasa(form invalid)
 
                 solicitud= Solicitud(numero=numero,
                                     solicitante=solFijo,
@@ -110,7 +112,8 @@ class SolicitudCreateView(CreateView):
                                     cargo_presupuesto=cp_Fijo,
                                     parleg=parlegFijo,
                                     autoriza=autorizaFijo,
-                                    observaciones=obsFijo)
+                                    observaciones=obsFijo,
+                                    labor=laborFijo,)
             else:
                 solicitud= Solicitud(numero=numero,
                                     solicitante=solicitante,
@@ -127,7 +130,8 @@ class SolicitudCreateView(CreateView):
                                     cargo_presupuesto=cp,
                                     parleg=parleg,
                                     autoriza=autoriza,
-                                    observaciones=observaciones)
+                                    observaciones=observaciones,
+                                    labor=labor,)
             solicitud.save()
         else:
             print("No es valido")
@@ -150,6 +154,7 @@ class SolicitudCreateView(CreateView):
             context['cp'] = lista[0].cargo_presupuesto
             context['autoriza'] = lista[0].autoriza
             context['obs'] = lista[0].observaciones
+            context['labor'] = lista[0].labor
 
         #fin de las validaciones
 
@@ -169,13 +174,17 @@ def crear_modelo(request):
         trabajadorTest = Crea.objects.get(usuario=request.user.id)
         estado = 'StandBye' + trabajadorTest.unidad_organizativa.nombre
         solicitudes_list=Solicitud.objects.all().filter(estado=estado)
+        try:
+            pargleg1=solicitudes_list[0].parleg.usuario.first_name+' '+solicitudes_list[0].parleg.usuario.last_name
+        except:
+            pargleg1=''
         estadoM='ok'
         modelo = Modelo(consec=numero,
                         nombre=request.user.first_name+' '+request.user.last_name,
                         solicitante=solicitudes_list[0].solicitante.usuario.first_name+' '+solicitudes_list[0].solicitante.usuario.last_name,
                         unidad_organizativa=solicitudes_list[0].unidad_organizativa.nombre,
-                        c_contable=solicitudes_list[0].c_contable,
-                        parleg=solicitudes_list[0].parleg.trabajador.usuario.first_name+' '+solicitudes_list[0].parleg.trabajador.usuario.last_name,
+                        c_contable=solicitudes_list[0].c_contable.nombre,
+                        parleg=pargleg1,
                         autoriza=solicitudes_list[0].autoriza.usuario.first_name+' '+solicitudes_list[0].autoriza.usuario.last_name,
                         cargo_presupuesto=solicitudes_list[0].cargo_presupuesto.cuenta,
                         observaciones=solicitudes_list[0].observaciones,
@@ -183,7 +192,8 @@ def crear_modelo(request):
                         cargo_autoriza=solicitudes_list[0].autoriza.cargo,
                         dependencia_autoriza=solicitudes_list[0].autoriza.dependencia,
                         cargo_solicita=solicitudes_list[0].solicitante.cargo,
-                        area_trabajo_solicita=solicitudes_list[0].solicitante.unidad_organizativa.nombre)
+                        area_trabajo_solicita=solicitudes_list[0].solicitante.unidad_organizativa.nombre,
+                        labor=solicitudes_list[0].labor,)
         modelo.save()
         for i in solicitudes_list:
             i.estado="Check"
@@ -197,8 +207,8 @@ def crear_modelo(request):
             'action': 'add',
             'title': 'Agregar Solicitud',
         }
-    except:
-        data['error1']= "Ha ocurrido un error"
+    except Exception as e:
+        data['error1']= e
         data['action']='add'
         data['title']='Agregar Solicitud'
         return render(request,'solicitudes/listar.html',data)
