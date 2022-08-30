@@ -169,13 +169,17 @@ def crear_modelo(request):
         trabajadorTest = Crea.objects.get(usuario=request.user.id)
         estado = 'StandBye' + trabajadorTest.unidad_organizativa.nombre
         solicitudes_list=Solicitud.objects.all().filter(estado=estado)
+        try:
+            pargleg1=solicitudes_list[0].parleg.usuario.first_name+' '+solicitudes_list[0].parleg.usuario.last_name
+        except:
+            pargleg1=''
         estadoM='ok'
         modelo = Modelo(consec=numero,
                         nombre=request.user.first_name+' '+request.user.last_name,
                         solicitante=solicitudes_list[0].solicitante.usuario.first_name+' '+solicitudes_list[0].solicitante.usuario.last_name,
                         unidad_organizativa=solicitudes_list[0].unidad_organizativa.nombre,
-                        c_contable=solicitudes_list[0].c_contable,
-                        parleg=solicitudes_list[0].parleg.trabajador.usuario.first_name+' '+solicitudes_list[0].parleg.trabajador.usuario.last_name,
+                        c_contable=solicitudes_list[0].c_contable.nombre,
+                        parleg=pargleg1,
                         autoriza=solicitudes_list[0].autoriza.usuario.first_name+' '+solicitudes_list[0].autoriza.usuario.last_name,
                         cargo_presupuesto=solicitudes_list[0].cargo_presupuesto.cuenta,
                         observaciones=solicitudes_list[0].observaciones,
@@ -197,8 +201,8 @@ def crear_modelo(request):
             'action': 'add',
             'title': 'Agregar Solicitud',
         }
-    except:
-        data['error1']= "Ha ocurrido un error"
+    except Exception as e:
+        data['error1']= e
         data['action']='add'
         data['title']='Agregar Solicitud'
         return render(request,'solicitudes/listar.html',data)

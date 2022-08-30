@@ -73,10 +73,10 @@
   </nav>
   <!-- /.navbar -->
 
-            {% if error1 == "Ha ocurrido un error" %}
+            {% if error1 %}
             <div class=" alert alert-danger alert-dismissible">
                 <button type="button" class=" close" data-dismiss="alert" aria-hidden="true">x</button>
-                <h5><i class="icon bi bi-x-octagon"></i>Ha ocurrido un error al generar el Modelo</h5>
+                <h5><i class="icon bi bi-x-octagon"></i>{{error1}}</h5>
             </div>
             {% endif %}
 

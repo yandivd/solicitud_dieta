@@ -55,9 +55,6 @@ class SolicitudAdmin(admin.ModelAdmin):
 class Cargo_al_PresupuestoAdmin(admin.ModelAdmin):
     list_display = ('cuenta',)
 
-class PARLEGAdmin(admin.ModelAdmin):
-    list_display = ('trabajador',)
-
 class CreaAdmin(admin.ModelAdmin):
     list_display = ('usuario',)
 
@@ -73,7 +70,6 @@ admin.site.register(Provincia, ProvinciaAdmin)
 admin.site.register(Autoriza, AutorizaAdmin)
 admin.site.register(Modelo, ModeloAdmin)
 admin.site.register(Cargo_al_Presupuesto, Cargo_al_PresupuestoAdmin)
-admin.site.register(PARLEG, PARLEGAdmin)
 admin.site.register(Solicitante, SolicitanteAdmin)
 admin.site.register(Crea, CreaAdmin)
 admin.site.register(C_Contable, C_ContableAdmin)
