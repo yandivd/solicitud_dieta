@@ -74,12 +74,17 @@ class Crea(models.Model):
     def __str__(self):
         return self.usuario.username
 
+class C_Contable(models.Model):
+    nombre=models.CharField(max_length=4)
+    def __str__(self):
+        return self.nombre
+
 class Solicitud(models.Model):
     numero=models.IntegerField()
     solicitante=models.ForeignKey(Solicitante, on_delete=models.CASCADE)
     trabajador=models.ForeignKey(Trabajador, on_delete=models.CASCADE)
     unidad_organizativa=models.ForeignKey(Unidad_Organizativa, on_delete=models.CASCADE)
-    c_contable=models.CharField(max_length=4)
+    c_contable=models.ForeignKey(C_Contable, on_delete=models.CASCADE)
     provincia=models.ForeignKey(Provincia, on_delete=models.CASCADE)
     origen=models.ForeignKey(Municipio, on_delete=models.CASCADE, related_name='municipio_origen')
     destino=models.ForeignKey(Municipio, on_delete=models.CASCADE, related_name='municipio_destino')

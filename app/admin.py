@@ -61,6 +61,9 @@ class PARLEGAdmin(admin.ModelAdmin):
 class CreaAdmin(admin.ModelAdmin):
     list_display = ('usuario',)
 
+class C_ContableAdmin(admin.ModelAdmin):
+    list_display = ('nombre',)
+
 # Register your models here.
 admin.site.register(Trabajador, TrabajadorAdmin)
 admin.site.register(Municipio, MunicipioAdmin)
@@ -73,3 +76,4 @@ admin.site.register(Cargo_al_Presupuesto, Cargo_al_PresupuestoAdmin)
 admin.site.register(PARLEG, PARLEGAdmin)
 admin.site.register(Solicitante, SolicitanteAdmin)
 admin.site.register(Crea, CreaAdmin)
+admin.site.register(C_Contable, C_ContableAdmin)
