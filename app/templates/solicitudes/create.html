@@ -75,7 +75,7 @@
     </script>
 {% endblock %}
 {% block content %}
-<form action="" method="post" id="" enctype="multipart/form-data">
+<form action="" method="post" id="" enctype="multipart/form-data" name="f1">
     <div class="card card-default">
         <div class="card-body ">
             {% csrf_token %}
@@ -138,7 +138,7 @@
                                     <!---Provincia-->
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Provincia:</label>
-				                            <div class="col-sm-5" name="f1">
+				                            <div class="col-sm-5">
                                                 <select class="select form-control" name=pais onchange="cambia_provincia()"> 
                                                 <option value="0" selected>---------- 
                                                 <option value="1">Artemisa 
@@ -151,7 +151,9 @@
                                     <div class="form-group row">
 				                        <label class="col-sm-4 col-form-label">Origen:</label>
 				                            <div class="col-sm-5">
-                                                {{form.origen}}
+                                                <select name=provincia> 
+                                                <option value="-">- 
+                                                </select>
                                             </div>
 			                        </div>
                                     <div class="form-group row">
@@ -174,7 +176,7 @@
                                         <label class="col-sm-4 col-form-label">Persona autorizada a Recibir y Loquidar el efectivo del grupo:</label>
                                             <div class="col-sm-5">
                                                 <select name="parleg" class="select form-control" required="" id="id_parleg">
-                                                  <option value="1" selected="1">{{parleg}}</option>
+                                                <option value="1" selected="1">{{parleg}}</option>
 
                                                 </select>
                                             </div>
