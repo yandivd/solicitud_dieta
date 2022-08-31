@@ -15,4 +15,6 @@ urlpatterns = [
     path('listar/modelos/archivados/', ModeloArchivedListView.as_view(), name='listarModArch'),
 
     path('modelo/pdf/<int:pk>/', ModeloPDFView.as_view(), name='modelo_pdf'),
+
+    path('prueba/', prueba, name='prueba'),
 ]

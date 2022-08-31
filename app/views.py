@@ -416,3 +416,6 @@ class ModeloPDFView(View):
             print(e)
 
         return HttpResponseRedirect(reverse_lazy('listarMod'))
+
+def prueba(request):
+    return render(request, 'pruebas/ptueba.html')
