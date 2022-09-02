@@ -6,48 +6,48 @@
     <script>
         //Empieza el select dinamico
 
-  var provincias_1=new Array("-","Artemisa","Guanajay","Caimito","Bauta","Castilla y León","Castilla-La Mancha","...");
-  var provincias_2=new Array("-","Salta","San Juan","San Luis","La Rioja","La Pampa","...");
-  var provincias_3=new Array("-","Cali","Santamarta","Medellin","Cartagena","...");
-  var provincias_4=new Array("-","Aisne","Creuse","Dordogne","Essonne","Gironde ","...");
-  var provincias_5=new Array("-","Cienfuegos","Creuse","Dordogne","Essonne","Gironde ","...");
+  var municipios_1=new Array("-","Artemisa","Guanajay","Caimito","Bauta","Castilla y León","Castilla-La Mancha","...");
+  var municipios_2=new Array("-","Salta","San Juan","San Luis","La Rioja","La Pampa","...");
+  var municipios_3=new Array("-","Cali","Santamarta","Medellin","Cartagena","...");
+  var municipios_4=new Array("-","Aisne","Creuse","Dordogne","Essonne","Gironde ","...");
+  var municipios_5=new Array("-","Cienfuegos","Creuse","Dordogne","Essonne","Gironde ","...");
 
-  var todasProvincias = [
+  var todasMunicipios = [
     [],
-    provincias_1,
-    provincias_2,
-    provincias_3,
-    provincias_4,
-    provincias_5,
+    municipios_1,
+    municipios_2,
+    municipios_3,
+    municipios_4,
+    municipios_5,
   ];
 
   function cambia_provincia(){ 
    	//tomo el valor del select del pais elegido 
    	var pais 
-   	pais = document.f1.pais[document.f1.pais.selectedIndex].value 
+   	pais = document.f1.provincia[document.f1.provincia.selectedIndex].value 
    	//miro a ver si el pais está definido 
    	if (pais != 0) { 
       	//si estaba definido, entonces coloco las opciones de la provincia correspondiente. 
       	//selecciono el array de provincia adecuado 
-      	mis_provincias=todasProvincias[pais]
+      	mis_municipios=todasMunicipios[pais]
       	//calculo el numero de provincias 
-      	num_provincias = mis_provincias.length 
+      	num_municipios = mis_municipios.length 
       	//marco el número de provincias en el select 
-      	document.f1.provincia.length = num_provincias 
+      	document.f1.origen.length = num_municipios 
       	//para cada provincia del array, la introduzco en el select 
-      	for(i=0;i<num_provincias;i++){ 
-         	document.f1.provincia.options[i].value=mis_provincias[i] 
-         	document.f1.provincia.options[i].text=mis_provincias[i] 
+      	for(i=0;i<num_municipios;i++){ 
+         	document.f1.origen.options[i].value=mis_municipios[i] 
+         	document.f1.origen.options[i].text=mis_municipios[i] 
       	}	
    	}else{ 
       	//si no había provincia seleccionada, elimino las provincias del select 
-      	document.f1.provincia.length = 1 
+      	document.f1.origen.length = 1 
       	//coloco un guión en la única opción que he dejado 
-      	document.f1.provincia.options[0].value = "-" 
-      	document.f1.provincia.options[0].text = "-" 
+      	document.f1.origen.options[0].value = "-" 
+      	document.f1.origen.options[0].text = "-" 
    	} 
    	//marco como seleccionada la opción primera de provincia 
-   	document.f1.provincia.options[0].selected = true 
+   	document.f1.origen.options[0].selected = true 
 }
 //Termina lo del select
 
@@ -140,7 +140,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Provincia:</label>
 				                            <div class="col-sm-5">
-                                                <select class="select form-control" name=pais onchange="cambia_provincia()"> 
+                                                <select class="select form-control" name=provincia onchange="cambia_provincia()"> 
                                                 <option value="0" selected>---------- 
                                                 <option value="1">Artemisa 
                                                 <option value="2">La Habana 
@@ -153,7 +153,7 @@
                                     <div class="form-group row">
 				                        <label class="col-sm-4 col-form-label">Origen:</label>
 				                            <div class="col-sm-5">
-                                                <select class="select form-control" name=provincia> 
+                                                <select class="select form-control" name=origen> 
                                                 <option value="-"> 
                                                 </select>
                                             </div>
