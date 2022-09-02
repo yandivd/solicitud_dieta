@@ -60,7 +60,7 @@
 function cambia_provinciaDestino(){ 
    	//tomo el valor del select del pais elegido 
    	var pais 
-   	pais = document.f1.provincia[document.f1.provincia.selectedIndex].value 
+   	pais = document.f1.prov_destino[document.f1.prov_destino.selectedIndex].value 
    	//miro a ver si el pais está definido 
    	if (pais != 0) { 
       	//si estaba definido, entonces coloco las opciones de la provincia correspondiente. 
@@ -69,28 +69,21 @@ function cambia_provinciaDestino(){
       	//calculo el numero de provincias 
       	num_municipios = mis_municipios.length 
       	//marco el número de provincias en el select 
-      	document.f1.origen.length = num_municipios 
-      	document.f1.regreso.length = num_municipios 
+      	document.f1.destino.length = num_municipios
       	//para cada provincia del array, la introduzco en el select 
       	for(i=0;i<num_municipios;i++){ 
-         	document.f1.origen.options[i].value=mis_municipios[i] 
-         	document.f1.regreso.options[i].value=mis_municipios[i] 
-         	document.f1.origen.options[i].text=mis_municipios[i] 
-         	document.f1.regreso.options[i].text=mis_municipios[i] 
+         	document.f1.destino.options[i].value=mis_municipios[i] 
+         	document.f1.destino.options[i].text=mis_municipios[i] 
       	}	
    	}else{ 
       	//si no había provincia seleccionada, elimino las provincias del select 
-      	document.f1.origen.length = 1 
-      	document.f1.regreso.length = 1 
+      	document.f1.destino.length = 1
       	//coloco un guión en la única opción que he dejado 
-      	document.f1.origen.options[0].value = "-" 
-      	document.f1.regreso.options[0].value = "-" 
-      	document.f1.origen.options[0].text = "-" 
-      	document.f1.regreso.options[0].text = "-" 
+      	document.f1.destino.options[0].value = "-" 
+      	document.f1.destino.options[0].text = "-" 
    	} 
    	//marco como seleccionada la opción primera de provincia 
-   	document.f1.origen.options[0].selected = true 
-   	document.f1.regreso.options[0].selected = true 
+   	document.f1.destino.options[0].selected = true 
 }
 //Termina lo del select
 
@@ -202,9 +195,24 @@ function cambia_provinciaDestino(){
                                             </div>
 			                        </div>
                                     <div class="form-group row">
-				                        <label class="col-sm-4 col-form-label">Destino:</label>
+                                        <label class="col-sm-4 col-form-label">Provincia Destino:</label>
 				                            <div class="col-sm-5">
-                                                {{form.destino}}
+                                                <select class="select form-control" name=prov_destino onchange="cambia_provinciaDestino()"> 
+                                                <option value="0" selected>---------- 
+                                                <option value="1">Artemisa 
+                                                <option value="2">La Habana 
+                                                <option value="3">Matanzas 
+                                                <option value="4">Pinar del Rio 
+                                                <option value="5">Cienfuegos 
+                                                </select>
+                                            </div>
+			                        </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Destino:</label>
+                                            <div class="col-sm-5">
+                                                <select class="select form-control" name=destino> 
+                                                <option value="-"> 
+                                                </select>
                                             </div>
                                     </div>
                                     <div class="form-group row">
