@@ -88,7 +88,7 @@ class Solicitud(models.Model):
     provincia=models.CharField(max_length=50)
     origen=models.CharField(max_length=50)
     destino=models.ForeignKey(Municipio, on_delete=models.CASCADE, related_name='municipio_destino')
-    regreso=models.ForeignKey(Municipio, on_delete=models.CASCADE, related_name='municipio_regreso')
+    regreso=models.CharField(max_length=50)
     fecha_inicio=models.DateField()
     fecha_final=models.DateField()
     #nuevos models add
