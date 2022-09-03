@@ -4,6 +4,112 @@
 {% block js %}
 
     <script>
+        //Empieza el select dinamico
+
+var municipios_1=new Array("-","Pinar del Rio","Consolacion del Sur","San Juan y Martinez","Sandino","Los Palacios","Guane","La Palma","Minas de Matahambre","San Luis","Vinales","Mantua");
+var municipios_2=new Array("-","Artemisa","Guanajay","Caimito","Bauta","San Cristobal","Candelaria","Bahia Honda","Mariel","Alquizar","Guira de Melena","San Antonio");
+var municipios_3=new Array("-","Playa","Plaza de la Revolución","Centro Habana","La Habana Vieja","Regla","La Habana del Este","Guanabacoa","San Miguel del Padrón","Diez de Octubre","Cerro","Marianao","La Lisa","Boyeros","Arroyo Naranjo","Cotorro");
+var municipios_4=new Array("-","Bejucal","San José de las Lajas","Jaruco","Santa Cruz del Norte","Madruga","Nueva Paz","San Nicolás","Güines","Melena del Sur","Batabanó","Quivicán");
+var municipios_5=new Array("-","Matanzas","Cárdenas","Martí","Colón","Perico","Jovellanos","Pedro Betancourt","Limonar","Unión de Reyes","Ciénaga de Zapata","Jagüey Grande","Calimete","Los Arabos");
+var municipios_6=new Array("-","Corralillo","Quemado de Güines","Sagua la Grande","Encrucijada","Camajuaní","Caibarién","Remedios","Placetas","Santa Clara","Cifuentes","Santo Domingo","Ranchuelo","Manicaragua");
+var municipios_7=new Array("-","Aguada de Pasajeros","Rodas","Palmira","Lajas","Cruces","Cumanayagua","Cienfuegos","Abreus");
+var municipios_8=new Array("-","Yaguajay","Jatibonico","Taguasco","Cabaiguán","Fomento","Trinidad","Sancti Spíritus","La Sierpe");
+var municipios_9=new Array("-","Chambas","Morón","Bolivia","Primero de Enero","Ciro Redondo","Florencia","Majagua","Ciego de Ávila","Venezuela","Baraguá");
+var municipios_10=new Array("-","Carlos Manuel de Céspedes","Esmeralda","Sierra de Cubitas","Minas","Nuevitas","Guáimaro","Sibanicú","Camagüey","Florida","Vertientes","Jimaguayú","Najasa","Santa Cruz del Sur");
+var municipios_11=new Array("-","Manatí","Puerto Padre","Jesús Menéndez","Majibacoa","Las Tunas","Jobabo","Colombia","Amancio");
+var municipios_12=new Array("-","Gibara","Rafael Freyre","Banes","Antilla","Báguanos","Holguín","Calixto García","Cacocum","Urbano Noris","Cueto","Mayarí","Frank País","Sagua de Tánamo","Moa");
+var municipios_13=new Array("-","Río Cauto","Cauto Cristo","Jiguaní","Bayamo","Yara","Manzanillo","Campechuela","Media Luna","Niquero","Pilón","Bartolomé Masó","Buey Arriba","Guisa");
+var municipios_14=new Array("-","Contramaestre","Mella","San Luis","Segundo Frente","Songo - La Maya","Santiago de Cuba","Palma Soriano","Tercer Frente","Guamá");
+var municipios_15=new Array("-","El Salvador","Manuel Tames","Yateras","Baracoa","Maisí","Imías","San Antonio del Sur","Caimanera","Guantánamo","Niceto Pérez");
+var municipios_16=new Array("-","Isla de la Juventud");
+
+var todasMunicipios = [
+    [],
+    municipios_1,
+    municipios_2,
+    municipios_3,
+    municipios_4,
+    municipios_5,
+    municipios_6,
+    municipios_7,
+    municipios_8,
+    municipios_9,
+    municipios_10,
+    municipios_11,
+    municipios_12,
+    municipios_13,
+    municipios_14,
+    municipios_15,
+    municipios_16,
+    ];
+
+  function cambia_provincia(){ 
+   	//tomo el valor del select del pais elegido 
+   	var pais 
+   	pais = document.f1.provincia[document.f1.provincia.selectedIndex].value 
+   	//miro a ver si el pais está definido 
+   	if (pais != 0) { 
+      	//si estaba definido, entonces coloco las opciones de la provincia correspondiente. 
+      	//selecciono el array de provincia adecuado 
+      	mis_municipios=todasMunicipios[pais]
+      	//calculo el numero de provincias 
+      	num_municipios = mis_municipios.length 
+      	//marco el número de provincias en el select 
+      	document.f1.origen.length = num_municipios 
+      	document.f1.regreso.length = num_municipios 
+      	//para cada provincia del array, la introduzco en el select 
+      	for(i=0;i<num_municipios;i++){ 
+         	document.f1.origen.options[i].value=mis_municipios[i] 
+         	document.f1.regreso.options[i].value=mis_municipios[i] 
+         	document.f1.origen.options[i].text=mis_municipios[i] 
+         	document.f1.regreso.options[i].text=mis_municipios[i] 
+      	}	
+   	}else{ 
+      	//si no había provincia seleccionada, elimino las provincias del select 
+      	document.f1.origen.length = 1 
+      	document.f1.regreso.length = 1 
+      	//coloco un guión en la única opción que he dejado 
+      	document.f1.origen.options[0].value = "-" 
+      	document.f1.regreso.options[0].value = "-" 
+      	document.f1.origen.options[0].text = "-" 
+      	document.f1.regreso.options[0].text = "-" 
+   	} 
+   	//marco como seleccionada la opción primera de provincia 
+   	document.f1.origen.options[0].selected = true 
+   	document.f1.regreso.options[0].selected = true 
+}
+
+function cambia_provinciaDestino(){ 
+   	//tomo el valor del select del pais elegido 
+   	var pais 
+   	pais = document.f1.prov_destino[document.f1.prov_destino.selectedIndex].value 
+   	//miro a ver si el pais está definido 
+   	if (pais != 0) { 
+      	//si estaba definido, entonces coloco las opciones de la provincia correspondiente. 
+      	//selecciono el array de provincia adecuado 
+      	mis_municipios=todasMunicipios[pais]
+      	//calculo el numero de provincias 
+      	num_municipios = mis_municipios.length 
+      	//marco el número de provincias en el select 
+      	document.f1.destino.length = num_municipios
+      	//para cada provincia del array, la introduzco en el select 
+      	for(i=0;i<num_municipios;i++){ 
+         	document.f1.destino.options[i].value=mis_municipios[i] 
+         	document.f1.destino.options[i].text=mis_municipios[i] 
+      	}	
+   	}else{ 
+      	//si no había provincia seleccionada, elimino las provincias del select 
+      	document.f1.destino.length = 1
+      	//coloco un guión en la única opción que he dejado 
+      	document.f1.destino.options[0].value = "-" 
+      	document.f1.destino.options[0].text = "-" 
+   	} 
+   	//marco como seleccionada la opción primera de provincia 
+   	document.f1.destino.options[0].selected = true 
+}
+//Termina lo del select
+
+        
 
         function generarModelo(){
             Swal.fire({
@@ -28,7 +134,7 @@
     </script>
 {% endblock %}
 {% block content %}
-<form action="" method="post" id="" enctype="multipart/form-data">
+<form action="" method="post" id="" enctype="multipart/form-data" name="f1">
     <div class="card card-default">
         <div class="card-body ">
             {% csrf_token %}
@@ -90,29 +196,77 @@
                                     <!---Fin Centro COntable-->
                                     <!---Provincia-->
                                     <div class="form-group row">
-                                        <label class="col-sm-4 col-form-label">Provincia:</label>
+                                        <label class="col-sm-4 col-form-label">Provincia Origen:</label>
 				                            <div class="col-sm-5">
-                                                {{form.provincia}}
+                                                <select class="select form-control" name=provincia onchange="cambia_provincia()"> 
+                                                <option value="0" selected>---------- 
+                                                <option value="1">Pinar del Río 
+                                                <option value="2">Artemisa 
+                                                <option value="3">La Habana 
+                                                <option value="4">Mayabeque
+                                                <option value="5">Matanzas 
+                                                <option value="6">Villa Clara
+                                                <option value="7">Cienfuegos
+                                                <option value="8">Sancti Spíritus
+                                                <option value="9">Ciego de Ávila
+                                                <option value="10">Camagüey
+                                                <option value="11">Las Tunas 
+                                                <option value="12">Holguín  
+                                                <option value="13">Granma   
+                                                <option value="14">Santiago de Cuba  
+                                                <option value="15">Guantánamo   
+                                                <option value="16">Isla de la Juventud   
+                                                </select>
                                             </div>
 			                        </div>
                                     <div class="form-group row">
 				                        <label class="col-sm-4 col-form-label">Origen:</label>
 				                            <div class="col-sm-5">
-                                                {{form.origen}}
+                                                <select class="select form-control" name=origen> 
+                                                <option value="-"> 
+                                                </select>
                                             </div>
 			                        </div>
                                     <div class="form-group row">
-				                        <label class="col-sm-4 col-form-label">Destino:</label>
+                                        <label class="col-sm-4 col-form-label">Provincia Destino:</label>
 				                            <div class="col-sm-5">
-                                                {{form.destino}}
+                                                <select class="select form-control" name=prov_destino onchange="cambia_provinciaDestino()"> 
+                                                <option value="0" selected>---------- 
+                                                <option value="1">Pinar del Río 
+                                                <option value="2">Artemisa 
+                                                <option value="3">La Habana 
+                                                <option value="4">Mayabeque
+                                                <option value="5">Matanzas 
+                                                <option value="6">Villa Clara
+                                                <option value="7">Cienfuegos
+                                                <option value="8">Sancti Spíritus
+                                                <option value="9">Ciego de Ávila
+                                                <option value="10">Camagüey
+                                                <option value="11">Las Tunas 
+                                                <option value="12">Holguín  
+                                                <option value="13">Granma   
+                                                <option value="14">Santiago de Cuba  
+                                                <option value="15">Guantánamo   
+                                                <option value="16">Isla de la Juventud  
+                                                </select>
+                                            </div>
+			                        </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Destino:</label>
+                                            <div class="col-sm-5">
+                                                <select class="select form-control" name=destino> 
+                                                <option value="-"> 
+                                                </select>
                                             </div>
                                     </div>
                                     <div class="form-group row">
-				                    <label class="col-sm-4 col-form-label">Regreso:</label>
-				                        <div class="col-sm-5">
-                                            {{form.regreso}}
-                                        </div>
-			                        </div>
+                                        <label class="col-sm-4 col-form-label">Regreso:</label>
+                                            <div class="col-sm-5">
+                                                <select class="select form-control" name=regreso> 
+                                                <option value="-"> 
+                                                </select>
+                                            </div>
+                                    </div>
                                     <!---Fin Provincia-->
                                 </div>
                                 <div class="col-sm-6">
@@ -121,7 +275,7 @@
                                         <label class="col-sm-4 col-form-label">Persona autorizada a Recibir y Loquidar el efectivo del grupo:</label>
                                             <div class="col-sm-5">
                                                 <select name="parleg" class="select form-control" required="" id="id_parleg">
-                                                  <option value="1" selected="1">{{parleg}}</option>
+                                                <option value="1" selected="1">{{parleg}}</option>
 
                                                 </select>
                                             </div>
@@ -140,7 +294,7 @@
                                         <label class="col-sm-4 col-form-label">Con Cargo al Presupuesto:</label>
                                             <div class="col-sm-5">
                                                 <select name="cargo_presupuesto" class="select form-control" required="" id="id_cargo_presupuesto">
-                                                  <option value="1" selected="1">{{cp}}</option>
+                                                <option value="1" selected="1">{{cp}}</option>
 
                                                 </select>
                                             </div>
@@ -174,7 +328,7 @@
                                         <label class="col-sm-4 col-form-label">Autoriza:</label>
 				                            <div class="col-sm-4">
                                                 <select name="autoriza" class="select form-control" required="" id="id_autoriza">
-                                                  <option value="1" selected="{{autoriza}}">{{autoriza}}</option>
+                                                <option value="1" selected="{{autoriza}}">{{autoriza}}</option>
                                                 </select>
                                             </div>
 			                        </div>

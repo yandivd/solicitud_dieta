@@ -66,6 +66,7 @@ class SolicitudCreateView(CreateView):
             cc=formulario.cleaned_data['c_contable']
             provincia=formulario.cleaned_data['provincia']
             origen=formulario.cleaned_data['origen']
+            prov_destino=formulario.cleaned_data['prov_destino']
             destino=formulario.cleaned_data['destino']
             regreso=formulario.cleaned_data['regreso']
             inicio=formulario.cleaned_data['fecha_inicio']
@@ -104,6 +105,7 @@ class SolicitudCreateView(CreateView):
                                     c_contable=ccFijo,
                                     provincia=provincia,
                                     origen=origen,
+                                    prov_destino=prov_destino,
                                     destino=destino,
                                     regreso=regreso,
                                     fecha_inicio=inicio,
@@ -122,6 +124,7 @@ class SolicitudCreateView(CreateView):
                                     c_contable=cc,
                                     provincia=provincia,
                                     origen=origen,
+                                    prov_destino=prov_destino,
                                     destino=destino,
                                     regreso=regreso,
                                     fecha_inicio=inicio,
@@ -416,3 +419,6 @@ class ModeloPDFView(View):
             print(e)
 
         return HttpResponseRedirect(reverse_lazy('listarMod'))
+
+def prueba(request):
+    return render(request, 'pruebas/ptueba.html')
