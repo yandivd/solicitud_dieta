@@ -7,10 +7,18 @@
         //Empieza el select dinamico
 
   var municipios_1=new Array("-","Pinar del Rio","Consolacion del Sur","San Juan y Martinez","Sandino","Los Palacios","Guane","La Palma","Minas de Matahambre","San Luis","Vinales","Mantua");
-  var municipios_2=new Array("-","Artemisa","Guanajay","Caimito","Bauta","San Cristobal","Candelaria","Mariel","Alquizar","Guira de Melena");
-  var municipios_3=new Array("-","Cali","Santamarta","Medellin","Cartagena","...");
-  var municipios_4=new Array("-","Aisne","Creuse","Dordogne","Essonne","Gironde ","...");
-  var municipios_5=new Array("-","Cienfuegos","Creuse","Dordogne","Essonne","Gironde ","...");
+
+  var municipios_2=new Array("-","Artemisa","Guanajay","Caimito","Bauta","San Cristobal","Candelaria","Bahia Honda","Mariel","Alquizar","Guira de Melena","San Antonio");
+  
+  var municipios_3=new Array("-","Playa","Plaza de la Revolución","Centro Habana","La Habana Vieja","Regla","La Habana del Este","Guanabacoa","San Miguel del Padrón","Diez de Octubre","Cerro","Marianao","La Lisa","Boyeros","Arroyo Naranjo","Cotorro");
+  
+  var municipios_4=new Array("-","Bejucal","San José de las Lajas","Jaruco","Santa Cruz del Norte","Madruga","Nueva Paz","San Nicolás","Güines","Melena del Sur","Batabanó","Quivicán");
+  
+  var municipios_5=new Array("-","Matanzas","Cárdenas","Martí","Colón","Perico","Jovellanos","Pedro Betancourt","Limonar","Unión de Reyes","Ciénaga de Zapata","Jagüey Grande","Calimete","Los Arabos");
+
+  var municipios_6=new Array("-","Corralillo","Quemado de Güines","Sagua la Grande","Encrucijada","Camajuaní","Caibarién","Remedios","Placetas","Santa Clara","Cifuentes","Santo Domingo","Ranchuelo","Manicaragua");
+
+
 
   var todasMunicipios = [
     [],
@@ -19,6 +27,7 @@
     municipios_3,
     municipios_4,
     municipios_5,
+    municipios_6,
   ];
 
   function cambia_provincia(){ 
@@ -178,11 +187,22 @@ function cambia_provinciaDestino(){
 				                            <div class="col-sm-5">
                                                 <select class="select form-control" name=provincia onchange="cambia_provincia()"> 
                                                 <option value="0" selected>---------- 
-                                                <option value="1">Pinar del Rio 
+                                                <option value="1">Pinar del Río 
                                                 <option value="2">Artemisa 
-                                                <option value="3">Matanzas 
-                                                <option value="4">Pinar del Rio 
-                                                <option value="5">Cienfuegos 
+                                                <option value="3">La Habana 
+                                                <option value="4">Mayabeque
+                                                <option value="5">Matanzas 
+                                                <option value="6">Villa Clara
+                                                <option value="7">Cienfuegos
+                                                <option value="8">Sancti Spíritus
+                                                <option value="9">Ciego de Ávila
+                                                <option value="10">Camagüey
+                                                <option value="11">Las Tunas 
+                                                <option value="12">Holguín  
+                                                <option value="13">Granma   
+                                                <option value="14">Santiago de Cuba  
+                                                <option value="15">Guantánamo   
+                                                <option value="16">Isla de la Juventud   
                                                 </select>
                                             </div>
 			                        </div>
@@ -199,11 +219,22 @@ function cambia_provinciaDestino(){
 				                            <div class="col-sm-5">
                                                 <select class="select form-control" name=prov_destino onchange="cambia_provinciaDestino()"> 
                                                 <option value="0" selected>---------- 
-                                                <option value="1">Pinar del Rio 
+                                                <option value="1">Pinar del Río 
                                                 <option value="2">Artemisa 
-                                                <option value="3">Matanzas 
-                                                <option value="4">Cienfuegos 
-                                                <option value="5">Granma 
+                                                <option value="3">La Habana 
+                                                <option value="4">Mayabeque
+                                                <option value="5">Matanzas 
+                                                <option value="6">Villa Clara
+                                                <option value="7">Cienfuegos
+                                                <option value="8">Sancti Spíritus
+                                                <option value="9">Ciego de Ávila
+                                                <option value="10">Camagüey
+                                                <option value="11">Las Tunas 
+                                                <option value="12">Holguín  
+                                                <option value="13">Granma   
+                                                <option value="14">Santiago de Cuba  
+                                                <option value="15">Guantánamo   
+                                                <option value="16">Isla de la Juventud  
                                                 </select>
                                             </div>
 			                        </div>
