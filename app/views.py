@@ -270,7 +270,7 @@ class SolicitudUpdateView(UpdateView):
 
     model=Solicitud
     form_class=SolicitudForm
-    template_name='solicitudes/edit.html'
+    template_name='solicitudes/create.html'
     success_url=reverse_lazy('crear_solicitud')
 
     @method_decorator(permission_required('app.change_solicitud'))
