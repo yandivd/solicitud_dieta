@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required, permission_required
 from django.utils.decorators import method_decorator
 from django.contrib import messages
+from django.contrib.auth import *
 
 #librerias del html2pdf
 import os
@@ -422,3 +423,9 @@ class ModeloPDFView(View):
 
 def prueba(request):
     return render(request, 'pruebas/ptueba.html')
+
+def inicio(request):
+    if request.user.is_authenticated :
+        return render(request, 'solicitudes/listar.html')
+    else:
+        return render(request, 'registration/login.html')

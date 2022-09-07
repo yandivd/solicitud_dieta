@@ -67,19 +67,13 @@
                 {% endif %}
             </div>
 
-        <div class="col-lg-3 col-6"></div>
+        <div class="col-lg-4 col-6"></div>
             </div>
-             {% if perms.app.add_solicitud %}
-             <div class=" card-footer mt-3">
-            <a href="{% url 'crear_solicitud' %}" type="button" class="btn btn-primary">
-                <i class="fas fa-plus"></i>
-                Agregar Solicitud
-            </a>
-        </div>
-             {% endif %}
+             
         </div>
     </div>
     <div class=" card card-default">
+   
         <div class="card-header px-3 mb-3 mt-3 container">
             <h3 class="card-title">
             <i class="fas fa-search"></i>
@@ -87,6 +81,14 @@
             </h3>
             </div>
         <div class="card card-body content-header mx-5 px-5">
+         {% if perms.app.add_solicitud %}
+             <div class=" card-footer mt-3">
+            <a href="{% url 'crear_solicitud' %}" type="button" class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+                Agregar Solicitud
+            </a>
+        </div>
+             {% endif %}
             <table id="myTable" class="display" style="width: 100%;">
                 <thead>
                     <tr>
