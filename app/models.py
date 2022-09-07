@@ -63,6 +63,7 @@ class Municipio(models.Model):
 
 class Solicitante(models.Model):
     usuario=models.ForeignKey(User, on_delete=models.CASCADE)
+    telf=models.CharField(max_length=100)
     cargo=models.CharField(max_length=100)
     unidad_organizativa=models.ForeignKey(Unidad_Organizativa, on_delete=models.CASCADE)
     def __str__(self):
