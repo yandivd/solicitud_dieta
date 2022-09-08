@@ -163,7 +163,12 @@ function cambia_provinciaDestino(){
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Solicita:</label>
                                             <div class="col-sm-5">
-                                                {{form.solicitante}}
+                                                <select name="solicitante" class="select form-control" required="" id="id_solicitante">
+                                                <option value="0">----------</option>    
+                                                {% for i in solicitantes %}
+                                                <option value="{{i.id}}">{{i}}</option>
+                                                {% endfor %}
+                                                </select>
                                             </div>
                                     </div>
                                     {% endif %}
@@ -181,14 +186,24 @@ function cambia_provinciaDestino(){
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Centro Contable:</label>
                                             <div class="col-sm-5">
-                                                {{form.c_contable}}
+                                                <select name="c_contable" class="select form-control" required="" id="id_c_contable">
+                                                    <option value="0">----------</option>
+                                                    {% for i in ccs %}
+                                                    <option value="{{i.id}}">{{i}}</option>
+                                                    {% endfor %}
+                                                </select>
                                             </div>
                                     </div>
                                     {% endif %}
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Trabajador:</label>
                                             <div class="col-sm-5">
-                                                {{form.trabajador}}
+                                                <select name="trabajador" class="select form-control" required="" id="id_trabajador">
+                                                    <option value="0">----------</option>
+                                                    {% for i in trabajadores %}
+                                                    <option value="{{i.id}}">{{i}}</option>
+                                                    {% endfor %}
+                                                </select>
                                             </div>
                                     </div>
                                     <!---Fin Centro COntable-->
@@ -282,7 +297,12 @@ function cambia_provinciaDestino(){
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Persona autorizada a Recibir y Loquidar el efectivo del grupo:</label>
                                             <div class="col-sm-5">
-                                                {{form.parleg}}
+                                                <select name="parleg" class="select form-control" required="" id="id_parleg">
+                                                    <option value="0" selected="0">----------</option>
+                                                    {% for i in trabajadores%}
+                                                    <option value="{{i.id}}">{{i}}</option>
+                                                    {% endfor %}
+                                                    </select>
                                             </div>
                                     </div>
                                     {% endif %}
@@ -301,7 +321,12 @@ function cambia_provinciaDestino(){
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Con Cargo al Presupuesto:</label>
                                             <div class="col-sm-5">
-                                                {{form.cargo_presupuesto}}
+                                                <select name="cargo_presupuesto" class="select form-control" required="" id="id_cargo_presupuesto">
+                                                    <option value="0">----------</option>
+                                                    {% for i in cargos %}
+                                                    <option value="{{i.id}}">{{i}}</option>
+                                                    {% endfor %}
+                                                    </select>
                                             </div>
                                     </div>
                                     {% endif %}
@@ -334,7 +359,12 @@ function cambia_provinciaDestino(){
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Autoriza:</label>
 				                            <div class="col-sm-4">
-                                                {{form.autoriza}}
+                                                <select name="autoriza" class="select form-control" required="" id="id_autoriza">
+                                                    <option value="0">----------</option>
+                                                    {% for i in autorizas %}
+                                                    <option value="{{i.id}}">{{i}}</option>
+                                                    {% endfor %}
+                                                    </select>
                                             </div>
 			                        </div>
                                     {% endif %}
