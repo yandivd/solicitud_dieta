@@ -186,7 +186,12 @@ function cambia_provinciaDestino(){
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Centro Contable:</label>
                                             <div class="col-sm-5">
-                                                {{form.c_contable}}
+                                                <select name="c_contable" class="select form-control" required="" id="id_c_contable">
+                                                    <option value="0">----------</option>
+                                                    {% for i in ccs %}
+                                                    <option value="{{i.id}}">{{i}}</option>
+                                                    {% endfor %}
+                                                </select>
                                             </div>
                                     </div>
                                     {% endif %}

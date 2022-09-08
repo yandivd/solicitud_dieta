@@ -154,6 +154,7 @@ class SolicitudCreateView(CreateView):
         #########Arreglar el estilo del form########
 
         context['solicitantes'] = Solicitante.objects.all()
+        context['ccs'] = C_Contable.objects.all()
 
         #######FIn############
         if len(lista)>0:
