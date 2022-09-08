@@ -163,7 +163,12 @@ function cambia_provinciaDestino(){
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Solicita:</label>
                                             <div class="col-sm-5">
-                                                {{form.solicitante}}
+                                                <select name="solicitante" class="select form-control" required="" id="id_solicitante">
+                                                <option value="0">----------</option>    
+                                                {% for i in solicitantes %}
+                                                <option value="{{i.id}}">{{i}}</option>
+                                                {% endfor %}
+                                                </select>
                                             </div>
                                     </div>
                                     {% endif %}
