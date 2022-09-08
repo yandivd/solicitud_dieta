@@ -155,6 +155,9 @@ class SolicitudCreateView(CreateView):
 
         context['solicitantes'] = Solicitante.objects.all()
         context['ccs'] = C_Contable.objects.all()
+        context['trabajadores'] = Trabajador.objects.all()
+        context['cargos'] = Cargo_al_Presupuesto.objects.all()
+        context['autorizas'] = Autoriza.objects.all()
 
         #######FIn############
         if len(lista)>0:
