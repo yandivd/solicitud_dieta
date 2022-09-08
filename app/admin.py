@@ -3,6 +3,7 @@ from .models import *
 
 class TrabajadorAdmin(admin.ModelAdmin):
     list_display=('usuario', 'ci')
+    list_filter=('usuario', 'ci')
 
 class AutorizaAdmin(admin.ModelAdmin):
     list_display=('usuario',)
