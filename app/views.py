@@ -278,6 +278,8 @@ def listar_solicitudes_de_modelo(request, id):
         'telf': lista_solicitudes[0].solicitante.telf,
         'date': date.today().strftime('%d/%m/%y')
     }
+
+    archivarModelo(request, id)
     return render(request, 'modelos/solicitudes/modeloList.html', data)
 
 class SolicitudUpdateView(UpdateView):
