@@ -201,7 +201,7 @@ JAZZMIN_SETTINGS = {
     "topmenu_links": [
 
         # Url that gets reversed (Permissions can be added)
-        {"name": "Solicitudes de Dieta",  "url": "/solicitud_dieta"},
+        {"name": "Solicitudes de Dieta",  "url": "/"},
 
         # external url that opens in a new window (Permissions can be added)
         # model admin to link to (Permissions checked against model)
