@@ -1,140 +1,198 @@
 {% load static %}
 <html>
-    <head>
-        <title>Sistema de Solicitud de Dietas</title>
-  <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css'%}">
-        <!-- CSS only -->
-        <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-        <!-- Datatable-->
-        <link rel="stylesheet" type="text/css" href="{% static 'datatable/data_tables/datatables.min.css' %}" />
-        
-        <!-- Font Awesome Icons-->
-        <link rel="stylesheet" href="{% static 'plugins/jquery/jquery-confirm.min.css' %}">
-        <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
-        <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-        <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-        <script src="{% static 'plugins/popper/popper.min.js' %}" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-        <script src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
-        <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-        <link href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css'%}">
-        <script src="{% static 'plugins/popper/popper.min.js' %}" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
-    
-    </head>
-    <!-- Navbar -->
-<nav class="navbar navbar-expand-md navbar-white navbar-light">
+  <head>
+    <title>Sistema de Solicitud de Dietas</title>
+    <link
+      rel="stylesheet"
+      href="{% static 'plugins/fontawesome-free/css/all.min.css'%}"
+    />
+    <!-- CSS only -->
+    <link
+      href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <!-- Datatable-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'datatable/data_tables/datatables.min.css' %}"
+    />
+
+    <!-- Font Awesome Icons-->
+    <link
+      rel="stylesheet"
+      href="{% static 'plugins/jquery/jquery-confirm.min.css' %}"
+    />
+    <script
+      src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"
+      integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
+    />
+    <link
+      href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <script
+      src="{% static 'plugins/popper/popper.min.js' %}"
+      integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="{% static 'plugins/bootstrap/js/bootstrap.min.js' %}"
+      integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="{% static 'plugins/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'dist/css/adminlte.min.css'%}"
+    />
+    <script
+      src="{% static 'plugins/popper/popper.min.js' %}"
+      integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-md navbar-white navbar-light">
     <!-- Left navbar links -->
-
- <ul class="navbar-nav">
-          <li class="nav-item">
-            <a href="{% url 'solicitudes' %}" class="nav-link">
-            <i class="fas fa-home"></i>
-            Inicio</a>
-          </li>
-         {% if user.is_superuser or user.is_staff %}
-          <li class="nav-item">
-           <a class="nav-link"  href="/admin/" role="button">
-            <i class="fas fa-tachometer-alt"></i> Admin
-           </a>
-          </li>
-         {%endif%}
-
-        </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a href="{% url 'solicitudes' %}" class="nav-link">
+          <i class="fas fa-home"></i>
+          Inicio</a
+        >
+      </li>
+      {% if user.is_superuser or user.is_staff %}
+      <li class="nav-item">
+        <a class="nav-link" href="/admin/" role="button">
+          <i class="fas fa-tachometer-alt"></i> Admin
+        </a>
+      </li>
+      {%endif%}
+    </ul>
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-           <a class="nav-link" onclick="modal_firma()" role="button">
-            <i class="fas fa-edit"></i> Firma
-           </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="javascript:;"role="button">
-          <i class="fas fa-user"></i>  {{ user.username }}
+        <a class="nav-link" onclick="modal_firma()" role="button">
+          <i class="fas fa-edit"></i> Firma
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'logout' %}"role="button">
+        <a class="nav-link" href="javascript:;" role="button">
+          <i class="fas fa-user"></i> {{ user.username }}
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}" role="button">
           <i class="fas fa-power-off"></i> Salir
         </a>
       </li>
     </ul>
   </nav>
   <!-- /.navbar -->
-
-            {% if error1 %}
-            <div class=" alert alert-danger alert-dismissible">
-                <button type="button" class=" close" data-dismiss="alert" aria-hidden="true">x</button>
-                <h5><i class="icon bi bi-x-octagon"></i>{{error1}}</h5>
-            </div>
-            {% endif %}
-
-        {%block content%}
-        {% endblock %}
+  <body style="max-width: 1750px" class="mx-auto">
+    {% if error1 %}
+    <div class="alert alert-danger alert-dismissible">
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-hidden="true"
+      >
+        x
+      </button>
+      <h5><i class="icon bi bi-x-octagon"></i>{{error1}}</h5>
+    </div>
+    {% endif %} {%block content%} {% endblock %}
 
     <!-- jQuery -->
     <script src="{% static 'datatable/jquery/jquery.min.js'   %}"></script>
     <!-- Datatable-->
-    <script type="text/javascript" src="{% static 'datatable/data_tables/datatables.min.js' %}"></script>
+    <script
+      type="text/javascript"
+      src="{% static 'datatable/data_tables/datatables.min.js' %}"
+    ></script>
     <script src="{% static 'plugins/sweetalert2/sweetalert2.all.min.js' %}"></script>
 
-    <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-     <script src="{% static 'plugins/sweetalert2/sweetalert2.all.min.js' %}"></script> <!---Sweet Alert-->
-      
+    <script
+      src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"
+      integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'plugins/sweetalert2/sweetalert2.all.min.js' %}"></script>
+    <!---Sweet Alert-->
+
     <script src="{% static 'dist/js/adminlte.min.js'%}"></script>
-        <script>
-    $(document).ready( function () {
-            $('#myTable').DataTable();
-    } );
+    <script>
+      $(document).ready(function () {
+        $("#myTable").DataTable();
+      });
 
-    function eliminarSolicitud(id){
+      function eliminarSolicitud(id) {
         Swal.fire({
-            "title": "Estas Seguro?",
-            "text": "Esta accion no se puede deshacer",
-            "icon": "question",
-            "showCancelButton": true,
-            "cancelButtonText": "No, Cancelar",
-            "confirmButtonText": "Si, Eliminar esta Solicitud",
-            "reverseButtons": true,
-            "confirmButtonColor": "#cc1417"
-                })
-            .then(function(result){
-                if (result.isConfirmed){
-                    window.location.href = "/index/eliminar_solicitud/"+id+"/"
-                }
-            })
-        }
-    function eliminarModelo(id){
+          title: "Estas Seguro?",
+          text: "Esta accion no se puede deshacer",
+          icon: "question",
+          showCancelButton: true,
+          cancelButtonText: "No, Cancelar",
+          confirmButtonText: "Si, Eliminar esta Solicitud",
+          reverseButtons: true,
+          confirmButtonColor: "#cc1417",
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            window.location.href =
+              "/index/eliminar_solicitud/" + id + "/";
+          }
+        });
+      }
+      function eliminarModelo(id) {
         Swal.fire({
-            "title": "Estas Seguro?",
-            "text": "Esta accion no se puede deshacer",
-            "icon": "question",
-            "showCancelButton": true,
-            "cancelButtonText": "No, Cancelar",
-            "confirmButtonText": "Si, Cancelar este Modelo",
-            "reverseButtons": true,
-            "confirmButtonColor": "#cc1417"
-                })
-            .then(function(result){
-                if (result.isConfirmed){
-                    window.location.href = "/eliminar_modelo/"+id+"/"
-                }
-            })
-        }
-
-        </script>
-        {% if messages %}
-        {% for i in messages %}
-            <script>
-                Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...',
-                  text: "{{i}}",
-                })
-            </script>
-        {% endfor %}
-    {%endif%}
-    {% block js %}
-    {% endblock %}
-    </body>
+          title: "Estas Seguro?",
+          text: "Esta accion no se puede deshacer",
+          icon: "question",
+          showCancelButton: true,
+          cancelButtonText: "No, Cancelar",
+          confirmButtonText: "Si, Cancelar este Modelo",
+          reverseButtons: true,
+          confirmButtonColor: "#cc1417",
+        }).then(function (result) {
+          if (result.isConfirmed) {
+            window.location.href = "/eliminar_modelo/" + id + "/";
+          }
+        });
+      }
+    </script>
+    {% if messages %} {% for i in messages %}
+    <script>
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "{{i}}",
+      });
+    </script>
+    {% endfor %} {%endif%} {% block js %} {% endblock %}
+  </body>
 </html>
