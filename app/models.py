@@ -38,28 +38,10 @@ class Trabajador(models.Model):
         verbose_name_plural = "Trabajadores"
 
 class PARLEG(models.Model):
-    trabajador=models.ForeignKey(Trabajador, on_delete=models.CASCADE)
+    trabajador=models.ForeignKey(Trabajador, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.trabajador.usuario.first_name+' '+self.trabajador.usuario.last_name
-
-class Provincia(models.Model):
-    nombre=models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.nombre
-
-class Municipio(models.Model):
-    nombre=models.CharField(max_length=30)
-    provincia=models.ForeignKey(Provincia, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.nombre
-
-    class Meta:
-        verbose_name="Municipio"
-        verbose_name_plural="Municipios"
-
 
 class Solicitante(models.Model):
     usuario=models.ForeignKey(User, on_delete=models.CASCADE)

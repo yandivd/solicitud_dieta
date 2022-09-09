@@ -155,9 +155,10 @@ class SolicitudCreateView(CreateView):
 
         context['solicitantes'] = Solicitante.objects.all()
         context['ccs'] = C_Contable.objects.all()
-        context['trabajadores'] = Trabajador.objects.all()
+        context['trabajadores'] = Trabajador.objects.all().order_by('usuario__username')
         context['cargos'] = Cargo_al_Presupuesto.objects.all()
         context['autorizas'] = Autoriza.objects.all()
+        context['parlegs'] = PARLEG.objects.all()
 
         #######FIn############
         if len(lista)>0:
@@ -224,6 +225,7 @@ def crear_modelo(request):
         data['error1']= e
         data['action']='add'
         data['title']='Agregar Solicitud'
+        data['telf']=solicitudes_list[0].solicitante.telf
         return render(request,'solicitudes/listar.html',data)
 
 
@@ -273,6 +275,8 @@ def listar_solicitudes_de_modelo(request, id):
     data={
         'modelo': Modelo.objects.get(pk=id),
         'soli': lista,
+        'telf': lista_solicitudes[0].solicitante.telf,
+        'date': date.today().strftime('%d/%m/%y')
     }
     return render(request, 'modelos/solicitudes/modeloList.html', data)
 

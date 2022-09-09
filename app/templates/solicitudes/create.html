@@ -297,8 +297,8 @@ function cambia_provinciaDestino(){
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Persona autorizada a Recibir y Loquidar el efectivo del grupo:</label>
                                             <div class="col-sm-5">
-                                                <select name="parleg" class="select form-control" required="" id="id_parleg">
-                                                    <option value="0" selected="0">----------</option>
+                                                <select name="parleg" class="select form-control" id="id_parleg">
+                                                    <option value selected>----------</option>
                                                     {% for i in trabajadores%}
                                                     <option value="{{i.id}}">{{i}}</option>
                                                     {% endfor %}

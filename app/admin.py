@@ -8,9 +8,6 @@ class TrabajadorAdmin(admin.ModelAdmin):
 class AutorizaAdmin(admin.ModelAdmin):
     list_display=('usuario',)
 
-class MunicipioAdmin(admin.ModelAdmin):
-    list_display=('nombre','provincia')
-
 class Unidad_OrganizativaAdmin(admin.ModelAdmin):
     list_display=('nombre',)
 
@@ -64,10 +61,8 @@ class C_ContableAdmin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Trabajador, TrabajadorAdmin)
-admin.site.register(Municipio, MunicipioAdmin)
 admin.site.register(Solicitud, SolicitudAdmin)
 admin.site.register(Unidad_Organizativa, Unidad_OrganizativaAdmin)
-admin.site.register(Provincia, ProvinciaAdmin)
 admin.site.register(Autoriza, AutorizaAdmin)
 admin.site.register(Modelo, ModeloAdmin)
 admin.site.register(Cargo_al_Presupuesto, Cargo_al_PresupuestoAdmin)
