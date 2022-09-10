@@ -111,8 +111,19 @@
         </table>
       </div>
     </div>
-    <div style="height: 0.9cm">
+    <div
+      style="
+        height: 0.9cm;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+      "
+    >
       <p>TIPO DE SOLICITUD(5):</p>
+      <div style="display: flex; width: 70%">
+        <p style="margin-left: 10px">Ordinaria: ___</p>
+        <p style="margin-left: 10px">Prórroga: ___</p>
+      </div>
     </div>
 
     <table style="margin-top: 2rem; width: auto">
@@ -200,15 +211,19 @@
           <td></td>
           <td></td>
           <td></td>
-          <td></td> 
+          <td></td>
         </tr>
         {% endfor %}
         <tr>
           {% if modelo.labor != none %}
-                        <td colspan="16" style="height: 0.7cm">LABOR A REALIZAR: {{modelo.labor}}</td>
-                        {% else %}
-                        <td colspan="16" style="height: 0.7cm">LABOR A REALIZAR: </td>
-                        {% endif %}
+          <td colspan="16" style="height: 0.7cm">
+            LABOR A REALIZAR: {{modelo.labor}}
+          </td>
+          {% else %}
+          <td colspan="16" style="height: 0.7cm">
+            LABOR A REALIZAR:
+          </td>
+          {% endif %}
         </tr>
         <tr>
           <th colspan="7" style="text-align: left; height: 0.4cm">
@@ -259,7 +274,7 @@
     </table>
 
     <script>
-        window.print();
+      window.print();
     </script>
   </body>
 </html>
