@@ -79,7 +79,7 @@ class Solicitud(models.Model):
     parleg=models.ForeignKey(Trabajador, on_delete=models.CASCADE, related_name='Trabajador_parleg', null=True, blank=True)
     cargo_presupuesto=models.ForeignKey(Cargo_al_Presupuesto, on_delete=models.CASCADE)
     autoriza=models.ForeignKey(Autoriza, on_delete=models.CASCADE)
-    estado=models.CharField(max_length=20)
+    estado=models.CharField(max_length=200)
     observaciones=models.CharField(max_length=500, blank=True, null=True)
     labor=models.CharField(max_length=500, blank=True, null=True)
 
@@ -97,7 +97,7 @@ class Modelo(models.Model):
     c_contable=models.CharField(max_length=4)
     consec=models.IntegerField()
     solicitudes=models.ManyToManyField(Solicitud)
-    parleg=models.CharField(max_length=20, blank=True, null=True)
+    parleg=models.CharField(max_length=200, blank=True, null=True)
     autoriza=models.CharField(max_length=50)
     cargo_presupuesto=models.CharField(max_length=20)
     observaciones = models.CharField(max_length=500, blank=True, null=True)
