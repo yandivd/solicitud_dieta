@@ -272,11 +272,17 @@ def listar_solicitudes_de_modelo(request, id):
     lista_solicitudes=modelo.solicitudes.all()
     for i in lista_solicitudes:
         lista.append(i)
+    cant=[]
+    index = 0
+    for i in lista:
+        index+=1
+        cant.append(index)
     data={
         'modelo': Modelo.objects.get(pk=id),
         'soli': lista,
         'telf': lista_solicitudes[0].solicitante.telf,
-        'date': date.today().strftime('%d/%m/%y')
+        'date': date.today().strftime('%d/%m/%y'),
+        'cant': cant
     }
 
     archivarModelo(request, id)
