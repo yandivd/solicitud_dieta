@@ -321,7 +321,7 @@ function cambia_provinciaDestino(){
                                     <div class="form-group row">
                                         <label class="col-sm-4 col-form-label">Con Cargo al Presupuesto:</label>
                                             <div class="col-sm-5">
-                                                <select name="cargo_presupuesto" class="select form-control" required="" id="id_cargo_presupuesto">
+                                                <select name="cargo_presupuesto" class="select form-control" required id="id_cargo_presupuesto">
                                                     <option value="0">----------</option>
                                                     {% for i in cargos %}
                                                     <option value="{{i.id}}">{{i}}</option>
@@ -334,7 +334,7 @@ function cambia_provinciaDestino(){
 				                        <label class="col-sm-4 col-form-label">Fecha de Inicio:</label>
 				                            <div class="col-sm-5">
 					                            <div id="fecha_inicio" data-target-input="nearest" class="input-group date">
-						                            <input type="date" name="fecha_inicio" class="dateinput form-control" required="" id="id_fecha_inicio">
+						                            <input type="date" name="fecha_inicio" class="dateinput form-control" required id="id_fecha_inicio">
 					                            </div>
 				                            </div>
 			                        </div>
@@ -370,36 +370,38 @@ function cambia_provinciaDestino(){
                                     {% endif %}
                                 </div>
                             </div>
+                            <div class="container">
                             {% if labor %}
                             <div class="form-group row">
-                                        <label class=" col-form-label">Labor a Realizar:</label>
-				                            <div class="">
-                                                <input type="text" value="{{labor}}" readonly name="labor" maxlength="500" class="textinput textInput form-control" required="" id="id_labor">
+                                        <label class="col-form-label col-sm-2">Labor a Realizar:</label>
+				                            <div class="col-sm-10">
+                                                <input type="text" value="{{labor}}" readonly name="labor" class="form-control" required id="id_labor">
                                             </div>
 			                        </div>
                             {% else %}
                             <div class="form-group row">
-                                        <label class=" col-form-label">Labor a Realizar:</label>
-				                            <div class="">
-                                                {{form.labor}}
-                                            </div>
-			                        </div>
+                                <label class="col-form-label col-sm-2">Labor a Realizar:</label>
+				                    <div class="col-sm-10">
+                                        <input type="text" value="{{labor}}" name="labor" class="form-control" required id="id_labor">
+                                    </div>
+			                </div>
                             {% endif %}
                             {% if obs %}
                             <div class="form-group row">
-                                        <label class=" col-form-label">Observaciones:</label>
-				                            <div class="">
-                                                <input type="text" value="{{obs}}" readonly name="observaciones" maxlength="500" class="textinput textInput form-control" required="" id="id_observaciones">
+                                        <label class="col-form-label col-sm-2">Observaciones:</label>
+				                            <div class="col-sm-10">
+                                                <input type="text" value="{{obs}}" readonly name="observaciones" class="textinput textInput form-control" required="" id="id_observaciones">
                                             </div>
 			                        </div>
                             {% else %}
                             <div class="form-group row">
-                                        <label class=" col-form-label">Observaciones:</label>
-				                            <div class="">
-                                                {{form.observaciones}}
+                                        <label class="col-form-label col-sm-2">Observaciones:</label>
+				                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="observaciones" id="id_observaciones">
                                             </div>
 			                        </div>
                             {% endif %}
+                            </div>
 
                             {% if perms.app.add_solicitud or perms.app.change_solicitud %}
                             {% if action == 'add' %}
