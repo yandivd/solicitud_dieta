@@ -282,7 +282,8 @@ def listar_solicitudes_de_modelo(request, id):
         'soli': lista,
         'telf': lista_solicitudes[0].solicitante.telf,
         'date': date.today().strftime('%d/%m/%y'),
-        'cant': cant
+        'cant': cant,
+        'year':date.today().year,
     }
 
     archivarModelo(request, id)
