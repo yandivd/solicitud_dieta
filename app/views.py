@@ -211,7 +211,8 @@ def crear_modelo(request):
                         dependencia_autoriza=solicitudes_list[0].autoriza.dependencia,
                         cargo_solicita=solicitudes_list[0].solicitante.cargo,
                         area_trabajo_solicita=solicitudes_list[0].solicitante.unidad_organizativa.nombre,
-                        labor=solicitudes_list[0].labor,)
+                        labor=solicitudes_list[0].labor,
+                        )
         modelo.save()
         for i in solicitudes_list:
             i.estado="Check"
@@ -285,7 +286,8 @@ def listar_solicitudes_de_modelo(request, id):
         'modelo': Modelo.objects.get(pk=id),
         'soli': lista,
         'telf': lista_solicitudes[0].solicitante.telf,
-        'date': date.today().strftime('%d/%m/%y'),
+        # 'date': date.today().strftime('%d/%m/%y'),
+        'date': modelo.fecha.strftime('%d/%m/%y'),
         'cant': cant,
         'year':date.today().year,
     }

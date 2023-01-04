@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import date
 
 # Create your models here.
 
@@ -108,6 +109,7 @@ class Modelo(models.Model):
     cargo_solicita=models.CharField(max_length=100)
     area_trabajo_solicita=models.CharField(max_length=100)
     labor=models.CharField(max_length=500, blank=True, null=True)
+    fecha=models.DateField(default=date.today())
 
     def __str__(self):
         return self.nombre
