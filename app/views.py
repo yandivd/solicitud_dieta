@@ -471,3 +471,12 @@ def actualizarEstados():
     for i in solicitudesCanceladas:
         i.estado='2022Cancelado'
         i.save() 
+
+def modelos2022(request):
+    modelosArch = Modelo.objects.all().filter(estado='22Arch')
+    modelosCanc = Modelo.objects.all().filter(estado='22Canc')
+    data = {
+        'archivados': modelosArch,
+        'cancelados': modelosCanc,
+    }
+    return render(request, 'modelos/antiguos/listar.html', data)

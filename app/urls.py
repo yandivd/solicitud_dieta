@@ -17,4 +17,6 @@ urlpatterns = [
     path('modelo/pdf/<int:pk>/', ModeloPDFView.as_view(), name='modelo_pdf'),
 
     path('prueba/', prueba, name='prueba'),
+
+    path('2022/', modelos2022, name='2022'),
 ]
