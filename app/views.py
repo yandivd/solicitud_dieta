@@ -179,9 +179,13 @@ class SolicitudCreateView(CreateView):
 def crear_modelo(request):
     data={}
     try:
-        modelos_para_consecutivos=Modelo.objects.all()
+        modelos_para_consecutivosOK=Modelo.objects.all().filter(estado='ok')
+        modelos_para_consecutivosCAN=Modelo.objects.all().filter(estado='cancel')
         mayor=0
-        for i in modelos_para_consecutivos:
+        for i in modelos_para_consecutivosOK:
+            if i.consec > mayor:
+                mayor = i.consec
+        for i in modelos_para_consecutivosCAN:
             if i.consec > mayor:
                 mayor = i.consec
         numero=mayor+1
@@ -444,6 +448,7 @@ class ModeloPDFView(View):
         return HttpResponseRedirect(reverse_lazy('listarMod'))
 
 def prueba(request):
+    actualizarEstados()
     return render(request, 'pruebas/ptueba.html')
 
 def inicio(request):
@@ -451,3 +456,16 @@ def inicio(request):
         return render(request, 'solicitudes/listar.html')
     else:
         return render(request, 'registration/login.html')
+
+#######De aqui para abajo##########3
+def actualizarEstados():
+    solicitudesArchivadas = Modelo.objects.all().filter(estado='archivado')
+    solicitudesCanceladas = Modelo.objects.all().filter(estado='cancel')
+
+    for i in solicitudesArchivadas:
+        i.estado='2022Archivado'
+        i.save()
+    
+    for i in solicitudesCanceladas:
+        i.estado='2022Cancelado'
+        i.save() 
